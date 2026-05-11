@@ -1,4 +1,6 @@
 # 290045.github.io
-yay
+Game, Proxy, and More links 
 
-hosted at https://290045.github.io/
+Created because I was bored
+
+Hosted at https://290045.github.io/
