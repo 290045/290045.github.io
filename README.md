@@ -4,3 +4,5 @@ Game, Proxy, and More links
 Created because I was bored
 
 Hosted at https://290045.github.io/
+
+Have Suggestions? Contact me:  soon...
