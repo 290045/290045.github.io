@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>290045's Links</title>
+  <title>290045's Hub</title>
 
   <style>
     body {
@@ -31,10 +31,30 @@
       margin-bottom: 25px;
     }
 
-    .link-grid {
+    /* Tab Layouts - Hide them by default */
+    .tab-content {
+      display: none;
+    }
+
+    /* Show the active tab */
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Grid layout for buttons */
+    .grid-layout {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
+    }
+
+    /* Big Menu Buttons for Homepage */
+    .menu-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     button {
@@ -53,6 +73,17 @@
       transform: scale(1.03);
     }
 
+    /* Back Button Style */
+    .back-btn {
+      background: #ef4444;
+      color: white;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .back-btn:hover {
+      background: #dc2626;
+    }
+
     .footer {
       margin-top: 25px;
       text-align: center;
@@ -65,127 +96,87 @@
       justify-content: center;
       margin-top: 20px;
     }
+    
+    .credits-text {
+      text-align: center;
+      line-height: 1.6;
+      font-size: 18px;
+    }
   </style>
 </head>
   
 <body>
 
   <div class="container">
-    <h1>Link Launcher</h1>
 
-    <div class="link-grid">
-       <button onclick="handleLinkClick('https://github.io')">
-        About:blank site
-      </button>
-
-      <button onclick="handleLinkClick('https://github.io')">
-        Seraph
-      </button>
-
-      <button onclick="handleLinkClick('https://noahstutoring.academy')">
-        Noah's Hub
-      </button>
-
-      <button onclick="handleLinkClick('https://pages.dev')">
-        Selenite
-      </button>
-
-      <button onclick="handleLinkClick('https://rocketgoal.io')">
-        Rocket Leauge
-      </button>
-
-      <button onclick="handleLinkClick('https://neocities.org')">
-        Pluto TV
-      </button>
-
-      <button onclick="handleLinkClick('https://neocities.org')">
-        Blooket Bot
-      </button>
-
-      <button onclick="handleLinkClick('https://kahootbot.net')">
-        Kahoot Bot
-      </button>
-      
-      <button onclick="handleLinkClick('https://gimkitbot.com')">
-        Gimkit Bot
-      </button>
-      
-      <button onclick="handleLinkClick('https://ipv64.net')">
-        Interstellar
-      </button>
-      
-      <button onclick="handleLinkClick('https://cloudflare.net')">
-        Space
-      </button>
-      
-      <button onclick="handleLinkClick('https://myinstants.com')">
-        Sound Board
-      </button>
-      
-      <button onclick="handleLinkClick('https://granit-union.ru')">
-        Galaxy v6 Proxy
-      </button>
-      
-      <button onclick="handleLinkClick('https://sulevkivastik.ee')">
-        Void v5
-      </button>
-      
-      <button onclick="handleLinkClick('https://jsdelivr.net')">
-        GUST
-      </button>
-      
-      <button onclick="handleLinkClick('https://goodfox.com.br')">
-        LuminalOS
-      </button>
-      
-      <button onclick="handleLinkClick('https://github.io')">
-        Dodge Hub
-      </button>
-      
-      <button onclick="handleLinkClick('https://schooloqy.com')">
-        RammerHead
-      </button>
-      
-      <button onclick="handleLinkClick('https://remiosenifoundation.org')">
-        Utopia
-      </button>
-      
-      <button onclick="handleLinkClick('https://google.com')">
-        Movies
-      </button>
-      
-      <button onclick="handleLinkClick('https://soap2day.day')">
-        More Movies
-      </button>
-      
-      <button onclick="handleLinkClick('https://pages.dev')">
-        Diamond
-      </button>
-      
-      <button onclick="handleLinkClick('https://github.io')">
-        Seraph
-      </button>
-      
-      <button onclick="handleLinkClick('https://github.io')">
-        Selenite
-      </button>
-      
-      <button onclick="handleLinkClick('text')">
-        idk
-      </button>
-      
-      <button onclick="handleLinkClick('https://google.com')">
-        More Coming Soon...
-      </button>
-    </div>
-    
-    <div class="suggest-wrapper">
-      <button onclick="handleLinkClick('https://forms.gle')">
-        Suggest a Site
-      </button>
+    <!-- ================= HOMEPAGE TAB ================= -->
+    <div id="homepage" class="tab-content active">
+      <h1>Welcome to 290045's Hub</h1>
+      <div class="menu-layout">
+        <button onclick="switchTab('games')">🎮 Games</button>
+        <button onclick="switchTab('proxies')">🌐 Proxies</button>
+        <button onclick="switchTab('credits')">📝 Credits</button>
+      </div>
     </div>
 
-    <!-- The id="update-date" tag lets the script insert the date right here -->
+    <!-- ================= GAMES TAB ================= -->
+    <div id="games" class="tab-content">
+      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+      <h1>Games</h1>
+      <div class="grid-layout">
+        <button onclick="handleLinkClick('https://rocketgoal.io')">Rocket League</button>
+        <button onclick="handleLinkClick('https://neocities.org')">Blooket Bot</button>
+        <button onclick="handleLinkClick('https://kahootbot.net')">Kahoot Bot</button>
+        <button onclick="handleLinkClick('https://gimkitbot.com')">Gimkit Bot</button>
+        <button onclick="handleLinkClick('https://github.io')">Dodge Hub</button>
+      </div>
+    </div>
+
+    <!-- ================= PROXIES TAB ================= -->
+    <div id="proxies" class="tab-content">
+      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+      <h1>Proxies & Tools</h1>
+      <div class="grid-layout">
+        <button onclick="handleLinkClick('https://github.io')">About:blank site</button>
+        <button onclick="handleLinkClick('https://github.io')">Seraph</button>
+        <button onclick="handleLinkClick('https://noahstutoring.academy')">Noah's Hub</button>
+        <button onclick="handleLinkClick('https://pages.dev')">Selenite</button>
+        <button onclick="handleLinkClick('https://neocities.org')">Pluto TV</button>
+        <button onclick="handleLinkClick('https://ipv64.net')">Interstellar</button>
+        <button onclick="handleLinkClick('https://cloudflare.net')">Space</button>
+        <button onclick="handleLinkClick('https://myinstants.com')">Sound Board</button>
+        <button onclick="handleLinkClick('https://granit-union.ru')">Galaxy v6 Proxy</button>
+        <button onclick="handleLinkClick('https://sulevkivastik.ee')">Void v5</button>
+        <button onclick="handleLinkClick('https://jsdelivr.net')">GUST</button>
+        <button onclick="handleLinkClick('https://goodfox.com.br')">LuminalOS</button>
+        <button onclick="handleLinkClick('https://schooloqy.com')">RammerHead</button>
+        <button onclick="handleLinkClick('https://remiosenifoundation.org')">Utopia</button>
+        <button onclick="handleLinkClick('https://google.com')">Movies</button>
+        <button onclick="handleLinkClick('https://soap2day.day')">More Movies</button>
+        <button onclick="handleLinkClick('https://pages.dev')">Diamond</button>
+        <button onclick="handleLinkClick('https://github.io')">Seraph (Alt)</button>
+        <button onclick="handleLinkClick('https://github.io')">Selenite (Alt)</button>
+        <button onclick="handleLinkClick('text')">idk</button>
+        <button onclick="handleLinkClick('https://google.com')">More Coming Soon...</button>
+      </div>
+      
+      <div class="suggest-wrapper">
+        <button onclick="handleLinkClick('https://forms.gle')">Suggest a Site</button>
+      </div>
+    </div>
+
+    <!-- ================= CREDITS TAB ================= -->
+    <div id="credits" class="tab-content">
+      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+      <h1>Credits</h1>
+      <div class="credits-text">
+        <p><strong>Owner:</strong> 290045</p>
+        <p><strong>Contributors:</strong> Shouts out to everyone hosting these mirrors and scripts.</p>
+        <p>Thanks for visiting the site! Keep suggesting new links via the proxy tab.</p>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
     <div class="footer">
       Updated <span id="update-date">Loading...</span> (Refreshing links)
     </div>
@@ -193,9 +184,18 @@
   </div>
 
   <script>
-    // GitHub API Configuration setup for username: 290045
     const GITHUB_USERNAME = '290045'; 
     const GITHUB_REPO = '290045.github.io'; 
+
+    // Tab switcher logic function
+    function switchTab(tabId) {
+      // Hide all tabs
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      // Show chosen tab
+      document.getElementById(tabId).classList.add('active');
+    }
 
     // Automatically fetch the last commit date from GitHub API on page load
     window.addEventListener('DOMContentLoaded', () => {
@@ -211,22 +211,17 @@
         })
         .then(data => {
           if (data && data.length > 0) {
-            // Get date from the latest commit info block
-            const commitDateString = data[0].commit.committer.date;
+            const commitDateString = data.commit.committer.date;
             const commitDate = new Date(commitDateString);
-
-            // Turn date into localized text (e.g. "Jun 24, 2026")
             const options = { month: 'short', day: 'numeric', year: 'numeric' };
-            const formattedDate = commitDate.toLocaleDateString('en-US', options);
-
-            dateElement.textContent = formattedDate;
+            dateElement.textContent = commitDate.toLocaleDateString('en-US', options);
           } else {
             fallbackToToday(dateElement);
           }
         })
         .catch(error => {
           console.error('Error fetching GitHub commit date:', error);
-          fallbackToToday(dateElement); // Safe backup if API rate limits you
+          fallbackToToday(dateElement);
         });
     });
 
@@ -236,7 +231,7 @@
       element.textContent = today.toLocaleDateString('en-US', options);
     }
 
-    // Modal alternative selection handler
+    // Modal choice logic
     function handleLinkClick(url) {
       const choice = confirm("Open in about:blank? \n\nClick 'OK' for about:blank \nClick 'Cancel' to open normally.");
       if (choice) {
