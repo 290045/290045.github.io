@@ -74,43 +74,43 @@
     <h1>Link Launcher</h1>
 
     <div class="link-grid">
-       <button onclick="openBlank('https://290045.github.io/')">
+       <button onclick="handleLinkClick('https://290045.github.io/')">
         About:blank site
       </button>
 
-      <button onclick="openBlank('https://imonlyhereforthaproxys.github.io/seraph/')">
+      <button onclick="handleLinkClick('https://imonlyhereforthaproxys.github.io/seraph/')">
         Seraph
       </button>
 
-      <button onclick="openBlank('https://noahstutoring.academy/')">
+      <button onclick="handleLinkClick('https://noahstutoring.academy/')">
         Noah's Hub
       </button>
 
-      <button onclick="openBlank('https://selenite-copy.pages.dev/')">
+      <button onclick="handleLinkClick('https://selenite-copy.pages.dev/')">
         Selenite
       </button>
 
-      <button onclick="openBlank('https://rocketgoal.io/')">
+      <button onclick="handleLinkClick('https://rocketgoal.io/')">
         Rocket Leauge
       </button>
 
-      <button onclick="openBlank('https://math-calculator.neocities.org/plutotv')">
+      <button onclick="handleLinkClick('https://math-calculator.neocities.org/plutotv')">
         Pluto TV
       </button>
 
-      <button onclick="openBlank('https://blooketbotlite.neocities.org/')">
+      <button onclick="handleLinkClick('https://blooketbotlite.neocities.org/')">
         Blooket Bot
       </button>
 
-      <button onclick="openBlank('https://kahootbot.net/')">
+      <button onclick="handleLinkClick('https://kahootbot.net/')">
         Kahoot Bot
       </button>
       
-      <button onclick="openBlank('https://gimkitbot.com/')">
+      <button onclick="handleLinkClick('https://gimkitbot.com/')">
         Gimkit Bot
       </button>
       
-      <button onclick="openBlank('https://hbiew.ipv64.net/')">
+      <button onclick="handleLinkClick('https://hbiew.ipv64.net/')">
         Interstellar
       </button>
       
@@ -118,69 +118,69 @@
         Space
       </button>
       
-      <button onclick="openBlank('https://www.myinstants.com/en/categories/sound%20effects/us/')">
+      <button onclick="handleLinkClick('https://www.myinstants.com/en/categories/sound%20effects/us/')">
         Sound Board
       </button>
       
-      <button onclick="openBlank('https://granit.granit-union.ru/')">
+      <button onclick="handleLinkClick('https://granit.granit-union.ru/')">
         Galaxy v6 Proxy
       </button>
       
-      <button onclick="openBlank('https://kym.sulevkivastik.ee/?/')">
+      <button onclick="handleLinkClick('https://kym.sulevkivastik.ee/?/')">
         Void v5
       </button>
       
-      <button onclick="openBlank('https://cdn.jsdelivr.net/gh/nautilus-os/GUST@latest/svg/site.svg')">
+      <button onclick="handleLinkClick('https://cdn.jsdelivr.net/gh/nautilus-os/GUST@latest/svg/site.svg')">
         GUST
       </button>
       
-      <button onclick="openBlank('https://playernation.goodfox.com.br/')">
+      <button onclick="handleLinkClick('https://playernation.goodfox.com.br/')">
         LuminalOS
       </button>
       
-      <button onclick="openBlank('https://fontonwonton.github.io/')">
+      <button onclick="handleLinkClick('https://fontonwonton.github.io/')">
         Dodge Hub
       </button>
       
-      <button onclick="openBlank('https://play.schooloqy.com/')">
+      <button onclick="handleLinkClick('https://play.schooloqy.com/')">
         RammerHead
       </button>
       
-      <button onclick="openBlank('https://utopia.remiosenifoundation.org/')">
+      <button onclick="handleLinkClick('https://utopia.remiosenifoundation.org/')">
         Utopia
       </button>
       
-      <button onclick="openBlank('https://docs.google.com/presentation/d/1BBouYN7q_KPCOMMk1upRNVN3kki5ZI-wQyYT4S9t65w/edit?slide=id.p#slide=id.p')">
+      <button onclick="handleLinkClick('https://docs.google.com/presentation/d/1BBouYN7q_KPCOMMk1upRNVN3kki5ZI-wQyYT4S9t65w/edit?slide=id.p#slide=id.p')">
         Movies
       </button>
       
-      <button onclick="openBlank('https://ww25.soap2day.day/')">
+      <button onclick="handleLinkClick('https://ww25.soap2day.day/')">
         More Movies
       </button>
       
-      <button onclick="openBlank('https://diamond-static.pages.dev/')">
+      <button onclick="handleLinkClick('https://diamond-static.pages.dev/')">
         Diamond
       </button>
       
-      <button onclick="openBlank('https://joemama980.github.io/')">
+      <button onclick="handleLinkClick('https://joemama980.github.io/')">
         Seraph
       </button>
       
-      <button onclick="openBlank('https://chroma67.github.io/index.html')">
+      <button onclick="handleLinkClick('https://chroma67.github.io/index.html')">
         Selenite
       </button>
       
-      <button onclick="openBlank('text')">
+      <button onclick="handleLinkClick('text')">
         idk
       </button>
       
-      <button onclick="openBlank('https://www.google.com/')">
+      <button onclick="handleLinkClick('https://www.google.com/')">
         More Coming Soon...
       </button>
     </div>
     
     <div class="suggest-wrapper">
-      <button onclick="openBlank('https://forms.gle/ReZJ9WWewxqjdosT7')">
+      <button onclick="handleLinkClick('https://forms.gle/ReZJ9WWewxqjdosT7')">
         Suggest a Site
       </button>
     </div>
@@ -191,8 +191,25 @@
 
   </div>
 
-</body>
   <script>
+    // New function to handle the choice
+    function handleLinkClick(url) {
+      // Ask user to click OK for about:blank, or Cancel for normal tab
+      const choice = confirm("Open in about:blank? \n\nClick 'OK' for about:blank \nClick 'Cancel' to open normally.");
+      
+      if (choice) {
+        openBlank(url);
+      } else {
+        openNormal(url);
+      }
+    }
+
+    // Opens normally in a new tab
+    function openNormal(url) {
+      window.open(url, '_blank');
+    }
+
+    // Your original about:blank iframe logic
     function openBlank(url) {
       const win = window.open('about:blank', '_blank');
 
