@@ -279,41 +279,43 @@
       </div>
     </div>
 
-    <!-- ================= SETTINGS TAB ================= -->
-<div id="tools" class="tab-content">
-  <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+<!-- ================= SETTINGS TAB ================= -->
+<div id="tools" class="tab-content" style="display: block; padding: 20px; color: #ffffff; font-family: sans-serif;">
+  <button class="back-btn" onclick="switchTab('homepage')" style="padding: 10px 15px; margin-bottom: 20px; cursor: pointer; background: #333; color: white; border: 1px solid #555; border-radius: 4px;">⬅ Back to Home</button>
   
-  <h1>Settings</h1>
+  <h1 style="margin-top: 0; color: #fff;">Settings</h1>
   
-  <div class="settings-container">
+  <div style="display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin: 0 auto; text-align: left;">
+    
     <!-- Section 1: Preset Cloaks -->
-    <div class="settings-card">
-      <h3>Quick Tab Cloaks</h3>
-      <p>Instantly disguise this tab as an educational tool.</p>
-      <div class="settings-grid">
-        <button class="setting-btn" onclick="setUserCloak('googleDrive')">🟢 Google Drive</button>
-        <button class="setting-btn" onclick="setUserCloak('googleClassroom')">🟢 Google Classroom</button>
-        <button class="setting-btn" onclick="setUserCloak('canvas')">🟢 Canvas Dashboard</button>
+    <div style="background: #1e1e1e; border: 1px solid #333; border-radius: 12px; padding: 20px;">
+      <h3 style="margin: 0 0 5px 0; color: #fff;">Quick Tab Cloaks</h3>
+      <p style="margin: 0 0 15px 0; color: #aaa; font-size: 14px;">Instantly disguise this tab as an educational tool.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;">
+        <button onclick="setUserCloak('googleDrive')" style="padding: 10px; background: #2d2d2d; color: white; border: none; border-radius: 6px; cursor: pointer;">🟢 Google Drive</button>
+        <button onclick="setUserCloak('googleClassroom')" style="padding: 10px; background: #2d2d2d; color: white; border: none; border-radius: 6px; cursor: pointer;">🟢 Classroom</button>
+        <button onclick="setUserCloak('canvas')" style="padding: 10px; background: #2d2d2d; color: white; border: none; border-radius: 6px; cursor: pointer;">🟢 Canvas</button>
       </div>
     </div>
 
     <!-- Section 2: Custom Cloak Inputs -->
-    <div class="settings-card">
-      <h3>Custom Tab Cloak</h3>
-      <p>Use your own custom title and icon image.</p>
-      <div class="input-group">
-        <input type="text" id="customTitleInput" placeholder="Enter custom tab title...">
-        <input type="text" id="customIconInput" placeholder="Enter custom favicon image URL...">
-        <button class="setting-btn save-btn" onclick="applyCustomCloak()">Apply Custom Cloak</button>
+    <div style="background: #1e1e1e; border: 1px solid #333; border-radius: 12px; padding: 20px;">
+      <h3 style="margin: 0 0 5px 0; color: #fff;">Custom Tab Cloak</h3>
+      <p style="margin: 0 0 15px 0; color: #aaa; font-size: 14px;">Use your own custom title and icon image.</p>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="text" id="customTitleInput" placeholder="Enter custom tab title..." style="padding: 10px; background: #121212; border: 1px solid #444; border-radius: 6px; color: white;">
+        <input type="text" id="customIconInput" placeholder="Enter custom favicon image URL..." style="padding: 10px; background: #121212; border: 1px solid #444; border-radius: 6px; color: white;">
+        <button onclick="applyCustomCloak()" style="padding: 10px; background: #007acc; color: white; border: none; border-radius: 6px; cursor: pointer;">Apply Custom Cloak</button>
       </div>
     </div>
 
     <!-- Section 3: Reset Settings -->
-    <div class="settings-card reset-card">
-      <h3>Reset Configuration</h3>
-      <p>Restore the original look and feel of your hub.</p>
-      <button class="setting-btn reset-btn" onclick="setUserCloak('reset')">Reset to Default</button>
+    <div style="background: #1e1e1e; border: 1px solid #333; border-radius: 12px; padding: 20px;">
+      <h3 style="margin: 0 0 5px 0; color: #fff;">Reset Configuration</h3>
+      <p style="margin: 0 0 15px 0; color: #aaa; font-size: 14px;">Restore the original look and feel of your hub.</p>
+      <button onclick="setUserCloak('reset')" style="padding: 10px; background: #cc3333; color: white; border: none; border-radius: 6px; cursor: pointer; width: 100%;">Reset to Default</button>
     </div>
+    
   </div>
 </div>
     
