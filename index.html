@@ -1,84 +1,4 @@
 <!DOCTYPE html>
-<script>
-  // ========================================================
-  // 1. PLACE THIS AT THE VERY TOP OF YOUR SCRIPT TAG
-  // This stops the tab from flashing its real name on load!
-  // ========================================================
-  (function loadSavedCloak() {
-      var savedTitle = localStorage.getItem('cloakedTitle');
-      var savedFavicon = localStorage.getItem('cloakedFavicon');
-      if (savedTitle && savedFavicon) {
-          document.title = savedTitle;
-          var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-          link.rel = 'icon';
-          link.href = savedFavicon;
-          if (!document.head.contains(link)) document.head.appendChild(link);
-      }
-  })();
-
-  // ========================================================
-  // 2. PASTE THE SETTINGS LOGIC HERE
-  // ========================================================
-  var cloakingPresets = {
-      googleDrive: {
-          title: "My Drive - Google Drive",
-          favicon: "https://gstatic.com"
-      },
-      googleClassroom: {
-          title: "Classes",
-          favicon: "https://gstatic.com"
-      },
-      canvas: {
-          title: "Dashboard",
-          favicon: "https://cloudfront.net"
-      },
-      reset: {
-          title: "290045's Hub", 
-          favicon: "/favicon.ico" 
-      }
-  };
-
-  function cloakTab(title, faviconUrl) {
-      document.title = title;
-      var link = document.querySelector("link[rel*='icon']");
-      if (!link) {
-          link = document.createElement('link');
-          link.rel = 'icon';
-          document.head.appendChild(link);
-      }
-      link.href = faviconUrl;
-  }
-
-  function setUserCloak(presetKey) {
-      var preset = cloakingPresets[presetKey];
-      if (preset) {
-          cloakTab(preset.title, preset.favicon);
-          localStorage.setItem('cloakedTitle', preset.title);
-          localStorage.setItem('cloakedFavicon', preset.favicon);
-      }
-  }
-
-  function applyCustomCloak() {
-      var customTitle = document.getElementById('customTitleInput').value.trim();
-      var customIcon = document.getElementById('customIconInput').value.trim();
-
-      if (!customTitle || !customIcon) {
-          alert("Please fill out both fields!");
-          return;
-      }
-
-      cloakTab(customTitle, customIcon);
-      localStorage.setItem('cloakedTitle', customTitle);
-      localStorage.setItem('cloakedFavicon', customIcon);
-      
-      document.getElementById('customTitleInput').value = '';
-      document.getElementById('customIconInput').value = '';
-  }
-
-  // ========================================================
-  // 3. YOUR EXISTING CODE SITS RIGHT BELOW HERE
-  // ========================================================
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -196,7 +116,6 @@
         <button onclick="switchTab('games')">🎮 Games</button>
         <button onclick="switchTab('proxies')">🌐 Proxies</button>
         <button onclick="switchTab('tools')">🛠️ Tools</button>
-        <button onclick="switchTab('settings')">⚙️ Settings</button>
         <button onclick="switchTab('credits')">📝 Credits</button>
       </div>
     </div>
@@ -269,25 +188,6 @@
         <button onclick="handleLinkClick('https://kahootbot.net')">Kahoot Bot</button>
       </div>
     </div>
-
-<!-- ================= SETTINGS TAB ================= -->
-<div id="settings" class="tab-content">
-  <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-  
-  <h1>Settings</h1>
-  
-  <div class="grid-layout">
-    <button onclick="setUserCloak('googleDrive')">🟢 Google Drive Cloak</button>
-    <button onclick="setUserCloak('googleClassroom')">🟢 Classroom Cloak</button>
-    <button onclick="setUserCloak('canvas')">🟢 Canvas Cloak</button>
-    
-    <input type="text" id="customTitleInput" placeholder="Custom Title..." style="grid-column: span 1; padding: 12px; font-size: 1rem; border-radius: 8px; border: 1px solid #444; background: #222; color: #fff;">
-    <input type="text" id="customIconInput" placeholder="Custom Favicon URL..." style="grid-column: span 1; padding: 12px; font-size: 1rem; border-radius: 8px; border: 1px solid #444; background: #222; color: #fff;">
-    
-    <button onclick="applyCustomCloak()" style="background-color: #007acc;">Apply Custom Cloak</button>
-    <button onclick="setUserCloak('reset')" style="background-color: #cc3333;">Reset to Default</button>
-  </div>
-</div>
     
     <!-- ================= CREDITS TAB ================= -->
     <div id="credits" class="tab-content">
@@ -326,8 +226,8 @@
       const dateElement = document.getElementById('update-date');
       if (!dateElement) return;
 
-      const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
-      
+      const url = `https://github.com{GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
+
       fetch(url)
         .then(response => {
           if (!response.ok) throw new Error('API failed');
@@ -348,82 +248,18 @@
           fallbackToToday(dateElement);
         });
     });
-  </script>
-<!-- Put this separate block at the absolute bottom of your HTML file, below your main script -->
-<script>
-(function() {
-  // Wrap everything inside a try/catch block so browser extensions can't crash your page
-  try {
-    var cloakingPresets = {
-        googleDrive: {
-            title: "My Drive - Google Drive",
-            favicon: "https://gstatic.com"
-        },
-        googleClassroom: {
-            title: "Classes",
-            favicon: "https://gstatic.com"
-        },
-        canvas: {
-            title: "Dashboard",
-            favicon: "https://cloudfront.net"
-        },
-        reset: {
-            title: "290045's Hub", 
-            favicon: "/favicon.ico" 
-        }
-    };
 
-    window.cloakTab = function(title, faviconUrl) {
-        try {
-            document.title = title;
-            var link = document.querySelector("link[rel*='icon']");
-            if (!link) {
-                link = document.createElement('link');
-                link.rel = 'icon';
-                document.head.appendChild(link);
-            }
-            link.href = faviconUrl;
-        } catch(e) { console.log("Extension blocked title change"); }
-    };
-
-    window.setUserCloak = function(presetKey) {
-        var preset = cloakingPresets[presetKey];
-        if (preset) {
-            window.cloakTab(preset.title, preset.favicon);
-            localStorage.setItem('cloakedTitle', preset.title);
-            localStorage.setItem('cloakedFavicon', preset.favicon);
-        }
-    };
-
-    window.applyCustomCloak = function() {
-        var customTitle = document.getElementById('customTitleInput');
-        var customIcon = document.getElementById('customIconInput');
-
-        if (!customTitle || !customIcon || !customTitle.value.trim() || !customIcon.value.trim()) {
-            alert("Please fill out both custom fields!");
-            return;
-        }
-
-        window.cloakTab(customTitle.value.trim(), customIcon.value.trim());
-        localStorage.setItem('cloakedTitle', customTitle.value.trim());
-        localStorage.setItem('cloakedFavicon', customIcon.value.trim());
-        
-        customTitle.value = '';
-        customIcon.value = '';
-    };
-
-    // Auto-load saved settings safely on startup
-    var savedTitle = localStorage.getItem('cloakedTitle');
-    var savedFavicon = localStorage.getItem('cloakedFavicon');
-    if (savedTitle && savedFavicon) {
-        window.cloakTab(savedTitle, savedFavicon);
+    function fallbackToToday(element) {
+      const today = new Date();
+      const options = { month: 'short', day: 'numeric', year: 'numeric' };
+      element.textContent = today.toLocaleDateString('en-US', options);
     }
 
-  } catch (globalError) {
-      console.warn("Caught an extension error safely:", globalError);
-  }
-})();
-</script>
+    // Simplified link logic to open normally
+    function handleLinkClick(url) {
+      window.open(url, '_blank');
+    }
+  </script>
 
 </body>
 </html>
