@@ -326,8 +326,8 @@
       const dateElement = document.getElementById('update-date');
       if (!dateElement) return;
 
-      const url = `https://github.com{GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
-
+      const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
+      
       fetch(url)
         .then(response => {
           if (!response.ok) throw new Error('API failed');
