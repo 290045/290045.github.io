@@ -348,89 +348,82 @@
           fallbackToToday(dateElement);
         });
     });
+  </script>
+<!-- Put this separate block at the absolute bottom of your HTML file, below your main script -->
+<script>
+(function() {
+  // Wrap everything inside a try/catch block so browser extensions can't crash your page
+  try {
+    var cloakingPresets = {
+        googleDrive: {
+            title: "My Drive - Google Drive",
+            favicon: "https://gstatic.com"
+        },
+        googleClassroom: {
+            title: "Classes",
+            favicon: "https://gstatic.com"
+        },
+        canvas: {
+            title: "Dashboard",
+            favicon: "https://cloudfront.net"
+        },
+        reset: {
+            title: "290045's Hub", 
+            favicon: "/favicon.ico" 
+        }
+    };
 
-    function fallbackToToday(element) {
-      const today = new Date();
-      const options = { month: 'short', day: 'numeric', year: 'numeric' };
-      element.textContent = today.toLocaleDateString('en-US', options);
-    }
+    window.cloakTab = function(title, faviconUrl) {
+        try {
+            document.title = title;
+            var link = document.querySelector("link[rel*='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = faviconUrl;
+        } catch(e) { console.log("Extension blocked title change"); }
+    };
 
-    // Simplified link logic to open normally
-    function handleLinkClick(url) {
-      window.open(url, '_blank');
-    }
-  // ========================================================
-// SAFE UTILITY SYSTEM (Pasted at the bottom of your script)
-// ========================================================
-var cloakingPresets = {
-    googleDrive: {
-        title: "My Drive - Google Drive",
-        favicon: "https://gstatic.com"
-    },
-    googleClassroom: {
-        title: "Classes",
-        favicon: "https://gstatic.com"
-    },
-    canvas: {
-        title: "Dashboard",
-        favicon: "https://cloudfront.net"
-    },
-    reset: {
-        title: "290045's Hub", 
-        favicon: "/favicon.ico" 
-    }
-};
+    window.setUserCloak = function(presetKey) {
+        var preset = cloakingPresets[presetKey];
+        if (preset) {
+            window.cloakTab(preset.title, preset.favicon);
+            localStorage.setItem('cloakedTitle', preset.title);
+            localStorage.setItem('cloakedFavicon', preset.favicon);
+        }
+    };
 
-function cloakTab(title, faviconUrl) {
-    document.title = title;
-    var link = document.querySelector("link[rel*='icon']");
-    if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
-        document.head.appendChild(link);
-    }
-    link.href = faviconUrl;
-}
+    window.applyCustomCloak = function() {
+        var customTitle = document.getElementById('customTitleInput');
+        var customIcon = document.getElementById('customIconInput');
 
-function setUserCloak(presetKey) {
-    var preset = cloakingPresets[presetKey];
-    if (preset) {
-        cloakTab(preset.title, preset.favicon);
-        localStorage.setItem('cloakedTitle', preset.title);
-        localStorage.setItem('cloakedFavicon', preset.favicon);
-    }
-}
+        if (!customTitle || !customIcon || !customTitle.value.trim() || !customIcon.value.trim()) {
+            alert("Please fill out both custom fields!");
+            return;
+        }
 
-function applyCustomCloak() {
-    var customTitle = document.getElementById('customTitleInput');
-    var customIcon = document.getElementById('customIconInput');
+        window.cloakTab(customTitle.value.trim(), customIcon.value.trim());
+        localStorage.setItem('cloakedTitle', customTitle.value.trim());
+        localStorage.setItem('cloakedFavicon', customIcon.value.trim());
+        
+        customTitle.value = '';
+        customIcon.value = '';
+    };
 
-    if (!customTitle || !customIcon || !customTitle.value.trim() || !customIcon.value.trim()) {
-        alert("Please fill out both custom fields!");
-        return;
-    }
-
-    cloakTab(customTitle.value.trim(), customIcon.value.trim());
-    localStorage.setItem('cloakedTitle', customTitle.value.trim());
-    localStorage.setItem('cloakedFavicon', customIcon.value.trim());
-    
-    customTitle.value = '';
-    customIcon.value = '';
-}
-
-// Automatically apply the saved cloak on startup safely
-(function loadSavedCloak() {
+    // Auto-load saved settings safely on startup
     var savedTitle = localStorage.getItem('cloakedTitle');
     var savedFavicon = localStorage.getItem('cloakedFavicon');
     if (savedTitle && savedFavicon) {
-        document.title = savedTitle;
-        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-        link.rel = 'icon';
-        link.href = savedFavicon;
-        if (!document.head.contains(link)) document.head.appendChild(link);
+        window.cloakTab(savedTitle, savedFavicon);
     }
+
+  } catch (globalError) {
+      console.warn("Caught an extension error safely:", globalError);
+  }
 })();
-  </script>
+</script>
 
 </body>
 </html>
