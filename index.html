@@ -1,4 +1,93 @@
 <!DOCTYPE html>
+<script>
+  // ========================================================
+  // 1. PLACE THIS AT THE VERY TOP OF YOUR SCRIPT TAG
+  // This stops the tab from flashing its real name on load!
+  // ========================================================
+  (function loadSavedCloak() {
+      const savedTitle = localStorage.getItem('cloakedTitle');
+      const savedFavicon = localStorage.getItem('cloakedFavicon');
+      if (savedTitle && savedFavicon) {
+          document.title = savedTitle;
+          let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+          link.rel = 'icon';
+          link.href = savedFavicon;
+          if (!document.head.contains(link)) document.head.appendChild(link);
+      }
+  })();
+
+  // ========================================================
+  // 2. PASTE THE SETTINGS LOGIC HERE
+  // ========================================================
+  const cloakingPresets = {
+      googleDrive: {
+          title: "My Drive - Google Drive",
+          favicon: "https://gstatic.com"
+      },
+      googleClassroom: {
+          title: "Classes",
+          favicon: "https://gstatic.com"
+      },
+      canvas: {
+          title: "Dashboard",
+          favicon: "https://cloudfront.net"
+      },
+      reset: {
+          title: "My Hub", 
+          favicon: "/favicon.ico" 
+      }
+  };
+
+  function cloakTab(title, faviconUrl) {
+      document.title = title;
+      let link = document.querySelector("link[rel*='icon']");
+      if (!link) {
+          link = document.createElement('link');
+          link.rel = 'icon';
+          document.head.appendChild(link);
+      }
+      link.href = faviconUrl;
+  }
+
+  function setUserCloak(presetKey) {
+      const preset = cloakingPresets[presetKey];
+      if (preset) {
+          cloakTab(preset.title, preset.favicon);
+          localStorage.setItem('cloakedTitle', preset.title);
+          localStorage.setItem('cloakedFavicon', preset.favicon);
+      }
+  }
+
+  function applyCustomCloak() {
+      const customTitle = document.getElementById('customTitleInput').value.trim();
+      const customIcon = document.getElementById('customIconInput').value.trim();
+
+      if (!customTitle || !customIcon) {
+          alert("Please fill out both fields!");
+          return;
+      }
+
+      cloakTab(customTitle, customIcon);
+      localStorage.setItem('cloakedTitle', customTitle);
+      localStorage.setItem('cloakedFavicon', customIcon);
+      
+      document.getElementById('customTitleInput').value = '';
+      document.getElementById('customIconInput').value = '';
+  }
+
+
+  // ========================================================
+  // 3. YOUR EXISTING CODE SITS RIGHT BELOW HERE
+  // ========================================================
+  function switchTab(tabId) {
+      // Your existing switchTab code...
+  }
+
+  function handleLinkClick(url) {
+      // Your existing handleLinkClick code...
+  }
+</script>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -116,6 +205,7 @@
         <button onclick="switchTab('games')">🎮 Games</button>
         <button onclick="switchTab('proxies')">🌐 Proxies</button>
         <button onclick="switchTab('tools')">🛠️ Tools</button>
+        <button onclick="switchTab('settings')">⚙️ Settings</button>
         <button onclick="switchTab('credits')">📝 Credits</button>
       </div>
     </div>
@@ -188,6 +278,44 @@
         <button onclick="handleLinkClick('https://kahootbot.net')">Kahoot Bot</button>
       </div>
     </div>
+
+    <!-- ================= SETTINGS TAB ================= -->
+<div id="tools" class="tab-content">
+  <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+  
+  <h1>Settings</h1>
+  
+  <div class="settings-container">
+    <!-- Section 1: Preset Cloaks -->
+    <div class="settings-card">
+      <h3>Quick Tab Cloaks</h3>
+      <p>Instantly disguise this tab as an educational tool.</p>
+      <div class="settings-grid">
+        <button class="setting-btn" onclick="setUserCloak('googleDrive')">🟢 Google Drive</button>
+        <button class="setting-btn" onclick="setUserCloak('googleClassroom')">🟢 Google Classroom</button>
+        <button class="setting-btn" onclick="setUserCloak('canvas')">🟢 Canvas Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Section 2: Custom Cloak Inputs -->
+    <div class="settings-card">
+      <h3>Custom Tab Cloak</h3>
+      <p>Use your own custom title and icon image.</p>
+      <div class="input-group">
+        <input type="text" id="customTitleInput" placeholder="Enter custom tab title...">
+        <input type="text" id="customIconInput" placeholder="Enter custom favicon image URL...">
+        <button class="setting-btn save-btn" onclick="applyCustomCloak()">Apply Custom Cloak</button>
+      </div>
+    </div>
+
+    <!-- Section 3: Reset Settings -->
+    <div class="settings-card reset-card">
+      <h3>Reset Configuration</h3>
+      <p>Restore the original look and feel of your hub.</p>
+      <button class="setting-btn reset-btn" onclick="setUserCloak('reset')">Reset to Default</button>
+    </div>
+  </div>
+</div>
     
     <!-- ================= CREDITS TAB ================= -->
     <div id="credits" class="tab-content">
