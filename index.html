@@ -1,4 +1,24 @@
 <!DOCTYPE html>
+<script>
+(function loadSavedCloak() {
+  try {
+    var savedTitle = localStorage.getItem('cloakedTitle');
+    var savedFavicon = localStorage.getItem('cloakedFavicon');
+    if (savedTitle || savedFavicon) {
+      if (savedTitle) document.title = savedTitle;
+      if (savedFavicon) {
+        var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.rel = 'icon';
+        link.href = savedFavicon;
+        if (!document.head.contains(link)) document.head.appendChild(link);
+      }
+    }
+  } catch (e) {
+    console.warn('Cloak loader blocked', e);
+  }
+})();
+</script>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -116,6 +136,7 @@
         <button onclick="switchTab('games')">🎮 Games</button>
         <button onclick="switchTab('proxies')">🌐 Proxies</button>
         <button onclick="switchTab('tools')">🛠️ Tools</button>
+        <button onclick="switchTab('settings')"> Settings</button>
         <button onclick="switchTab('credits')">📝 Credits</button>
       </div>
     </div>
@@ -189,6 +210,30 @@
       </div>
     </div>
     
+ <!-- ================= SETTINGS TAB ================= -->
+    <div id="settings" class="tab-content">
+  <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+  <h1>Settings</h1>
+
+  <div class="grid-layout" style="align-items:center;">
+    <!-- Preset cloak buttons -->
+    <button onclick="setUserCloak('googleDrive')">🟢 Google Drive Cloak</button>
+    <button onclick="setUserCloak('googleClassroom')">🟢 Classroom Cloak</button>
+    <button onclick="setUserCloak('canvas')">🟢 Canvas Cloak</button>
+
+    <!-- Custom cloak inputs -->
+    <input id="customTitleInput" type="text" placeholder="Custom Title (e.g. 'Dashboard')" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
+    <input id="customIconInput" type="text" placeholder="Custom Favicon URL (https://.../favicon.ico)" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
+
+    <button onclick="applyCustomCloak()" style="background:#007acc;color:#fff;">Apply Custom Cloak</button>
+    <button onclick="setUserCloak('reset')" style="background:#cc3333;color:#fff;">Reset to Default</button>
+  </div>
+
+  <p style="margin-top:16px;color:#9ca3af;font-size:14px;text-align:center;">
+    Cloak changes persist in your browser (localStorage) and will be reapplied when you revisit.
+  </p>
+</div>
+    
     <!-- ================= CREDITS TAB ================= -->
     <div id="credits" class="tab-content">
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
@@ -260,6 +305,81 @@
       window.open(url, '_blank');
     }
   </script>
+  <script>
+/* Cloaking presets and helper functions */
+var cloakingPresets = {
+  googleDrive: { title: "My Drive - Google Drive", favicon: "https://www.google.com/favicon.ico" },
+  googleClassroom: { title: "Classes", favicon: "https://www.google.com/favicon.ico" },
+  canvas: { title: "Dashboard", favicon: "https://canvas.instructure.com/favicon.ico" },
+  reset: { title: "290045's Hub", favicon: "/favicon.ico" }
+};
+
+function cloakTab(title, faviconUrl) {
+  try {
+    if (title) document.title = title;
+    if (faviconUrl) {
+      var link = document.querySelector("link[rel*='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.href = faviconUrl;
+    }
+  } catch (e) {
+    console.warn('cloakTab blocked by extension or browser:', e);
+  }
+}
+
+function setUserCloak(presetKey) {
+  var preset = cloakingPresets[presetKey];
+  if (!preset) return;
+  cloakTab(preset.title, preset.favicon);
+  try {
+    localStorage.setItem('cloakedTitle', preset.title || '');
+    localStorage.setItem('cloakedFavicon', preset.favicon || '');
+  } catch (e) {
+    console.warn('Could not save cloak to localStorage', e);
+  }
+}
+
+function applyCustomCloak() {
+  var titleInput = document.getElementById('customTitleInput');
+  var iconInput = document.getElementById('customIconInput');
+  if (!titleInput || !iconInput) return;
+
+  var title = titleInput.value.trim();
+  var icon = iconInput.value.trim();
+
+  if (!title || !icon) {
+    alert('Please fill both fields to apply a custom cloak.');
+    return;
+  }
+
+  cloakTab(title, icon);
+  try {
+    localStorage.setItem('cloakedTitle', title);
+    localStorage.setItem('cloakedFavicon', icon);
+  } catch (e) {
+    console.warn('Could not save custom cloak', e);
+  }
+
+  // Clear inputs for convenience
+  titleInput.value = '';
+  iconInput.value = '';
+}
+
+/* Safe auto-load on DOM ready to keep behavior resilient */
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    var savedTitle = localStorage.getItem('cloakedTitle');
+    var savedFavicon = localStorage.getItem('cloakedFavicon');
+    if (savedTitle || savedFavicon) cloakTab(savedTitle || null, savedFavicon || null);
+  } catch (e) {
+    console.warn('Could not load saved cloak', e);
+  }
+});
+</script>
 
 </body>
 </html>
