@@ -5,11 +5,11 @@
   // This stops the tab from flashing its real name on load!
   // ========================================================
   (function loadSavedCloak() {
-      const savedTitle = localStorage.getItem('cloakedTitle');
-      const savedFavicon = localStorage.getItem('cloakedFavicon');
+      var savedTitle = localStorage.getItem('cloakedTitle');
+      var savedFavicon = localStorage.getItem('cloakedFavicon');
       if (savedTitle && savedFavicon) {
           document.title = savedTitle;
-          let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+          var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
           link.rel = 'icon';
           link.href = savedFavicon;
           if (!document.head.contains(link)) document.head.appendChild(link);
@@ -19,10 +19,10 @@
   // ========================================================
   // 2. PASTE THE SETTINGS LOGIC HERE
   // ========================================================
-  const cloakingPresets = {
+  var cloakingPresets = {
       googleDrive: {
           title: "My Drive - Google Drive",
-          favicon: "https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_4.ico"
+          favicon: "https://gstatic.com"
       },
       googleClassroom: {
           title: "Classes",
@@ -40,7 +40,7 @@
 
   function cloakTab(title, faviconUrl) {
       document.title = title;
-      let link = document.querySelector("link[rel*='icon']");
+      var link = document.querySelector("link[rel*='icon']");
       if (!link) {
           link = document.createElement('link');
           link.rel = 'icon';
@@ -50,7 +50,7 @@
   }
 
   function setUserCloak(presetKey) {
-      const preset = cloakingPresets[presetKey];
+      var preset = cloakingPresets[presetKey];
       if (preset) {
           cloakTab(preset.title, preset.favicon);
           localStorage.setItem('cloakedTitle', preset.title);
@@ -59,8 +59,8 @@
   }
 
   function applyCustomCloak() {
-      const customTitle = document.getElementById('customTitleInput').value.trim();
-      const customIcon = document.getElementById('customIconInput').value.trim();
+      var customTitle = document.getElementById('customTitleInput').value.trim();
+      var customIcon = document.getElementById('customIconInput').value.trim();
 
       if (!customTitle || !customIcon) {
           alert("Please fill out both fields!");
@@ -75,18 +75,9 @@
       document.getElementById('customIconInput').value = '';
   }
 
-
   // ========================================================
   // 3. YOUR EXISTING CODE SITS RIGHT BELOW HERE
   // ========================================================
-  function switchTab(tabId) {
-      // Your existing switchTab code...
-  }
-
-  function handleLinkClick(url) {
-      // Your existing handleLinkClick code...
-  }
-</script>
 
 <html lang="en">
 <head>
