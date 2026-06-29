@@ -122,6 +122,72 @@
       line-height: 1.6;
       font-size: 18px;
     }
+
+    /* Panic Button Styles */
+    .panic-section {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 2px solid #ff6b6b;
+    }
+
+    .panic-section h3 {
+      margin-top: 0;
+      color: #ff6b6b;
+      font-size: 18px;
+    }
+
+    .panic-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .panic-key-display {
+      background: #333;
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: 2px solid #ff6b6b;
+      color: #fff;
+      font-weight: bold;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .panic-key-display.listening {
+      background: #ff6b6b;
+      color: #000;
+      animation: pulse 0.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .panic-btn-primary {
+      background: #ff6b6b;
+      color: white;
+    }
+    .panic-btn-primary:hover {
+      background: #ee5a52;
+    }
+
+    .panic-btn-secondary {
+      background: #444;
+      color: white;
+    }
+    .panic-btn-secondary:hover {
+      background: #555;
+    }
+
+    .panic-note {
+      color: #9ca3af;
+      font-size: 12px;
+      margin-top: 10px;
+    }
   </style>
 </head>
   
@@ -232,6 +298,19 @@
   <p style="margin-top:16px;color:#9ca3af;font-size:14px;text-align:center;">
     Cloak changes persist in your browser (localStorage) and will be reapplied when you revisit.
   </p>
+
+  <!-- Emergency Panic Button Section -->
+  <div class="panic-section">
+    <h3>🚨 Emergency Panic Button</h3>
+    <div class="panic-controls">
+      <div class="panic-key-display" id="panicKeyDisplay">No Key Set</div>
+      <button class="panic-btn-primary" onclick="startListeningForPanicKey()">Set Hotkey</button>
+      <button class="panic-btn-secondary" onclick="clearPanicKey()">Clear</button>
+    </div>
+    <p class="panic-note">
+      Press "Set Hotkey", then press any key on your keyboard to set it as the panic button. Press that key anytime to close this tab instantly.
+    </p>
+  </div>
 </div>
     
     <!-- ================= CREDITS TAB ================= -->
@@ -271,7 +350,7 @@
       const dateElement = document.getElementById('update-date');
       if (!dateElement) return;
 
-      const url = `https://github.com{GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
+      const url = `https://github.com${GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
 
       fetch(url)
         .then(response => {
@@ -377,6 +456,108 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedTitle || savedFavicon) cloakTab(savedTitle || null, savedFavicon || null);
   } catch (e) {
     console.warn('Could not load saved cloak', e);
+  }
+
+  // Load saved panic key if it exists
+  loadSavedPanicKey();
+});
+
+/* Emergency Panic Button Functions */
+var panicKeyCode = null;
+var listeningForPanicKey = false;
+
+function loadSavedPanicKey() {
+  try {
+    var savedKey = localStorage.getItem('panicKeyCode');
+    if (savedKey) {
+      panicKeyCode = parseInt(savedKey);
+      updatePanicKeyDisplay();
+    }
+  } catch (e) {
+    console.warn('Could not load saved panic key', e);
+  }
+}
+
+function getKeyName(keyCode) {
+  var keyMap = {
+    27: 'Escape',
+    32: 'Space',
+    13: 'Enter',
+    8: 'Backspace',
+    9: 'Tab',
+    20: 'Caps Lock'
+  };
+  
+  if (keyMap[keyCode]) return keyMap[keyCode];
+  
+  if (keyCode >= 65 && keyCode <= 90) return String.fromCharCode(keyCode);
+  if (keyCode >= 48 && keyCode <= 57) return String.fromCharCode(keyCode);
+  if (keyCode >= 112 && keyCode <= 123) return 'F' + (keyCode - 111);
+  
+  return 'Key ' + keyCode;
+}
+
+function updatePanicKeyDisplay() {
+  var display = document.getElementById('panicKeyDisplay');
+  if (panicKeyCode) {
+    display.textContent = getKeyName(panicKeyCode);
+  } else {
+    display.textContent = 'No Key Set';
+  }
+}
+
+function startListeningForPanicKey() {
+  listeningForPanicKey = true;
+  var display = document.getElementById('panicKeyDisplay');
+  display.classList.add('listening');
+  display.textContent = 'Press a key...';
+
+  function handleKeyPress(e) {
+    if (listeningForPanicKey) {
+      e.preventDefault();
+      panicKeyCode = e.keyCode;
+      
+      try {
+        localStorage.setItem('panicKeyCode', panicKeyCode.toString());
+      } catch (err) {
+        console.warn('Could not save panic key', err);
+      }
+
+      listeningForPanicKey = false;
+      display.classList.remove('listening');
+      updatePanicKeyDisplay();
+      
+      document.removeEventListener('keydown', handleKeyPress);
+    }
+  }
+
+  document.addEventListener('keydown', handleKeyPress);
+  
+  // Stop listening after 10 seconds if no key is pressed
+  setTimeout(function() {
+    if (listeningForPanicKey) {
+      listeningForPanicKey = false;
+      display.classList.remove('listening');
+      display.textContent = 'No Key Set';
+      document.removeEventListener('keydown', handleKeyPress);
+    }
+  }, 10000);
+}
+
+function clearPanicKey() {
+  panicKeyCode = null;
+  try {
+    localStorage.removeItem('panicKeyCode');
+  } catch (e) {
+    console.warn('Could not clear panic key', e);
+  }
+  updatePanicKeyDisplay();
+}
+
+// Global listener for panic button
+document.addEventListener('keydown', function(e) {
+  if (panicKeyCode && e.keyCode === panicKeyCode && !listeningForPanicKey) {
+    window.close();
   }
 });
 </script>
