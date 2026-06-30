@@ -244,44 +244,44 @@
       margin-top: 10px;
     }
 
-    /* Hidden content for blank mode */
-    body.blank-mode .container {
-      background: white;
-      color: #333;
+    /* BLANK MODE - COMPLETE OVERRIDE */
+    body.blank-mode {
+      background: white !important;
     }
 
-    body.blank-mode .tab-content,
-    body.blank-mode h1,
-    body.blank-mode .grid-layout,
-    body.blank-mode .menu-layout,
-    body.blank-mode .footer,
-    body.blank-mode .cloaking-section,
-    body.blank-mode .panic-section,
-    body.blank-mode #settings .back-btn,
-    body.blank-mode #settings h1 {
+    body.blank-mode .container {
+      background: white !important;
+      color: #333 !important;
+      box-shadow: none !important;
+    }
+
+    body.blank-mode .tab-content {
       display: none !important;
     }
 
     body.blank-mode #settings {
-      display: block !important;
-    }
-
-    body.blank-mode .container {
-      background: #ffffff;
-      color: #000000;
-      box-shadow: 0 0 0 transparent;
-      display: flex;
-      justify-content: center;
+      display: flex !important;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
 
-    body.blank-mode .blank-mode-section {
+    body.blank-mode #settings > * {
+      display: none !important;
+    }
+
+    body.blank-mode #settings .blank-mode-section {
       display: block !important;
-      width: 100%;
-      max-width: 500px;
+      max-width: 100%;
     }
 
-    body.blank-mode .blank-mode-section button {
+    body.blank-mode #settings .blank-mode-section h3,
+    body.blank-mode #settings .blank-mode-section .blank-mode-toggle,
+    body.blank-mode #settings .blank-mode-section .blank-mode-note {
+      display: block !important;
+    }
+
+    body.blank-mode #settings .blank-mode-section button {
       display: inline-block !important;
     }
   </style>
