@@ -435,7 +435,7 @@
 
     <!-- ================= FOOTER ================= -->
     <div class="footer">
-      Updated <span id="update-date">Loading...</span>
+      Last updated <span id="update-date">Loading...</span>
     </div>
 
   </div>
@@ -454,12 +454,12 @@
       document.getElementById(tabId).classList.add('active');
     }
 
-    // Automatically fetch the last commit date from GitHub API on page load
+    // Fetch the last commit date from GitHub API on page load
     window.addEventListener('DOMContentLoaded', () => {
       const dateElement = document.getElementById('update-date');
       if (!dateElement) return;
 
-      const url = `https://github.com${GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
+      const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1`;
 
       fetch(url)
         .then(response => {
@@ -470,7 +470,15 @@
           if (data && data.length > 0) {
             const commitDateString = data[0].commit.committer.date;
             const commitDate = new Date(commitDateString);
-            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            const options = { 
+              month: 'short', 
+              day: 'numeric', 
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              timeZoneName: 'short'
+            };
             dateElement.textContent = commitDate.toLocaleDateString('en-US', options);
           } else {
             fallbackToToday(dateElement);
@@ -484,7 +492,15 @@
 
     function fallbackToToday(element) {
       const today = new Date();
-      const options = { month: 'short', day: 'numeric', year: 'numeric' };
+      const options = { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short'
+      };
       element.textContent = today.toLocaleDateString('en-US', options);
     }
 
