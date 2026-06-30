@@ -194,35 +194,105 @@
 <!-- ================= ALL TABS ================= -->
   <div class="container">
     
-<!-- ================= HOMEPAGE TAB ================= -->
-    <div id="homepage" class="tab-content active">
-      <h1>Welcome to 290045's Hub</h1>
-      <div class="menu-layout">
-        <button onclick="switchTab('games')">🎮 Games</button>
-        <button onclick="switchTab('proxies')">🌐 Proxies</button>
-        <button onclick="switchTab('tools')">🛠️ Tools</button>
-        <button onclick="switchTab('settings')">⚙️ Settings</button>
-        <button onclick="switchTab('credits')">📝 Credits</button>
-      </div>
+    <!-- ================= HOMEPAGE TAB ================= -->
+<div id="homepage" class="tab-content active">
+  <h1>Welcome to 290045's Hub</h1>
+  <div class="menu-layout">
+    <button onclick="switchTab('games')">🎮 Games</button>
+    <button onclick="switchTab('proxies')">🌐 Proxies</button>
+    <button onclick="switchTab('tools')">🛠️ Tools</button>
+    <button onclick="switchTab('settings')">⚙️ Settings</button>
+    <button onclick="switchTab('credits')">📝 Credits</button>
+  </div>
+
+  <!-- ================= BOOKMARKS DISPLAY GRID ================= -->
+  <div id="favoritesSection" style="margin-top: 24px; display: none; padding: 16px; border-radius: 12px; background: var(--panel-bg, #1a1a1a); border: 1px solid var(--border-color, #333); text-align: left;">
+    <h3 style="margin-top: 0; margin-bottom: 12px;">⭐ Bookmarked Games</h3>
+    <div id="favoritesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px;">
+      <!-- Populated via Javascript -->
     </div>
+  </div>
+
+  <!-- ================= CHANGELOG COMPONENT ================= -->
+  <div class="changelog-card" style="margin-top: 32px; padding: 16px; border-radius: 12px; background: var(--panel-bg, #1a1a1a); border: 1px solid var(--border-color, #333); text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color, #444); padding-bottom: 8px; margin-bottom: 12px;">
+      <h4 style="margin: 0; font-size: 16px; color: var(--text-color, #fff);">🚀 Recent Updates (Changelog)</h4>
+      <span style="font-size: 12px; color: #9ca3af; background: #222; padding: 2px 8px; border-radius: 20px;" id="latestVersion">v1.2.0</span>
+    </div>
+    <ul style="margin: 0; padding-left: 20px; color: var(--text-color, #fff); font-size: 14px; line-height: 1.6;">
+      <li>🕵️‍♂️ Added <strong>Fake History Flooder</strong> to mask browser activity trackers.</li>
+      <li>🎨 Fixed custom themes coming soon</li>
+      <li>🛑 Removed broken About:Blank system since it didn't work</li>
+      <li>⭐ Added favoriting games | Favoriting proxies & tools coming soon... </li>
+      <li>🛠️ Organized code for easier understanding</li>
+    </ul>
+  </div>
+</div>
+
     
-    <!-- ================= GAMES TAB ================= -->
-    <div id="games" class="tab-content">
-      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-      <h1>Games</h1>
-      <div class="grid-layout">
-        <button onclick="handleLinkClick('https://skempisty.github.io/rocket_league_2d/')">2D Rocket Leauge</button>
-        <button onclick="handleLinkClick('https://pizagame.pages.dev/')">Pizza Games</button>
-        <button onclick="handleLinkClick('https://kripticedition2.neocities.org/')">Kriptic Edition 3.0</button>
-        <button onclick="handleLinkClick('https://kriptic-edition-3-0.vercel.app/')">Kriptic (Alt)</button>
-        <button onclick="handleLinkClick('https://gold-static.pages.dev/')">Vertex Gold</button>
-        <button onclick="handleLinkClick('https://biolyze90.lol/')">Biolyze 90</button>
-        <button onclick="handleLinkClick('https://mathadventure1.github.io/sm64/sm64/index.html')">Super Mario</button>
-        <button onclick="handleLinkClick('https://cattn.github.io/gba/')">GBA 2.0</button>
-        <button onclick="handleLinkClick('https://gamerateofficial.weebly.com/')">Game Rate</button>
-        <button onclick="handleLinkClick('test')">More soon...</button>
+      <!-- ================= GAMES TAB ================= -->
+  <div id="games" class="tab-content">
+    <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+    <h1>Games</h1>
+    <div class="grid-layout">
+      
+      <!-- Game 1 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://skempisty.github.io/rocket_league_2d/')" style="flex-grow:1;">2D Rocket Leauge</button>
+        <button class="fav-btn" data-id="rocket_league" data-name="2D Rocket Leauge" data-url="https://skempisty.github.io/rocket_league_2d/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
       </div>
+
+      <!-- Game 2 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://pizagame.pages.dev/')" style="flex-grow:1;">Pizza Games</button>
+        <button class="fav-btn" data-id="pizza_games" data-name="Pizza Games" data-url="https://pizagame.pages.dev/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <!-- Game 3 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://kripticedition2.neocities.org/')" style="flex-grow:1;">Kriptic Edition 3.0</button>
+        <button class="fav-btn" data-id="kriptic_3" data-name="Kriptic Edition 3.0" data-url="https://kripticedition2.neocities.org/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <!-- Game 4 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://kriptic-edition-3-0.vercel.app/')" style="flex-grow:1;">Kriptic (Alt)</button>
+        <button class="fav-btn" data-id="kriptic_alt" data-name="Kriptic (Alt)" data-url="https://kriptic-edition-3-0.vercel.app/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <!-- Game 5 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://gold-static.pages.dev/')" style="flex-grow:1;">Vertex Gold</button>
+        <button class="fav-btn" data-id="vertex_gold" data-name="Vertex Gold" data-url="https://gold-static.pages.dev/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <!-- Game 6 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://biolyze90.lol/')" style="flex-grow:1;">Biolyze 90</button>
+        <button class="fav-btn" data-id="biolyze_90" data-name="Biolyze 90" data-url="https://biolyze90.lol/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <!-- Game 7 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://mathadventure1.github.io/sm64/sm64/index.html')" style="flex-grow:1;">Super Mario</button>
+        <button class="fav-btn" data-id="super_mario" data-name="Super Mario" data-url="https://mathadventure1.github.io/sm64/sm64/index.html" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <!-- Game 8 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://cattn.github.io/gba/')" style="flex-grow:1;">GBA 2.0</button>
+        <button class="fav-btn" data-id="gba_2" data-name="GBA 2.0" data-url="https://cattn.github.io/gba/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <!-- Game 9 -->
+      <div style="display:flex; gap:5px; width:100%;">
+        <button onclick="handleLinkClick('https://gamerateofficial.weebly.com/')" style="flex-grow:1;">Game Rate</button>
+        <button class="fav-btn" data-id="game_rate" data-name="Game Rate" data-url="https://gamerateofficial.weebly.com/" onclick="toggleFavorite(this)" style="width:45px; padding:0; background:#222; color:#fff; border:1px solid #444; border-radius:8px; cursor:pointer;">☆</button>
+      </div>
+
+      <button onclick="handleLinkClick('test')">More soon...</button>
     </div>
+  </div>
 
     <!-- ================= PROXIES TAB ================= -->
     <div id="proxies" class="tab-content">
@@ -315,6 +385,21 @@
     <p class="panic-note">
       Press "Set Hotkey", then press any key on your keyboard to set it as the panic button. Press that key anytime to close this tab instantly.
     </p>
+<!-- ================= HISTORY FLOODER SECTION ================= -->
+<div class="flood-section" style="margin-top:24px; padding:16px; border-radius:12px; background:var(--panel-bg, #1a1a1a); border:1px solid var(--border-color, #333);">
+  <h3>🕵️‍♂️ Fake History Flooder</h3>
+  <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
+    <select id="floodType" style="flex-grow:1; padding:10px; border-radius:8px; border:1px solid var(--border-color, #444); background:var(--input-bg, #222); color:var(--text-color, #fff); cursor:pointer;">
+      <option value="google">Google Search (Standard Queries)</option>
+      <option value="classroom">Google Classroom Assignment Dashboard</option>
+      <option value="canvas">Canvas Instructure Login</option>
+    </select>
+    <button onclick="floodHistory()" style="background:#22c55e; color:#fff; padding:10px 16px; border-radius:8px; border:none; cursor:pointer; font-weight:bold;">Flood History</button>
+  </div>
+  <p style="margin:0; color:#9ca3af; font-size:13px;">
+    Injects 15 dummy pages into your browser history back-button record.
+  </p>
+</div>
   </div>
 </div>
    
@@ -576,7 +661,78 @@ document.addEventListener('keydown', function(e) {
     window.close();
   }
 });
+// ================= HISTORY FLOODER LOGIC =================
+function floodHistory() {
+  const type = document.getElementById('floodType').value;
+  let title = "Google";
+  let url = "https://google.com";
 
+  if (type === 'classroom') {
+    title = "Classes";
+    url = "https://google.com";
+  } else if (type === 'canvas') {
+    title = "Canvas Dashboard";
+    url = "https://instructure.com";
+  }
+
+  // Push the current site into state, then spam the browser history loop
+  for (let i = 0; i < 15; i++) {
+    window.history.pushState({}, title + " - " + i, url + "?authuser=" + i);
+  }
+  
+  alert("✨ History flooded successfully with fake school tabs!");
+}
+  
+  // ================= BOOKMARK ENGINE LOGIC =================
+let favoritesList = JSON.parse(localStorage.getItem('hub-favorites')) || [];
+
+function updateFavoritesUI() {
+  const grid = document.getElementById('favoritesGrid');
+  const section = document.getElementById('favoritesSection');
+  if (!grid || !section) return;
+
+  grid.innerHTML = '';
+
+  if (favoritesList.length === 0) {
+    section.style.display = 'none';
+  } else {
+    section.style.display = 'block';
+    favoritesList.forEach(game => {
+      const btn = document.createElement('button');
+      btn.style.cssText = 'padding: 10px; border-radius: 8px; border: 1px solid var(--border-color, #444); background: var(--input-bg, #222); color: var(--text-color, #fff); cursor: pointer; text-align: center; font-weight: bold;';
+      btn.innerHTML = game.name;
+      btn.onclick = () => handleLinkClick(game.url);
+      grid.appendChild(btn);
+    });
+  }
+
+  // Synchronize state markers on the Games tab buttons (★ vs ☆)
+  document.querySelectorAll('.fav-btn').forEach(btn => {
+    const id = btn.getAttribute('data-id');
+    const isFav = favoritesList.some(g => g.id === id);
+    btn.innerText = isFav ? '★' : '☆';
+    btn.style.color = isFav ? '#ffca28' : '#fff';
+  });
+}
+
+function toggleFavorite(element) {
+  const id = element.getAttribute('data-id');
+  const name = element.getAttribute('data-name');
+  const url = element.getAttribute('data-url');
+
+  const index = favoritesList.findIndex(g => g.id === id);
+  if (index > -1) {
+    favoritesList.splice(index, 1); // Drop entry
+  } else {
+    favoritesList.push({ id, name, url }); // Store entry
+  }
+
+  localStorage.setItem('hub-favorites', JSON.stringify(favoritesList));
+  updateFavoritesUI();
+}
+
+// Fire the setup checking loop immediately on layout compilation
+document.addEventListener('DOMContentLoaded', updateFavoritesUI);
 </script>
 
 </body>
