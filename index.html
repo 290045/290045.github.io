@@ -188,6 +188,102 @@
       font-size: 12px;
       margin-top: 10px;
     }
+
+    /* About:Blank Mode Styles */
+    .blank-mode-section {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 2px solid #4f9eff;
+    }
+
+    .blank-mode-section h3 {
+      margin-top: 0;
+      color: #4f9eff;
+      font-size: 18px;
+    }
+
+    .blank-mode-toggle {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .blank-mode-status {
+      background: #333;
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: 2px solid #4f9eff;
+      color: #fff;
+      font-weight: bold;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .blank-mode-btn {
+      background: #4f9eff;
+      color: white;
+    }
+    .blank-mode-btn:hover {
+      background: #3d7fcf;
+    }
+
+    .blank-mode-off {
+      background: #888;
+      color: white;
+    }
+    .blank-mode-off:hover {
+      background: #777;
+    }
+
+    .blank-mode-note {
+      color: #9ca3af;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    /* Hidden content for blank mode */
+    body.blank-mode .container {
+      background: white;
+      color: #333;
+    }
+
+    body.blank-mode .tab-content,
+    body.blank-mode h1,
+    body.blank-mode button,
+    body.blank-mode .grid-layout,
+    body.blank-mode .menu-layout,
+    body.blank-mode .footer,
+    body.blank-mode .cloaking-section,
+    body.blank-mode .panic-section {
+      display: none !important;
+    }
+
+    body.blank-mode #settings {
+      display: block !important;
+    }
+
+    body.blank-mode #settings h1,
+    body.blank-mode #settings .back-btn {
+      display: none !important;
+    }
+
+    body.blank-mode .container {
+      background: #ffffff;
+      color: #000000;
+      box-shadow: 0 0 0 transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body.blank-mode .blank-mode-section {
+      display: block !important;
+      width: 100%;
+      max-width: 500px;
+    }
   </style>
 </head>
   
@@ -311,6 +407,19 @@
       Press "Set Hotkey", then press any key on your keyboard to set it as the panic button. Press that key anytime to close this tab instantly.
     </p>
   </div>
+
+  <!-- About:Blank Mode Section -->
+  <div class="blank-mode-section">
+    <h3>📄 About:Blank Mode</h3>
+    <div class="blank-mode-toggle">
+      <div class="blank-mode-status" id="blankModeStatus">OFF</div>
+      <button class="blank-mode-btn" onclick="toggleBlankMode()">Enable</button>
+      <button class="blank-mode-off" onclick="disableBlankMode()">Disable</button>
+    </div>
+    <p class="blank-mode-note">
+      When enabled, the site appears as a blank white page and all links open in about:blank windows for maximum stealth.
+    </p>
+  </div>
 </div>
     
     <!-- ================= CREDITS TAB ================= -->
@@ -379,9 +488,16 @@
       element.textContent = today.toLocaleDateString('en-US', options);
     }
 
-    // Simplified link logic to open normally
+    // Link handling with blank mode support
+    var blankModeEnabled = false;
+
     function handleLinkClick(url) {
-      window.open(url, '_blank');
+      if (blankModeEnabled) {
+        var newWin = window.open('about:blank');
+        newWin.location = url;
+      } else {
+        window.open(url, '_blank');
+      }
     }
   </script>
   <script>
@@ -460,6 +576,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load saved panic key if it exists
   loadSavedPanicKey();
+
+  // Load blank mode setting
+  loadBlankModeSetting();
 });
 
 /* Emergency Panic Button Functions */
@@ -560,6 +679,50 @@ document.addEventListener('keydown', function(e) {
     window.close();
   }
 });
+
+/* About:Blank Mode Functions */
+function loadBlankModeSetting() {
+  try {
+    var saved = localStorage.getItem('blankModeEnabled');
+    if (saved === 'true') {
+      blankModeEnabled = true;
+      updateBlankModeDisplay();
+      document.body.classList.add('blank-mode');
+    }
+  } catch (e) {
+    console.warn('Could not load blank mode setting', e);
+  }
+}
+
+function updateBlankModeDisplay() {
+  var status = document.getElementById('blankModeStatus');
+  if (status) {
+    status.textContent = blankModeEnabled ? 'ON' : 'OFF';
+    status.style.color = blankModeEnabled ? '#4f9eff' : '#888';
+  }
+}
+
+function toggleBlankMode() {
+  blankModeEnabled = true;
+  try {
+    localStorage.setItem('blankModeEnabled', 'true');
+  } catch (e) {
+    console.warn('Could not save blank mode setting', e);
+  }
+  updateBlankModeDisplay();
+  document.body.classList.add('blank-mode');
+}
+
+function disableBlankMode() {
+  blankModeEnabled = false;
+  try {
+    localStorage.setItem('blankModeEnabled', 'false');
+  } catch (e) {
+    console.warn('Could not save blank mode setting', e);
+  }
+  updateBlankModeDisplay();
+  document.body.classList.remove('blank-mode');
+}
 </script>
 
 </body>
