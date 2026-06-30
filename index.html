@@ -332,7 +332,7 @@
     </div>
     
  <!-- ================= SETTINGS TAB ================= -->
-    <div id="settings" class="tab-content">
+<div id="settings" class="tab-content">
   <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
   <h1>Settings</h1>
 
@@ -350,8 +350,21 @@
     <button onclick="setUserCloak('reset')" style="background:#cc3333;color:#fff;">Reset to Default</button>
   </div>
 
+  <!-- Custom Themes Section -->
+  <div class="theme-section" style="margin-top:24px; padding:16px; border-radius:12px; background:#1a1a1a; border:1px solid #333;">
+    <h3 style="margin-top:0; margin-bottom:12px; display:flex; align-items:center; gap:8px;">🎨 Custom Themes</h3>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <select id="themeSelect" style="flex-grow:1; padding:10px; border-radius:8px; border:1px solid #444; background:#222; color:#fff; cursor:pointer;">
+        <option value="default">Dark Void (Default)</option>
+        <option value="theme-neon">Neon Cyberpunk</option>
+        <option value="theme-retro">80s Retro Arcade</option>
+        <option value="theme-nord">Nordic Frost</option>
+      </select>
+    </div>
+  </div>
+
   <p style="margin-top:16px;color:#9ca3af;font-size:14px;text-align:center;">
-    Cloak changes persist in your browser (localStorage) and will be reapplied when you revisit.
+    Cloak and theme changes persist in your browser (localStorage) and will be reapplied when you revisit.
   </p>
 
   <!-- Emergency Panic Button Section -->
@@ -366,21 +379,8 @@
       Press "Set Hotkey", then press any key on your keyboard to set it as the panic button. Press that key anytime to close this tab instantly.
     </p>
   </div>
-
-  <!-- About:Blank Mode Section -->
-  <div class="blank-mode-section">
-    <h3>📄 About:Blank Mode</h3>
-    <div class="blank-mode-toggle">
-      <div class="blank-mode-status" id="blankModeStatus">OFF</div>
-      <button class="blank-mode-btn" onclick="toggleBlankMode()">Enable</button>
-      <button class="blank-mode-off" onclick="disableBlankMode()">Disable</button>
-    </div>
-    <p class="blank-mode-note">
-      NOT WORKING!
-    </p>
-  </div>
 </div>
-    
+   
     <!-- ================= CREDITS TAB ================= -->
     <div id="credits" class="tab-content">
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
@@ -461,18 +461,6 @@
         timeZoneName: 'short'
       };
       element.textContent = today.toLocaleDateString('en-US', options);
-    }
-
-    // Link handling with blank mode support
-    var blankModeEnabled = false;
-
-    function handleLinkClick(url) {
-      if (blankModeEnabled) {
-        var newWin = window.open('about:blank');
-        newWin.location = url;
-      } else {
-        window.open(url, '_blank');
-      }
     }
   </script>
   <script>
@@ -655,46 +643,6 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-/* About:Blank Mode Functions */
-function loadBlankModeSetting() {
-  try {
-    var saved = localStorage.getItem('blankModeEnabled');
-    if (saved === 'true') {
-      blankModeEnabled = true;
-      updateBlankModeDisplay();
-    }
-  } catch (e) {
-    console.warn('Could not load blank mode setting', e);
-  }
-}
-
-function updateBlankModeDisplay() {
-  var status = document.getElementById('blankModeStatus');
-  if (status) {
-    status.textContent = blankModeEnabled ? 'ON' : 'OFF';
-    status.style.color = blankModeEnabled ? '#4f9eff' : '#888';
-  }
-}
-
-function toggleBlankMode() {
-  blankModeEnabled = true;
-  try {
-    localStorage.setItem('blankModeEnabled', 'true');
-  } catch (e) {
-    console.warn('Could not save blank mode setting', e);
-  }
-  updateBlankModeDisplay();
-}
-
-function disableBlankMode() {
-  blankModeEnabled = false;
-  try {
-    localStorage.setItem('blankModeEnabled', 'false');
-  } catch (e) {
-    console.warn('Could not save blank mode setting', e);
-  }
-  updateBlankModeDisplay();
-}
 </script>
 
 </body>
