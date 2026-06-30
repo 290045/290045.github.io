@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- ================= CLOAK SETTINGS SECTION ================= -->
 <script>
 (function loadSavedCloak() {
   try {
@@ -17,8 +18,9 @@
     console.warn('Cloak loader blocked', e);
   }
 })();
+  
 </script>
-
+<!-- ================= BUTTONS AND COLORS ================= -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -51,24 +53,23 @@
       margin-bottom: 25px;
     }
 
-    /* Tab Layouts - Hide them by default */
+    /* ================= TAB LAYOUTS ================= */
     .tab-content {
       display: none;
     }
 
-    /* Show the active tab */
+    /* ================= ACTIVE TAB ================= */
     .tab-content.active {
       display: block;
     }
 
-    /* Grid layout for buttons */
+    /* ================= GRID LAYOUT ================= */
     .grid-layout {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
     }
-
-    /* Big Menu Buttons for Homepage */
+/* ================= MENU BUTTONS ================= */
     .menu-layout {
       display: flex;
       flex-direction: column;
@@ -92,8 +93,7 @@
       background: #dbd7d7;
       transform: scale(1.03);
     }
-
-    /* Back Button Style */
+/* ================= BACK BUTTON STYLE ================= */
     .back-btn {
       background: #ef4444;
       color: white;
@@ -123,7 +123,7 @@
       font-size: 18px;
     }
 
-    /* Panic Button Styles */
+    /* ================= PANIC BUTTON ================= */
     .panic-section {
       background: #222;
       padding: 15px;
@@ -188,69 +188,13 @@
       font-size: 12px;
       margin-top: 10px;
     }
-
-    /* About:Blank Mode Styles */
-    .blank-mode-section {
-      background: #222;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border: 2px solid #4f9eff;
-    }
-
-    .blank-mode-section h3 {
-      margin-top: 0;
-      color: #4f9eff;
-      font-size: 18px;
-    }
-
-    .blank-mode-toggle {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .blank-mode-status {
-      background: #333;
-      padding: 10px 15px;
-      border-radius: 6px;
-      border: 2px solid #4f9eff;
-      color: #fff;
-      font-weight: bold;
-      min-width: 100px;
-      text-align: center;
-    }
-
-    .blank-mode-btn {
-      background: #4f9eff;
-      color: white;
-    }
-    .blank-mode-btn:hover {
-      background: #3d7fcf;
-    }
-
-    .blank-mode-off {
-      background: #888;
-      color: white;
-    }
-    .blank-mode-off:hover {
-      background: #777;
-    }
-
-    .blank-mode-note {
-      color: #9ca3af;
-      font-size: 12px;
-      margin-top: 10px;
-    }
   </style>
 </head>
-  
 <body>
-
+<!-- ================= ALL TABS ================= -->
   <div class="container">
-
-    <!-- ================= HOMEPAGE TAB ================= -->
+    
+<!-- ================= HOMEPAGE TAB ================= -->
     <div id="homepage" class="tab-content active">
       <h1>Welcome to 290045's Hub</h1>
       <div class="menu-layout">
@@ -261,7 +205,7 @@
         <button onclick="switchTab('credits')">📝 Credits</button>
       </div>
     </div>
-
+    
     <!-- ================= GAMES TAB ================= -->
     <div id="games" class="tab-content">
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
@@ -337,12 +281,12 @@
   <h1>Settings</h1>
 
   <div class="grid-layout" style="align-items:center;">
-    <!-- Preset cloak buttons -->
+    <!-- ================= PRESENT CLOAKS ================= -->
     <button onclick="setUserCloak('googleDrive')">🟢 Google Drive Cloak</button>
     <button onclick="setUserCloak('googleClassroom')">🟢 Classroom Cloak</button>
     <button onclick="setUserCloak('canvas')">🟢 Canvas Cloak</button>
 
-    <!-- Custom cloak inputs -->
+<!-- ================= CUSTOM CLOAK ================= -->
     <input id="customTitleInput" type="text" placeholder="Custom Title (e.g. 'Dashboard')" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
     <input id="customIconInput" type="text" placeholder="Custom Favicon URL (https://.../favicon.ico)" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
 
@@ -350,24 +294,17 @@
     <button onclick="setUserCloak('reset')" style="background:#cc3333;color:#fff;">Reset to Default</button>
   </div>
 
-  <!-- Custom Themes Section -->
+<!-- ================= CUSTOM THEMES (COMING SOON) ================= -->
   <div class="theme-section" style="margin-top:24px; padding:16px; border-radius:12px; background:#1a1a1a; border:1px solid #333;">
     <h3 style="margin-top:0; margin-bottom:12px; display:flex; align-items:center; gap:8px;">🎨 Custom Themes</h3>
     <div style="display:flex; gap:10px; align-items:center;">
       <select id="themeSelect" style="flex-grow:1; padding:10px; border-radius:8px; border:1px solid #444; background:#222; color:#fff; cursor:pointer;">
-        <option value="default">Dark Void (Default)</option>
-        <option value="theme-neon">Neon Cyberpunk</option>
-        <option value="theme-retro">80s Retro Arcade</option>
-        <option value="theme-nord">Nordic Frost</option>
+        <option value="default">Coming Soon!</option>
       </select>
     </div>
   </div>
 
-  <p style="margin-top:16px;color:#9ca3af;font-size:14px;text-align:center;">
-    Cloak and theme changes persist in your browser (localStorage) and will be reapplied when you revisit.
-  </p>
-
-  <!-- Emergency Panic Button Section -->
+<!-- ================= EMERGENCY PANIC BUTTON ================= -->
   <div class="panic-section">
     <h3>🚨 Emergency Panic Button</h3>
     <div class="panic-controls">
@@ -464,14 +401,15 @@
     }
   </script>
   <script>
-/* Cloaking presets and helper functions */
+/* Cloaking Presets */
 var cloakingPresets = {
-  googleDrive: { title: "My Drive - Google Drive", favicon: "https://www.google.com/favicon.ico" },
-  googleClassroom: { title: "Classes", favicon: "https://www.google.com/favicon.ico" },
+  googleDrive: { title: "My Drive - Google Drive", favicon: "https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_4.ico" },
+  google: { title: "Google", favicon: "https://www.google.com/favicon.ico" },
+  googleClassroom: { title: "Classes", favicon: "https://classroom.google.com/favicon.ico" },
   canvas: { title: "Dashboard", favicon: "https://canvas.instructure.com/favicon.ico" },
   reset: { title: "290045's Hub", favicon: "/favicon.ico" }
 };
-
+/* Custom Cloaking */
 function cloakTab(title, faviconUrl) {
   try {
     if (title) document.title = title;
@@ -539,10 +477,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load saved panic key if it exists
   loadSavedPanicKey();
-
-  // Load blank mode setting
-  loadBlankModeSetting();
-});
 
 /* Emergency Panic Button Functions */
 var panicKeyCode = null;
