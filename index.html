@@ -243,47 +243,6 @@
       font-size: 12px;
       margin-top: 10px;
     }
-
-    /* BLANK MODE - COMPLETE OVERRIDE */
-    body.blank-mode {
-      background: white !important;
-    }
-
-    body.blank-mode .container {
-      background: white !important;
-      color: #333 !important;
-      box-shadow: none !important;
-    }
-
-    body.blank-mode .tab-content {
-      display: none !important;
-    }
-
-    body.blank-mode #settings {
-      display: flex !important;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    body.blank-mode #settings > * {
-      display: none !important;
-    }
-
-    body.blank-mode #settings .blank-mode-section {
-      display: block !important;
-      max-width: 100%;
-    }
-
-    body.blank-mode #settings .blank-mode-section h3,
-    body.blank-mode #settings .blank-mode-section .blank-mode-toggle,
-    body.blank-mode #settings .blank-mode-section .blank-mode-note {
-      display: block !important;
-    }
-
-    body.blank-mode #settings .blank-mode-section button {
-      display: inline-block !important;
-    }
   </style>
 </head>
   
@@ -417,7 +376,7 @@
       <button class="blank-mode-off" onclick="disableBlankMode()">Disable</button>
     </div>
     <p class="blank-mode-note">
-      When enabled, the site appears as a blank white page and all links open in about:blank windows for maximum stealth.
+      When enabled, all links open in about:blank windows for maximum stealth.
     </p>
   </div>
 </div>
@@ -703,7 +662,6 @@ function loadBlankModeSetting() {
     if (saved === 'true') {
       blankModeEnabled = true;
       updateBlankModeDisplay();
-      document.body.classList.add('blank-mode');
     }
   } catch (e) {
     console.warn('Could not load blank mode setting', e);
@@ -726,7 +684,6 @@ function toggleBlankMode() {
     console.warn('Could not save blank mode setting', e);
   }
   updateBlankModeDisplay();
-  document.body.classList.add('blank-mode');
 }
 
 function disableBlankMode() {
@@ -737,7 +694,6 @@ function disableBlankMode() {
     console.warn('Could not save blank mode setting', e);
   }
   updateBlankModeDisplay();
-  document.body.classList.remove('blank-mode');
 }
 </script>
 
