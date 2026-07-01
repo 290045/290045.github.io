@@ -740,9 +740,23 @@ document.addEventListener('DOMContentLoaded', updateFavoritesUI);
 
 document.addEventListener('DOMContentLoaded', updateFavoritesUI);
 
-} // <-- 1. Try adding this closing bracket (in case a function was left open)
+} 
+// Quick fallback helper in case your main function has a different name
+function handleLinkClick(url) {
+  // Option A: If your site opens links in a clean new tab
+  window.open(url, '_blank');
+  
+  // Option B: If your site opens links inside an iframe frame on the same page
+  // Change 'gameFrame' to the actual ID of your iframe if you use one!
+  /* 
+  const iframe = document.getElementById('gameFrame');
+  if (iframe) {
+    iframe.src = url;
+    switchTab('gameView'); // Switches view to the game player screen
+  }
+  */
+}
 
 </script>
-
 </body>
 </html>
