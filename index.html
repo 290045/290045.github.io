@@ -733,6 +733,15 @@ function toggleFavorite(element) {
 
 // Fire the setup checking loop immediately on layout compilation
 document.addEventListener('DOMContentLoaded', updateFavoritesUI);
+    // ... your bookmark code ...
+  localStorage.setItem('hub-favorites', JSON.stringify(favoritesList));
+  updateFavoritesUI();
+}
+
+document.addEventListener('DOMContentLoaded', updateFavoritesUI);
+
+} // <-- 1. Try adding this closing bracket (in case a function was left open)
+
 </script>
 
 </body>
