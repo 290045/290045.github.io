@@ -16,3 +16,6 @@
     </ul>
   </div>
 </div>
+
+<!-- ================= NEW PROXY LINKS ================= -->
+<button onclick="handleLinkClick('https://joemama980.github.io/games/index.html')">Seraph</button>
