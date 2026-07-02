@@ -629,6 +629,17 @@ function floodHistory() {
   function switchTab(tabId) {
     // ... your tab switching code ...
   }
+  
+// ================= CORE GAME LINK HANDLER =================
+function handleLinkClick(url) {
+  if (url === 'test') {
+    alert("More games are coming soon!");
+    return;
+  }
+  
+  // This opens the game in a clean new tab
+  window.open(url, '_blank');
+}
 
 </script> <!-- 1. Explicitly close your JavaScript -->
 </body>  <!-- 2. Explicitly close your site Body -->
