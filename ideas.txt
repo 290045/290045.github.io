@@ -20,6 +20,11 @@
 <!-- ================= NEW PROXY LINKS ================= -->
 <button onclick="handleLinkClick('https://joemama980.github.io/games/index.html')">Seraph</button>
 
+<!-- ================= NEW GAME LINKS ================= -->
+<button onclick="handleLinkClick('https://humanornot.so/')">Human or Not</button>
+
+<!-- ================= NEW TOOL LINKS ================= -->
+<button onclick="handleLinkClick('link_here')">Name_of_site</button>
 
 // ================= HISTORY FLOODER LOGIC =================
 function floodHistory() {
