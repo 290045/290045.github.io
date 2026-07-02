@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- ================= CLOAK SETTINGS SECTION ================= -->
 <script>
 (function loadSavedCloak() {
   try {
@@ -18,9 +17,8 @@
     console.warn('Cloak loader blocked', e);
   }
 })();
-  
 </script>
-<!-- ================= BUTTONS AND COLORS ================= -->
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -53,23 +51,24 @@
       margin-bottom: 25px;
     }
 
-    /* ================= TAB LAYOUTS ================= */
+    /* Tab Layouts - Hide them by default */
     .tab-content {
       display: none;
     }
 
-    /* ================= ACTIVE TAB ================= */
+    /* Show the active tab */
     .tab-content.active {
       display: block;
     }
 
-    /* ================= GRID LAYOUT ================= */
+    /* Grid layout for buttons */
     .grid-layout {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
     }
-    /* ================= MENU BUTTONS ================= */
+
+    /* Big Menu Buttons for Homepage */
     .menu-layout {
       display: flex;
       flex-direction: column;
@@ -93,7 +92,8 @@
       background: #dbd7d7;
       transform: scale(1.03);
     }
-/* ================= BACK BUTTON STYLE ================= */
+
+    /* Back Button Style */
     .back-btn {
       background: #ef4444;
       color: white;
@@ -123,7 +123,7 @@
       font-size: 18px;
     }
 
-    /* ================= PANIC BUTTON ================= */
+    /* Panic Button Styles */
     .panic-section {
       background: #222;
       padding: 15px;
@@ -188,53 +188,97 @@
       font-size: 12px;
       margin-top: 10px;
     }
+
+    /* About:Blank Mode Styles */
+    .blank-mode-section {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 2px solid #4f9eff;
+    }
+
+    .blank-mode-section h3 {
+      margin-top: 0;
+      color: #4f9eff;
+      font-size: 18px;
+    }
+
+    .blank-mode-toggle {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .blank-mode-status {
+      background: #333;
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: 2px solid #4f9eff;
+      color: #fff;
+      font-weight: bold;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .blank-mode-btn {
+      background: #4f9eff;
+      color: white;
+    }
+    .blank-mode-btn:hover {
+      background: #3d7fcf;
+    }
+
+    .blank-mode-off {
+      background: #888;
+      color: white;
+    }
+    .blank-mode-off:hover {
+      background: #777;
+    }
+
+    .blank-mode-note {
+      color: #9ca3af;
+      font-size: 12px;
+      margin-top: 10px;
+    }
   </style>
 </head>
+  
 <body>
-<!-- ================= ALL TABS ================= -->
-  <div class="container">
-    
-    <!-- ================= HOMEPAGE TAB ================= -->
-<div id="homepage" class="tab-content active">
-  <h1>Welcome to 290045's Hub</h1>
-  <div class="menu-layout">
-    <button onclick="switchTab('games')">🎮 Games</button>
-    <button onclick="switchTab('proxies')">🌐 Proxies</button>
-    <button onclick="switchTab('tools')">🛠️ Tools</button>
-    <button onclick="switchTab('settings')">⚙️ Settings</button>
-    <button onclick="switchTab('credits')">📝 Credits</button>
-  </div>
 
-  <!-- ================= CHANGELOG COMPONENT ================= -->
-  <div class="changelog-card" style="margin-top: 32px; padding: 16px; border-radius: 12px; background: var(--panel-bg, #1a1a1a); border: 1px solid var(--border-color, #333); text-align: left;">
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color, #444); padding-bottom: 8px; margin-bottom: 12px;">
-      <h4 style="margin: 0; font-size: 16px; color: var(--text-color, #fff);">🚀 Recent Updates (Changelog)</h4>
-      <span style="font-size: 12px; color: #9ca3af; background: #222; padding: 2px 8px; border-radius: 20px;" id="latestVersion">v1.2.2</span>
+  <div class="container">
+
+    <!-- ================= HOMEPAGE TAB ================= -->
+    <div id="homepage" class="tab-content active">
+      <h1>Welcome to 290045's Hub</h1>
+      <div class="menu-layout">
+        <button onclick="switchTab('games')">🎮 Games</button>
+        <button onclick="switchTab('proxies')">🌐 Proxies</button>
+        <button onclick="switchTab('tools')">🛠️ Tools</button>
+        <button onclick="switchTab('settings')">⚙️ Settings</button>
+        <button onclick="switchTab('credits')">📝 Credits</button>
+      </div>
     </div>
-    <ul style="margin: 0; padding-left: 20px; color: var(--text-color, #fff); font-size: 14px; line-height: 1.6;">
-      <li>🛠️ Site down rn :(</li>
-      <li>⭐ More features coming soon!</li>
-    </ul>
-  </div>
-</div>
-    
-<!-- ================= GAMES TAB ================= -->
-<div id="games" class="tab-content">
-  <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-  <h1>Games</h1>
-  <div class="grid-layout">
-    <button onclick="handleLinkClick('https://github.io')">2D Rocket Leauge</button>
-    <button onclick="handleLinkClick('https://pages.dev')">Pizza Games</button>
-    <button onclick="handleLinkClick('https://neocities.org')">Kriptic Edition 3.0</button>
-    <button onclick="handleLinkClick('https://vercel.app')">Kriptic (Alt)</button>
-    <button onclick="handleLinkClick('https://pages.dev')">Vertex Gold</button>
-    <button onclick="handleLinkClick('https://biolyze90.lol')">Biolyze 90</button>
-    <button onclick="handleLinkClick('https://github.io')">Super Mario</button>
-    <button onclick="handleLinkClick('https://github.io')">GBA 2.0</button>
-    <button onclick="handleLinkClick('https://weebly.com')">Game Rate</button>
-    <button onclick="handleLinkClick('test')">More soon...</button>
-  </div>
-</div>
+
+    <!-- ================= GAMES TAB ================= -->
+    <div id="games" class="tab-content">
+      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
+      <h1>Games</h1>
+      <div class="grid-layout">
+        <button onclick="handleLinkClick('https://skempisty.github.io/rocket_league_2d/')">2D Rocket Leauge</button>
+        <button onclick="handleLinkClick('https://pizagame.pages.dev/')">Pizza Games</button>
+        <button onclick="handleLinkClick('https://kripticedition2.neocities.org/')">Kriptic Edition 3.0</button>
+        <button onclick="handleLinkClick('https://kriptic-edition-3-0.vercel.app/')">Kriptic (Alt)</button>
+        <button onclick="handleLinkClick('https://gold-static.pages.dev/')">Vertex Gold</button>
+        <button onclick="handleLinkClick('https://biolyze90.lol/')">Biolyze 90</button>
+        <button onclick="handleLinkClick('https://mathadventure1.github.io/sm64/sm64/index.html')">Super Mario</button>
+        <button onclick="handleLinkClick('https://cattn.github.io/gba/')">GBA 2.0</button>
+        <button onclick="handleLinkClick('https://gamerateofficial.weebly.com/')">Game Rate</button>
+        <button onclick="handleLinkClick('test')">More soon...</button>
+      </div>
+    </div>
 
     <!-- ================= PROXIES TAB ================= -->
     <div id="proxies" class="tab-content">
@@ -271,7 +315,6 @@
         <button onclick="handleLinkClick('https://rc-1140.martingrubinger.at/')">Rammerhead</button>
         <button onclick="handleLinkClick('https://shoolikedimnatoqourus.aiq-test.ru/')">Utopia</button>
         <button onclick="handleLinkClick('https://helios-blue.vercel.app/')">Helios</button>
-        <button onclick="handleLinkClick('https://joemama980.github.io/games/index.html')">Seraph</button>
         <button onclick="handleLinkClick('test')">More soon...</button>
       </div>
     </div>
@@ -294,12 +337,12 @@
   <h1>Settings</h1>
 
   <div class="grid-layout" style="align-items:center;">
-    <!-- ================= PRESENT CLOAKS ================= -->
+    <!-- Preset cloak buttons -->
     <button onclick="setUserCloak('googleDrive')">🟢 Google Drive Cloak</button>
     <button onclick="setUserCloak('googleClassroom')">🟢 Classroom Cloak</button>
     <button onclick="setUserCloak('canvas')">🟢 Canvas Cloak</button>
 
-<!-- ================= CUSTOM CLOAK ================= -->
+    <!-- Custom cloak inputs -->
     <input id="customTitleInput" type="text" placeholder="Custom Title (e.g. 'Dashboard')" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
     <input id="customIconInput" type="text" placeholder="Custom Favicon URL (https://.../favicon.ico)" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
 
@@ -307,17 +350,21 @@
     <button onclick="setUserCloak('reset')" style="background:#cc3333;color:#fff;">Reset to Default</button>
   </div>
 
-<!-- ================= CUSTOM THEMES (COMING SOON) ================= -->
+  <!-- Custom Themes Section -->
   <div class="theme-section" style="margin-top:24px; padding:16px; border-radius:12px; background:#1a1a1a; border:1px solid #333;">
     <h3 style="margin-top:0; margin-bottom:12px; display:flex; align-items:center; gap:8px;">🎨 Custom Themes</h3>
     <div style="display:flex; gap:10px; align-items:center;">
       <select id="themeSelect" style="flex-grow:1; padding:10px; border-radius:8px; border:1px solid #444; background:#222; color:#fff; cursor:pointer;">
-        <option value="default">Coming Soon!</option>
+        <option value="default">COMING SOON...</option>
       </select>
     </div>
   </div>
 
-<!-- ================= EMERGENCY PANIC BUTTON ================= -->
+  <p style="margin-top:16px;color:#9ca3af;font-size:14px;text-align:center;">
+    Cloak and theme changes persist in your browser (localStorage) and will be reapplied when you revisit.
+  </p>
+
+  <!-- Emergency Panic Button Section -->
   <div class="panic-section">
     <h3>🚨 Emergency Panic Button</h3>
     <div class="panic-controls">
@@ -328,21 +375,6 @@
     <p class="panic-note">
       Press "Set Hotkey", then press any key on your keyboard to set it as the panic button. Press that key anytime to close this tab instantly.
     </p>
-<!-- ================= HISTORY FLOODER SECTION ================= -->
-<div class="flood-section" style="margin-top:24px; padding:16px; border-radius:12px; background:var(--panel-bg, #1a1a1a); border:1px solid var(--border-color, #333);">
-  <h3>🕵️‍♂️ Fake History Flooder</h3>
-  <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
-    <select id="floodType" style="flex-grow:1; padding:10px; border-radius:8px; border:1px solid var(--border-color, #444); background:var(--input-bg, #222); color:var(--text-color, #fff); cursor:pointer;">
-      <option value="google">Google Search (Standard Queries)</option>
-      <option value="classroom">Google Classroom Assignment Dashboard</option>
-      <option value="canvas">Canvas Instructure Login</option>
-    </select>
-    <button onclick="floodHistory()" style="background:#22c55e; color:#fff; padding:10px 16px; border-radius:8px; border:none; cursor:pointer; font-weight:bold;">Flood History</button>
-  </div>
-  <p style="margin:0; color:#9ca3af; font-size:13px;">
-    Injects 15 dummy pages into your browser history back-button record.
-  </p>
-</div>
   </div>
 </div>
    
@@ -429,15 +461,14 @@
     }
   </script>
   <script>
-/* Cloaking Presets */
+/* Cloaking presets and helper functions */
 var cloakingPresets = {
-  googleDrive: { title: "My Drive - Google Drive", favicon: "https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_4.ico" },
-  google: { title: "Google", favicon: "https://www.google.com/favicon.ico" },
-  googleClassroom: { title: "Classes", favicon: "https://classroom.google.com/favicon.ico" },
+  googleDrive: { title: "My Drive - Google Drive", favicon: "https://www.google.com/favicon.ico" },
+  googleClassroom: { title: "Classes", favicon: "https://www.google.com/favicon.ico" },
   canvas: { title: "Dashboard", favicon: "https://canvas.instructure.com/favicon.ico" },
   reset: { title: "290045's Hub", favicon: "/favicon.ico" }
 };
-/* Custom Cloaking */
+
 function cloakTab(title, faviconUrl) {
   try {
     if (title) document.title = title;
@@ -505,6 +536,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load saved panic key if it exists
   loadSavedPanicKey();
+
+  // Load blank mode setting
+  loadBlankModeSetting();
+});
 
 /* Emergency Panic Button Functions */
 var panicKeyCode = null;
@@ -604,43 +639,8 @@ document.addEventListener('keydown', function(e) {
     window.close();
   }
 });
-// ================= HISTORY FLOODER LOGIC =================
-function floodHistory() {
-  const type = document.getElementById('floodType').value;
-  let title = "Google";
-  let url = "https://google.com";
 
-  if (type === 'classroom') {
-    title = "Classes";
-    url = "https://google.com";
-  } else if (type === 'canvas') {
-    title = "Canvas Dashboard";
-    url = "https://instructure.com";
-  }
+</script>
 
-  // Push the current site into state, then spam the browser history loop
-  for (let i = 0; i < 15; i++) {
-    window.history.pushState({}, title + " - " + i, url + "?authuser=" + i);
-  }
-  
-  alert("✨ History flooded successfully with fake school tabs!");
-}  
-  // This should be your last remaining script function
-  function switchTab(tabId) {
-    // ... your tab switching code ...
-  }
-  
-// ================= CORE GAME LINK HANDLER =================
-function handleLinkClick(url) {
-  if (url === 'test') {
-    alert("More games are coming soon!");
-    return;
-  }
-  
-  // This opens the game in a clean new tab
-  window.open(url, '_blank');
-}
-
-</script> <!-- 1. Explicitly close your JavaScript -->
-</body>  <!-- 2. Explicitly close your site Body -->
-</html>  <!-- 3. Explicitly close your main HTML wrapper -->
+</body>
+</html>
