@@ -19,3 +19,48 @@
 
 <!-- ================= NEW PROXY LINKS ================= -->
 <button onclick="handleLinkClick('https://joemama980.github.io/games/index.html')">Seraph</button>
+
+
+// ================= HISTORY FLOODER LOGIC =================
+function floodHistory() {
+  const type = document.getElementById('floodType').value;
+  let title = "Google";
+  let url = "https://google.com";
+
+  if (type === 'classroom') {
+    title = "Classes";
+    url = "https://google.com";
+  } else if (type === 'canvas') {
+    title = "Canvas Dashboard";
+    url = "https://instructure.com";
+  }
+
+  // Push the current site into state, then spam the browser history loop
+  for (let i = 0; i < 15; i++) {
+    window.history.pushState({}, title + " - " + i, url + "?authuser=" + i);
+  }
+  
+  alert("✨ History flooded successfully with fake school tabs!");
+}  
+  // This should be your last remaining script function
+  function switchTab(tabId) {
+    // ... your tab switching code ...
+  }
+
+<!-- ================= HISTORY FLOODER SECTION ================= -->
+<div class="flood-section" style="margin-top:24px; padding:16px; border-radius:12px; background:var(--panel-bg, #1a1a1a); border:1px solid var(--border-color, #333);">
+  <h3>🕵️‍♂️ Fake History Flooder</h3>
+  <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
+    <select id="floodType" style="flex-grow:1; padding:10px; border-radius:8px; border:1px solid var(--border-color, #444); background:var(--input-bg, #222); color:var(--text-color, #fff); cursor:pointer;">
+      <option value="google">Google Search (Standard Queries)</option>
+      <option value="classroom">Google Classroom Assignment Dashboard</option>
+      <option value="canvas">Canvas Instructure Login</option>
+    </select>
+    <button onclick="floodHistory()" style="background:#22c55e; color:#fff; padding:10px 16px; border-radius:8px; border:none; cursor:pointer; font-weight:bold;">Flood History</button>
+  </div>
+  <p style="margin:0; color:#9ca3af; font-size:13px;">
+    Injects 15 dummy pages into your browser history back-button record.
+  </p>
+</div>
+  </div>
+</div>
