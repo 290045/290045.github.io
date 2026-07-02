@@ -209,7 +209,7 @@
   <div class="changelog-card" style="margin-top: 32px; padding: 16px; border-radius: 12px; background: var(--panel-bg, #1a1a1a); border: 1px solid var(--border-color, #333); text-align: left;">
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color, #444); padding-bottom: 8px; margin-bottom: 12px;">
       <h4 style="margin: 0; font-size: 16px; color: var(--text-color, #fff);">🚀 Recent Updates (Changelog)</h4>
-      <span style="font-size: 12px; color: #9ca3af; background: #222; padding: 2px 8px; border-radius: 20px;" id="latestVersion">v1.2.1</span>
+      <span style="font-size: 12px; color: #9ca3af; background: #222; padding: 2px 8px; border-radius: 20px;" id="latestVersion">v1.2.2</span>
     </div>
     <ul style="margin: 0; padding-left: 20px; color: var(--text-color, #fff); font-size: 14px; line-height: 1.6;">
       <li>🛠️ Site down rn :(</li>
@@ -624,7 +624,12 @@ function floodHistory() {
   }
   
   alert("✨ History flooded successfully with fake school tabs!");
-}
-</script>
-</body>
-</html>
+}  
+  // This should be your last remaining script function
+  function switchTab(tabId) {
+    // ... your tab switching code ...
+  }
+
+</script> <!-- 1. Explicitly close your JavaScript -->
+</body>  <!-- 2. Explicitly close your site Body -->
+</html>  <!-- 3. Explicitly close your main HTML wrapper -->
