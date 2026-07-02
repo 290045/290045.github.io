@@ -1,0 +1,10 @@
+/* 
+===========================================
+🚧 FUTURE FEATURES (UNDER DEVELOPMENT) 🚧
+===========================================
+function futureCoolFeature() {
+   // This code is completely hidden from the browser
+   // It will not break anything until!
+}
+*/
+
