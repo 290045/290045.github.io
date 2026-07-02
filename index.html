@@ -188,61 +188,6 @@
       font-size: 12px;
       margin-top: 10px;
     }
-
-    /* About:Blank Mode Styles */
-    .blank-mode-section {
-      background: #222;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      border: 2px solid #4f9eff;
-    }
-
-    .blank-mode-section h3 {
-      margin-top: 0;
-      color: #4f9eff;
-      font-size: 18px;
-    }
-
-    .blank-mode-toggle {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .blank-mode-status {
-      background: #333;
-      padding: 10px 15px;
-      border-radius: 6px;
-      border: 2px solid #4f9eff;
-      color: #fff;
-      font-weight: bold;
-      min-width: 100px;
-      text-align: center;
-    }
-
-    .blank-mode-btn {
-      background: #4f9eff;
-      color: white;
-    }
-    .blank-mode-btn:hover {
-      background: #3d7fcf;
-    }
-
-    .blank-mode-off {
-      background: #888;
-      color: white;
-    }
-    .blank-mode-off:hover {
-      background: #777;
-    }
-
-    .blank-mode-note {
-      color: #9ca3af;
-      font-size: 12px;
-      margin-top: 10px;
-    }
   </style>
 </head>
   
@@ -536,10 +481,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load saved panic key if it exists
   loadSavedPanicKey();
-
-  // Load blank mode setting
-  loadBlankModeSetting();
-});
 
 /* Emergency Panic Button Functions */
 var panicKeyCode = null;
