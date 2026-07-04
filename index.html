@@ -355,6 +355,15 @@
       document.getElementById(tabId).classList.add('active');
     }
 
+    // Handle link clicks
+    function handleLinkClick(url) {
+      if (url === 'test') {
+        alert('More content coming soon!');
+        return;
+      }
+      window.location.href = url;
+    }
+
     // Fetch the last commit date from GitHub API on page load
     window.addEventListener('DOMContentLoaded', () => {
       const dateElement = document.getElementById('update-date');
@@ -406,182 +415,182 @@
     }
   </script>
   <script>
-/* Cloaking presets and helper functions */
-var cloakingPresets = {
-  googleDrive: { title: "My Drive - Google Drive", favicon: "https://www.google.com/favicon.ico" },
-  googleClassroom: { title: "Classes", favicon: "https://www.google.com/favicon.ico" },
-  canvas: { title: "Dashboard", favicon: "https://canvas.instructure.com/favicon.ico" },
-  reset: { title: "290045's Hub", favicon: "/favicon.ico" }
-};
+    /* Cloaking presets and helper functions */
+    var cloakingPresets = {
+      googleDrive: { title: "My Drive - Google Drive", favicon: "https://www.google.com/favicon.ico" },
+      googleClassroom: { title: "Classes", favicon: "https://www.google.com/favicon.ico" },
+      canvas: { title: "Dashboard", favicon: "https://canvas.instructure.com/favicon.ico" },
+      reset: { title: "290045's Hub", favicon: "/favicon.ico" }
+    };
 
-function cloakTab(title, faviconUrl) {
-  try {
-    if (title) document.title = title;
-    if (faviconUrl) {
-      var link = document.querySelector("link[rel*='icon']");
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
-        document.head.appendChild(link);
-      }
-      link.href = faviconUrl;
-    }
-  } catch (e) {
-    console.warn('cloakTab blocked by extension or browser:', e);
-  }
-}
-
-function setUserCloak(presetKey) {
-  var preset = cloakingPresets[presetKey];
-  if (!preset) return;
-  cloakTab(preset.title, preset.favicon);
-  try {
-    localStorage.setItem('cloakedTitle', preset.title || '');
-    localStorage.setItem('cloakedFavicon', preset.favicon || '');
-  } catch (e) {
-    console.warn('Could not save cloak to localStorage', e);
-  }
-}
-
-function applyCustomCloak() {
-  var titleInput = document.getElementById('customTitleInput');
-  var iconInput = document.getElementById('customIconInput');
-  if (!titleInput || !iconInput) return;
-
-  var title = titleInput.value.trim();
-  var icon = iconInput.value.trim();
-
-  if (!title || !icon) {
-    alert('Please fill both fields to apply a custom cloak.');
-    return;
-  }
-
-  cloakTab(title, icon);
-  try {
-    localStorage.setItem('cloakedTitle', title);
-    localStorage.setItem('cloakedFavicon', icon);
-  } catch (e) {
-    console.warn('Could not save custom cloak', e);
-  }
-
-  // Clear inputs for convenience
-  titleInput.value = '';
-  iconInput.value = '';
-}
-
-/* Safe auto-load on DOM ready to keep behavior resilient */
-document.addEventListener('DOMContentLoaded', function() {
-  try {
-    var savedTitle = localStorage.getItem('cloakedTitle');
-    var savedFavicon = localStorage.getItem('cloakedFavicon');
-    if (savedTitle || savedFavicon) cloakTab(savedTitle || null, savedFavicon || null);
-  } catch (e) {
-    console.warn('Could not load saved cloak', e);
-  }
-
-  // Load saved panic key if it exists
-  loadSavedPanicKey();
-
-/* Emergency Panic Button Functions */
-var panicKeyCode = null;
-var listeningForPanicKey = false;
-
-function loadSavedPanicKey() {
-  try {
-    var savedKey = localStorage.getItem('panicKeyCode');
-    if (savedKey) {
-      panicKeyCode = parseInt(savedKey);
-      updatePanicKeyDisplay();
-    }
-  } catch (e) {
-    console.warn('Could not load saved panic key', e);
-  }
-}
-
-function getKeyName(keyCode) {
-  var keyMap = {
-    27: 'Escape',
-    32: 'Space',
-    13: 'Enter',
-    8: 'Backspace',
-    9: 'Tab',
-    20: 'Caps Lock'
-  };
-  
-  if (keyMap[keyCode]) return keyMap[keyCode];
-  
-  if (keyCode >= 65 && keyCode <= 90) return String.fromCharCode(keyCode);
-  if (keyCode >= 48 && keyCode <= 57) return String.fromCharCode(keyCode);
-  if (keyCode >= 112 && keyCode <= 123) return 'F' + (keyCode - 111);
-  
-  return 'Key ' + keyCode;
-}
-
-function updatePanicKeyDisplay() {
-  var display = document.getElementById('panicKeyDisplay');
-  if (panicKeyCode) {
-    display.textContent = getKeyName(panicKeyCode);
-  } else {
-    display.textContent = 'No Key Set';
-  }
-}
-
-function startListeningForPanicKey() {
-  listeningForPanicKey = true;
-  var display = document.getElementById('panicKeyDisplay');
-  display.classList.add('listening');
-  display.textContent = 'Press a key...';
-
-  function handleKeyPress(e) {
-    if (listeningForPanicKey) {
-      e.preventDefault();
-      panicKeyCode = e.keyCode;
-      
+    function cloakTab(title, faviconUrl) {
       try {
-        localStorage.setItem('panicKeyCode', panicKeyCode.toString());
-      } catch (err) {
-        console.warn('Could not save panic key', err);
+        if (title) document.title = title;
+        if (faviconUrl) {
+          var link = document.querySelector("link[rel*='icon']");
+          if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            document.head.appendChild(link);
+          }
+          link.href = faviconUrl;
+        }
+      } catch (e) {
+        console.warn('cloakTab blocked by extension or browser:', e);
+      }
+    }
+
+    function setUserCloak(presetKey) {
+      var preset = cloakingPresets[presetKey];
+      if (!preset) return;
+      cloakTab(preset.title, preset.favicon);
+      try {
+        localStorage.setItem('cloakedTitle', preset.title || '');
+        localStorage.setItem('cloakedFavicon', preset.favicon || '');
+      } catch (e) {
+        console.warn('Could not save cloak to localStorage', e);
+      }
+    }
+
+    function applyCustomCloak() {
+      var titleInput = document.getElementById('customTitleInput');
+      var iconInput = document.getElementById('customIconInput');
+      if (!titleInput || !iconInput) return;
+
+      var title = titleInput.value.trim();
+      var icon = iconInput.value.trim();
+
+      if (!title || !icon) {
+        alert('Please fill both fields to apply a custom cloak.');
+        return;
       }
 
-      listeningForPanicKey = false;
-      display.classList.remove('listening');
-      updatePanicKeyDisplay();
+      cloakTab(title, icon);
+      try {
+        localStorage.setItem('cloakedTitle', title);
+        localStorage.setItem('cloakedFavicon', icon);
+      } catch (e) {
+        console.warn('Could not save custom cloak', e);
+      }
+
+      // Clear inputs for convenience
+      titleInput.value = '';
+      iconInput.value = '';
+    }
+
+    /* Emergency Panic Button Functions */
+    var panicKeyCode = null;
+    var listeningForPanicKey = false;
+
+    function loadSavedPanicKey() {
+      try {
+        var savedKey = localStorage.getItem('panicKeyCode');
+        if (savedKey) {
+          panicKeyCode = parseInt(savedKey);
+          updatePanicKeyDisplay();
+        }
+      } catch (e) {
+        console.warn('Could not load saved panic key', e);
+      }
+    }
+
+    function getKeyName(keyCode) {
+      var keyMap = {
+        27: 'Escape',
+        32: 'Space',
+        13: 'Enter',
+        8: 'Backspace',
+        9: 'Tab',
+        20: 'Caps Lock'
+      };
       
-      document.removeEventListener('keydown', handleKeyPress);
+      if (keyMap[keyCode]) return keyMap[keyCode];
+      
+      if (keyCode >= 65 && keyCode <= 90) return String.fromCharCode(keyCode);
+      if (keyCode >= 48 && keyCode <= 57) return String.fromCharCode(keyCode);
+      if (keyCode >= 112 && keyCode <= 123) return 'F' + (keyCode - 111);
+      
+      return 'Key ' + keyCode;
     }
-  }
 
-  document.addEventListener('keydown', handleKeyPress);
-  
-  // Stop listening after 10 seconds if no key is pressed
-  setTimeout(function() {
-    if (listeningForPanicKey) {
-      listeningForPanicKey = false;
-      display.classList.remove('listening');
-      display.textContent = 'No Key Set';
-      document.removeEventListener('keydown', handleKeyPress);
+    function updatePanicKeyDisplay() {
+      var display = document.getElementById('panicKeyDisplay');
+      if (panicKeyCode) {
+        display.textContent = getKeyName(panicKeyCode);
+      } else {
+        display.textContent = 'No Key Set';
+      }
     }
-  }, 10000);
-}
 
-function clearPanicKey() {
-  panicKeyCode = null;
-  try {
-    localStorage.removeItem('panicKeyCode');
-  } catch (e) {
-    console.warn('Could not clear panic key', e);
-  }
-  updatePanicKeyDisplay();
-}
+    function startListeningForPanicKey() {
+      listeningForPanicKey = true;
+      var display = document.getElementById('panicKeyDisplay');
+      display.classList.add('listening');
+      display.textContent = 'Press a key...';
 
-// Global listener for panic button
-document.addEventListener('keydown', function(e) {
-  if (panicKeyCode && e.keyCode === panicKeyCode && !listeningForPanicKey) {
-    window.close();
-  }
-});
+      function handleKeyPress(e) {
+        if (listeningForPanicKey) {
+          e.preventDefault();
+          panicKeyCode = e.keyCode;
+          
+          try {
+            localStorage.setItem('panicKeyCode', panicKeyCode.toString());
+          } catch (err) {
+            console.warn('Could not save panic key', err);
+          }
 
-</script>
+          listeningForPanicKey = false;
+          display.classList.remove('listening');
+          updatePanicKeyDisplay();
+          
+          document.removeEventListener('keydown', handleKeyPress);
+        }
+      }
+
+      document.addEventListener('keydown', handleKeyPress);
+      
+      // Stop listening after 10 seconds if no key is pressed
+      setTimeout(function() {
+        if (listeningForPanicKey) {
+          listeningForPanicKey = false;
+          display.classList.remove('listening');
+          display.textContent = 'No Key Set';
+          document.removeEventListener('keydown', handleKeyPress);
+        }
+      }, 10000);
+    }
+
+    function clearPanicKey() {
+      panicKeyCode = null;
+      try {
+        localStorage.removeItem('panicKeyCode');
+      } catch (e) {
+        console.warn('Could not clear panic key', e);
+      }
+      updatePanicKeyDisplay();
+    }
+
+    // Safe auto-load on DOM ready to keep behavior resilient
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        var savedTitle = localStorage.getItem('cloakedTitle');
+        var savedFavicon = localStorage.getItem('cloakedFavicon');
+        if (savedTitle || savedFavicon) cloakTab(savedTitle || null, savedFavicon || null);
+      } catch (e) {
+        console.warn('Could not load saved cloak', e);
+      }
+
+      // Load saved panic key if it exists
+      loadSavedPanicKey();
+    });
+
+    // Global listener for panic button
+    document.addEventListener('keydown', function(e) {
+      if (panicKeyCode && e.keyCode === panicKeyCode && !listeningForPanicKey) {
+        window.close();
+      }
+    });
+  </script>
 
 </body>
 </html>
