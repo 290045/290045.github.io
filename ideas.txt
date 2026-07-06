@@ -1,102 +1,199 @@
 ===========================================
-          🚧 FUTURE FEATURES 🚧
+         🚧 FUTURE FEATURES 🚧
 ===========================================
-   // These are just ideas and aren't on the site
-   // It will not break anything and is just for personal use
+These are ideas for future updates.
+Nothing below is currently implemented.
 
-<!-- ================= NEW GAME LINKS ================= -->
+===========================================
+              TEMPLATE BUTTONS
+===========================================
+
+<!-- Game -->
 <button onclick="handleLinkClick('link')">Name</button>
 
-<!-- ================= NEW PROXY LINKS ================= -->
+<!-- Proxy -->
 <button onclick="handleLinkClick('link')">Name</button>
 
-<!-- ================= NEW TOOL LINKS ================= -->
+<!-- Tool -->
 <button onclick="handleLinkClick('link')">Name</button>
 
-# Ideas
-   - History flood
-      - Floods history with 10+ random/select links to hide links from your history
-   - Themes
-      - Preset themes
-      - Custom themes
-      - Fonts
-      - Maybe mouse pointer
-      - Interactive particle background
-   - Favorites system
-      - When favoriting games/proxies will put them at the top with a yellow star next to it
-   - Thumbnails
-      - Adds the game's thumbnail/image for a clean/modern look
-   - Search bar
-      - Search for certain games/proxies
-   - Google form for suggestions
-      - Allows users to suggest games, proxies, tools, and settings for what to add
-   - about:blank
-      - For normal site
-   - Allow users to upload game/proxy links
-      - User uploads a file or link, allowing them to add games/proxies to the site (client-sided)
-   - Inspect element blocker 
-      - Makes sure people can't steal game/proxy links (Security purposes)
-   - Auto-timeout lock
-      - If a user doesn't move their mouse or clicks; will either close out of tab
-   - Site visits
-      - GUI on the homepage at the bottom (below footer) to show how many users have visited
-   - Sounds
-      - Click sounds for whenever you click
-      - Background music 
-         - User can select preset songs
-   - Referrer header stripper
-      - Security feature to ensure that when users click out to proxy links, the destination site can never trace back or log back to         the site
-   - Hacks / Cheats
-      - Hacked games
-      - Code to get hacks
-      - Built-in cheat engine overlay
-   - Compact / Minimalist navigation
-      - Main feature or setting
-   - Add emulators to the tools tab
-   - Badges Tab:
-      - Easy, Medium, and Hard badges, you can see the title, description, and the "?" icon
-      - Secret badges show a "???" as the title, show the description (hint), and shows the "?" icon
-      - The "?" icon should be white with a black background
-      - GUI Layout: 
-         - All badges in a box 
-         - Icon in the box, icon is on the left of the box
-         - Title is bolded, centered, on the top in the box
-         - Description is below the title
-         - Footer is how much XP was gained from the badge
-      - XP system
-         - Gain XP by time, badges, playing games, playing games and proxies
-         - Badges give XP based on difficulty
-            - Difficulty: Easy, Medium, Hard, Secret
-         - Levels 1-5 need 100 XP
-         - Levels 6-15 need 250 XP
-         - Levels 16-25 need 500 XP
-         - Levels 26-50 need 1000 XP
-      - Easy Badges: 
-         - Welcome newcomer!
-            - First time visiting site
-         - Welcome back!
-            - Visited site again (only shows when they visit for 2nd time)
-         - Gamer! (Increasing levels 'ex: 1, 10, 25, 50, 100')
-            - Played 1 game (Increasing levels 'ex: 1, 10, 25, 50, 100')
-         - Level 1! 
-            - Good job! You got level 1.
-         - Customize!
-            - Customized settings.
-      - Medium Badges: 
-         - Level 5! 
-            - Congrats! You got level 5.
-      - Hard Badges: 
-         - Title 
-            - Description
-      - Secret Badges: 
-         - Title
-            - Description
-   - Setting to open links differently
-      - Embedded into site
-      - about:blank
-      - Open in a new page normally
-   - Audio visualizer
-      - Link Spotify, Apple Music, or SoundCloud
-      - Shows the song with album/cover art
-      - Options to pause, play, skip, back, change volume, and time of the song *EX: "(time in song / time left)*
-   - 
+===========================================
+             HIGH PRIORITY
+===========================================
+
+🌐 Navigation
+- Search bar
+  - Search games
+  - Search proxies
+- Favorites system
+  - Pin favorites to the top
+  - Yellow ★ icon
+
+🎨 Themes
+- Preset themes
+- Custom themes
+- Custom fonts
+- Mouse cursor themes
+- Animated particle background
+
+🖼️ UI Improvements
+- Game thumbnails
+- Proxy thumbnails
+- Cleaner, modern cards
+- Compact / Minimalist mode
+
+📊 Site Stats
+- Visitor counter
+
+===========================================
+            SECURITY FEATURES
+===========================================
+
+🛡️ Privacy
+- about:blank launcher
+- Open links inside site
+- Open links in new tab
+- Referrer header stripping
+
+🔒 Protection
+- History flood
+  - Flood history with random pages
+- Auto-timeout lock
+  - Close tab after inactivity
+- Inspect Element blocker
+  - Hide game/proxy links where possible
+
+===========================================
+             CONTENT FEATURES
+===========================================
+
+🎮 Games
+- More games
+- Hacked games
+- Cheat codes
+- Built-in cheat overlay
+
+🌐 Proxies
+- More proxy links
+
+🛠️ Tools
+- Emulator collection
+
+👥 Community
+- Google Form suggestions
+- Client-side custom game/proxy uploader
+
+===========================================
+             AUDIO FEATURES
+===========================================
+
+🔊 Sounds
+- Button click sounds
+- Background music
+- Preset music selection
+
+🎵 Audio Visualizer
+- Spotify support
+- Apple Music support
+- SoundCloud support
+- Album artwork
+- Play / Pause
+- Previous / Next
+- Volume slider
+- Progress bar
+- Song timer
+
+===========================================
+              BADGES & XP
+===========================================
+
+🏆 XP System
+- Gain XP by:
+  - Time spent
+  - Playing games
+  - Using proxies
+  - Unlocking badges
+
+Level Requirements
+- Levels 1-5      → 100 XP
+- Levels 6-15     → 250 XP
+- Levels 16-25    → 500 XP
+- Levels 26-50    → 1000 XP
+
+-------------------------------------------
+Badge Layout
+-------------------------------------------
+
+Each badge contains:
+- White ? icon on black background
+- Badge title
+- Description
+- XP reward footer
+
+Secret badges:
+- Title shows "???"
+- Description gives a hint
+- White ? icon
+
+-------------------------------------------
+Easy Badges
+-------------------------------------------
+
+👋 Welcome Newcomer!
+- Visit the site for the first time.
+
+👋 Welcome Back!
+- Visit the site for a second time.
+
+🎮 Gamer!
+- Play:
+  - 1 game
+  - 10 games
+  - 25 games
+  - 50 games
+  - 100 games
+
+⭐ Level 1!
+- Reach Level 1.
+
+🎨 Customize!
+- Change your settings.
+
+-------------------------------------------
+Medium Badges
+-------------------------------------------
+
+⭐ Level 5!
+- Reach Level 5.
+
+-------------------------------------------
+Hard Badges
+-------------------------------------------
+
+- (Ideas)
+
+-------------------------------------------
+Secret Badges
+-------------------------------------------
+
+- (Ideas)
+
+===========================================
+          LINK OPENING OPTIONS
+===========================================
+
+Users can choose how links open:
+- Embedded in the site
+- about:blank
+- New browser tab
+
+===========================================
+             FUTURE IDEAS
+===========================================
+
+- Better animations
+- More settings
+- More games
+- More proxies
+- More tools
+- More achievements
