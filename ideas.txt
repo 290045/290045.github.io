@@ -1,10 +1,8 @@
 ===========================================
-🚧 FUTURE FEATURES (UNDER DEVELOPMENT) 🚧
+          🚧 FUTURE FEATURES 🚧
 ===========================================
-   // This code is completely hidden from the browser
-   // It will not break anything until!
-
-
+   // These are just ideas and aren't on the site
+   // It will not break anything and is just for personal use
 
 <!-- ================= NEW GAME LINKS ================= -->
 <button onclick="handleLinkClick('link')">Name</button>
@@ -15,46 +13,90 @@
 <!-- ================= NEW TOOL LINKS ================= -->
 <button onclick="handleLinkClick('link')">Name</button>
 
-// ================= HISTORY FLOODER LOGIC =================
-function floodHistory() {
-  const type = document.getElementById('floodType').value;
-  let title = "Google";
-  let url = "https://google.com";
-
-  if (type === 'classroom') {
-    title = "Classes";
-    url = "https://google.com";
-  } else if (type === 'canvas') {
-    title = "Canvas Dashboard";
-    url = "https://instructure.com";
-  }
-
-  // Push the current site into state, then spam the browser history loop
-  for (let i = 0; i < 15; i++) {
-    window.history.pushState({}, title + " - " + i, url + "?authuser=" + i);
-  }
-  
-  alert("✨ History flooded successfully with fake school tabs!");
-}  
-  // This should be your last remaining script function
-  function switchTab(tabId) {
-    // ... your tab switching code ...
-  }
-
-<!-- ================= HISTORY FLOODER SECTION ================= -->
-<div class="flood-section" style="margin-top:24px; padding:16px; border-radius:12px; background:var(--panel-bg, #1a1a1a); border:1px solid var(--border-color, #333);">
-  <h3>🕵️‍♂️ Fake History Flooder</h3>
-  <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
-    <select id="floodType" style="flex-grow:1; padding:10px; border-radius:8px; border:1px solid var(--border-color, #444); background:var(--input-bg, #222); color:var(--text-color, #fff); cursor:pointer;">
-      <option value="google">Google Search (Standard Queries)</option>
-      <option value="classroom">Google Classroom Assignment Dashboard</option>
-      <option value="canvas">Canvas Instructure Login</option>
-    </select>
-    <button onclick="floodHistory()" style="background:#22c55e; color:#fff; padding:10px 16px; border-radius:8px; border:none; cursor:pointer; font-weight:bold;">Flood History</button>
-  </div>
-  <p style="margin:0; color:#9ca3af; font-size:13px;">
-    Injects 15 dummy pages into your browser history back-button record.
-  </p>
-</div>
-  </div>
-</div>
+# Ideas
+   - History flood
+      - Floods history with 10+ random/select links to hide links from your history
+   - Themes
+      - Preset themes
+      - Custom themes
+      - Fonts
+      - Maybe mouse pointer
+      - Interactive particle background
+   - Favorites system
+      - When favoriting games/proxies will put them at the top with a yellow star next to it
+   - Thumbnails
+      - Adds the game's thumbnail/image for a clean/modern look
+   - Search bar
+      - Search for certain games/proxies
+   - Google form for suggestions
+      - Allows users to suggest games, proxies, tools, and settings for what to add
+   - about:blank
+      - For normal site
+   - Allow users to upload game/proxy links
+      - User uploads a file or link, allowing them to add games/proxies to the site (client-sided)
+   - Inspect element blocker 
+      - Makes sure people can't steal game/proxy links (Security purposes)
+   - Auto-timeout lock
+      - If a user doesn't move their mouse or clicks; will either close out of tab
+   - Site visits
+      - GUI on the homepage at the bottom (below footer) to show how many users have visited
+   - Sounds
+      - Click sounds for whenever you click
+      - Background music 
+         - User can select preset songs
+   - Referrer header stripper
+      - Security feature to ensure that when users click out to proxy links, the destination site can never trace back or log back to         the site
+   - Hacks / Cheats
+      - Hacked games
+      - Code to get hacks
+      - Built-in cheat engine overlay
+   - Compact / Minimalist navigation
+      - Main feature or setting
+   - Add emulators to the tools tab
+   - Badges Tab:
+      - Easy, Medium, and Hard badges, you can see the title, description, and the "?" icon
+      - Secret badges show a "???" as the title, show the description (hint), and shows the "?" icon
+      - The "?" icon should be white with a black background
+      - GUI Layout: 
+         - All badges in a box 
+         - Icon in the box, icon is on the left of the box
+         - Title is bolded, centered, on the top in the box
+         - Description is below the title
+         - Footer is how much XP was gained from the badge
+      - XP system
+         - Gain XP by time, badges, playing games, playing games and proxies
+         - Badges give XP based on difficulty
+            - Difficulty: Easy, Medium, Hard, Secret
+         - Levels 1-5 need 100 XP
+         - Levels 6-15 need 250 XP
+         - Levels 16-25 need 500 XP
+         - Levels 26-50 need 1000 XP
+      - Easy Badges: 
+         - Welcome newcomer!
+            - First time visiting site
+         - Welcome back!
+            - Visited site again (only shows when they visit for 2nd time)
+         - Gamer! (Increasing levels 'ex: 1, 10, 25, 50, 100')
+            - Played 1 game (Increasing levels 'ex: 1, 10, 25, 50, 100')
+         - Level 1! 
+            - Good job! You got level 1.
+         - Customize!
+            - Customized settings.
+      - Medium Badges: 
+         - Level 5! 
+            - Congrats! You got level 5.
+      - Hard Badges: 
+         - Title 
+            - Description
+      - Secret Badges: 
+         - Title
+            - Description
+   - Setting to open links differently
+      - Embedded into site
+      - about:blank
+      - Open in a new page normally
+   - Audio visualizer
+      - Link Spotify, Apple Music, or SoundCloud
+      - Shows the song with album/cover art
+      - Options to pause, play, skip, back, change volume, and time of the song *EX: "(time in song / time left)*
+   - 
