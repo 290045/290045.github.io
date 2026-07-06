@@ -6,14 +6,14 @@
 
 
 
-<!-- ================= NEW PROXY LINKS ================= -->
-<button onclick="handleLinkClick('https://joemama980.github.io/games/index.html')">Seraph</button>
-
 <!-- ================= NEW GAME LINKS ================= -->
-<button onclick="handleLinkClick('https://humanornot.so/')">Human or Not</button>
+<button onclick="handleLinkClick('link')">Name</button>
+
+<!-- ================= NEW PROXY LINKS ================= -->
+<button onclick="handleLinkClick('link')">Name</button>
 
 <!-- ================= NEW TOOL LINKS ================= -->
-<button onclick="handleLinkClick('https://www.miruro.tv/')">Miruro TV</button>
+<button onclick="handleLinkClick('link')">Name</button>
 
 // ================= HISTORY FLOODER LOGIC =================
 function floodHistory() {
