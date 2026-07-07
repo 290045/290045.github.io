@@ -1,0 +1,213 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 700px;
+  background: #303030;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+h2 {
+  color: #4ade80;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+h3 {
+  color: #60a5fa;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+/* Tab Layouts - Hide them by default */
+.tab-content {
+  display: none;
+}
+
+/* Show the active tab */
+.tab-content.active {
+  display: block;
+}
+
+/* Grid layout for buttons */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+/* Big Menu Buttons for Homepage */
+.menu-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+button {
+  background: #f7f5f5;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #dbd7d7;
+  transform: scale(1.03);
+}
+
+/* Back Button Style */
+.back-btn {
+  background: #ef4444;
+  color: white;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.back-btn:hover {
+  background: #dc2626;
+}
+
+.footer {
+  margin-top: 25px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.suggest-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.credits-text {
+  text-align: center;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.changelog-content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #d1d5db;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.changelog-item {
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #1f2937;
+  border-left: 3px solid #60a5fa;
+  border-radius: 4px;
+}
+
+.changelog-item ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.changelog-item li {
+  margin: 5px 0;
+}
+
+.changelog-version {
+  color: #4ade80;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.changelog-date {
+  color: #9ca3af;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* Panic Button Styles */
+.panic-section {
+  background: #222;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 2px solid #ff6b6b;
+}
+
+.panic-section h3 {
+  margin-top: 0;
+  color: #ff6b6b;
+  font-size: 18px;
+}
+
+.panic-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.panic-key-display {
+  background: #333;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 2px solid #ff6b6b;
+  color: #fff;
+  font-weight: bold;
+  min-width: 120px;
+  text-align: center;
+}
+
+.panic-key-display.listening {
+  background: #ff6b6b;
+  color: #000;
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.panic-btn-primary {
+  background: #ff6b6b;
+  color: white;
+}
+.panic-btn-primary:hover {
+  background: #ee5a52;
+}
+
+.panic-btn-secondary {
+  background: #444;
+  color: white;
+}
+.panic-btn-secondary:hover {
+  background: #555;
+}
+
+.panic-note {
+  color: #9ca3af;
+  font-size: 12px;
+  margin-top: 10px;
+}
