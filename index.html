@@ -8,19 +8,19 @@
   <script src="main.js" defer></script>
 </head>
 <body>
-  <div class="container">
+  <main class="container">
 
     <!-- ================= HOMEPAGE TAB ================= -->
     <div id="homepage" class="tab-content active">
       <h1>Welcome to 290045's Hub</h1>
-      <div class="menu-layout">
+      <nav class="menu-layout">
         <button onclick="switchTab('games')">🎮 Games</button>
         <button onclick="switchTab('proxies')">🌐 Proxies</button>
         <button onclick="switchTab('tools')">🛠️ Tools</button>
         <button onclick="switchTab('settings')">⚙️ Settings</button>
         <button onclick="switchTab('changelog')">📋 Changelog</button>
         <button onclick="switchTab('credits')">📝 Credits</button>
-      </div>
+      </nav>
     </div>
 
     <!-- ================= GAMES TAB ================= -->
@@ -99,31 +99,29 @@
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
       <h1>Settings</h1>
 
-      <div class="grid-layout" style="align-items:center;">
+      <div class="grid-layout">
         <!-- Preset cloak buttons -->
         <button onclick="setUserCloak('googleDrive')">🟢 Google Drive Cloak</button>
         <button onclick="setUserCloak('googleClassroom')">🟢 Classroom Cloak</button>
         <button onclick="setUserCloak('canvas')">🟢 Canvas Cloak</button>
 
         <!-- Custom cloak inputs -->
-        <input id="customTitleInput" type="text" placeholder="Custom Title (e.g. 'Dashboard')" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
-        <input id="customIconInput" type="text" placeholder="Custom Favicon URL (https://.../favicon.ico)" style="padding:10px;border-radius:8px;border:1px solid #444;background:#222;color:#fff;width:100%;">
+        <input id="customTitleInput" type="text" placeholder="Custom Title (e.g. 'Dashboard')">
+        <input id="customIconInput" type="text" placeholder="Custom Favicon URL (https://...)">
 
-        <button onclick="applyCustomCloak()" style="background:#007acc;color:#fff;">Apply Custom Cloak</button>
-        <button onclick="setUserCloak('reset')" style="background:#cc3333;color:#fff;">Reset to Default</button>
+        <button onclick="applyCustomCloak()" class="btn-primary">Apply Custom Cloak</button>
+        <button onclick="setUserCloak('reset')" class="btn-danger">Reset to Default</button>
       </div>
 
       <!-- Emergency Panic Button Section -->
       <div class="panic-section">
         <h3>🚨 Emergency Panic Button</h3>
+        <p>Press "Set Hotkey", then press any key on your keyboard to set it. Pressing that key anytime closes this tab instantly.</p>
         <div class="panic-controls">
           <div class="panic-key-display" id="panicKeyDisplay">No Key Set</div>
-          <button class="panic-btn-primary" onclick="startListeningForPanicKey()">Set Hotkey</button>
-          <button class="panic-btn-secondary" onclick="clearPanicKey()">Clear</button>
+          <button onclick="setPanicKey()" class="btn-warning">Set Hotkey</button>
+          <button onclick="clearPanicKey()" class="btn-secondary">Clear</button>
         </div>
-        <p class="panic-note">
-          Press "Set Hotkey", then press any key on your keyboard to set it as the panic button. Press that key anytime to close this tab instantly.
-        </p>
       </div>
     </div>
 
@@ -131,20 +129,14 @@
     <div id="changelog" class="tab-content">
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
       <h1>Changelog</h1>
-      <div class="changelog-content">
-
-        <div class="changelog-item">
-          <div class="changelog-version">Version 1.0.2</div>
-          <div class="changelog-date">Released: 2026-07-07</div>
-          <h3 style="color: #ef4444;">🔧 Changes</h3>
-          <ul>
-            <li>Organized code into seprate files</li>
-            <li>Many fixes coming...</li>
-            <li>Many features coming...</li>
-            <li>Maybe more links coming...</li>
-          </ul>
-          </ul>
-        </div>
+      <div class="changelog-card">
+        <h2>Version 1.0.3</h2>
+        <p class="date">Released: 2026-07-07</p>
+        <ul>
+          <li>Organized source code into separate clean files.</li>
+          <li>Performance updates and bug fixes coming soon...</li>
+          <li>Much more coming soon!</li>
+        </ul>
       </div>
     </div>
 
@@ -152,17 +144,13 @@
     <div id="credits" class="tab-content">
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
       <h1>Credits</h1>
-      <div class="credits-text">
+      <div class="credits-card">
         <p><strong>Owner:</strong> 290045</p>
-        <p><strong>Credits:</strong>Thanks to AI for helping me code and thanks to the people who made the game and proxy sites!</p>
-        <p>Thanks for visiting!</p>
+        <p><strong>Special Thanks:</strong> Grateful to AI assistance for helping write code optimizations, and props to the creators of the standalone proxy engines and flash/HTML5 games utilized here.</p>
+        <p class="footer-note">Thanks for visiting!</p>
       </div>
     </div>
 
-    <!-- ================= FOOTER ================= -->
-    <div class="footer">
-      Last updated <span id="update-date">Loading...</span>
-    </div>
-  </div>
+  </main>
 </body>
 </html>
