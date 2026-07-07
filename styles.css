@@ -1,3 +1,4 @@
+/* ================= GLOBAL & LAYOUT ================= */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -37,24 +38,18 @@ h3 {
   font-size: 15px;
 }
 
-/* Tab Layouts - Hide them by default */
+/* ================= TAB SYSTEM LAYOUTS ================= */
+/* Hide content tabs by default */
 .tab-content {
   display: none;
 }
 
-/* Show the active tab */
+/* Reveal active layout segment */
 .tab-content.active {
   display: block;
 }
 
-/* Grid layout for buttons */
-.grid-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-}
-
-/* Big Menu Buttons for Homepage */
+/* Big Navigation Buttons for Homepage Menu */
 .menu-layout {
   display: flex;
   flex-direction: column;
@@ -63,6 +58,15 @@ h3 {
   margin: 0 auto;
 }
 
+/* Responsive Grid layout for Games/Proxies/Settings */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* ================= COMPONENT CONTROLS ================= */
 button {
   background: #f7f5f5;
   border: none;
@@ -71,7 +75,7 @@ button {
   color: black;
   font-size: 16px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: transform 0.2s, background-color 0.2s;
 }
 
 button:hover {
@@ -79,7 +83,7 @@ button:hover {
   transform: scale(1.03);
 }
 
-/* Back Button Style */
+/* Back Button Style overrides */
 .back-btn {
   background: #ef4444;
   color: white;
@@ -90,68 +94,42 @@ button:hover {
   background: #dc2626;
 }
 
-.footer {
-  margin-top: 25px;
-  text-align: center;
-  color: #9ca3af;
-  font-size: 14px;
-}
-
-.suggest-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.credits-text {
-  text-align: center;
-  line-height: 1.6;
-  font-size: 18px;
-}
-
-.changelog-content {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #d1d5db;
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-.changelog-item {
-  margin-bottom: 20px;
-  padding: 12px;
+/* Inputs for custom cloaks */
+input[type="text"] {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #444;
   background: #1f2937;
-  border-left: 3px solid #60a5fa;
-  border-radius: 4px;
-}
-
-.changelog-item ul {
-  margin: 8px 0;
-  padding-left: 20px;
-}
-
-.changelog-item li {
-  margin: 5px 0;
-}
-
-.changelog-version {
-  color: #4ade80;
-  font-weight: bold;
+  color: #fff;
   font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.changelog-date {
-  color: #9ca3af;
-  font-size: 12px;
-  font-style: italic;
+input[type="text"]:focus {
+  outline: 2px solid #60a5fa;
+  background: #253346;
 }
 
-/* Panic Button Styles */
+/* Custom Settings Button Themes */
+.btn-primary { background: #007acc; color: white; }
+.btn-primary:hover { background: #0062a3; }
+
+.btn-danger { background: #cc3333; color: white; }
+.btn-danger:hover { background: #ab2a2a; }
+
+.btn-warning { background: #ff6b6b; color: white; }
+.btn-warning:hover { background: #ee5a52; }
+
+.btn-secondary { background: #444; color: white; }
+.btn-secondary:hover { background: #555; }
+
+/* ================= PANIC BUTTON COMPONENT ================= */
 .panic-section {
   background: #222;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 25px;
   border: 2px solid #ff6b6b;
 }
 
@@ -159,6 +137,13 @@ button:hover {
   margin-top: 0;
   color: #ff6b6b;
   font-size: 18px;
+}
+
+.panic-section p {
+  font-size: 14px;
+  color: #d1d5db;
+  margin-bottom: 15px;
+  line-height: 1.4;
 }
 
 .panic-controls {
@@ -170,8 +155,8 @@ button:hover {
 
 .panic-key-display {
   background: #333;
-  padding: 10px 15px;
-  border-radius: 6px;
+  padding: 12px 15px;
+  border-radius: 8px;
   border: 2px solid #ff6b6b;
   color: #fff;
   font-weight: bold;
@@ -190,24 +175,50 @@ button:hover {
   50% { opacity: 0.7; }
 }
 
-.panic-btn-primary {
-  background: #ff6b6b;
-  color: white;
-}
-.panic-btn-primary:hover {
-  background: #ee5a52;
-}
-
-.panic-btn-secondary {
-  background: #444;
-  color: white;
-}
-.panic-btn-secondary:hover {
-  background: #555;
-}
-
 .panic-note {
   color: #9ca3af;
   font-size: 12px;
   margin-top: 10px;
+}
+
+/* ================= CARDS (CHANGELOG/CREDITS) ================= */
+.changelog-card, .credits-card {
+  background: #1f2937;
+  padding: 20px;
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+.changelog-card h2 {
+  margin-top: 0;
+}
+
+.changelog-card .date {
+  color: #9ca3af;
+  font-size: 13px;
+  font-style: italic;
+  margin-top: -5px;
+  margin-bottom: 15px;
+}
+
+.changelog-card ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.changelog-card li {
+  margin-bottom: 8px;
+  color: #d1d5db;
+}
+
+.credits-card p {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.footer-note {
+  color: #9ca3af;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
 }
