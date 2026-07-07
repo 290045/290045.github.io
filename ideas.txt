@@ -5,20 +5,7 @@ These are ideas for future updates.
 Nothing below is currently implemented.
 
 ===========================================
-              TEMPLATE BUTTONS
-===========================================
-
-<!-- Game -->
-<button onclick="handleLinkClick('link')">Name</button>
-
-<!-- Proxy -->
-<button onclick="handleLinkClick('link')">Name</button>
-
-<!-- Tool -->
-<button onclick="handleLinkClick('link')">Name</button>
-
-===========================================
-	     HIGH PRIORITY
+	          HIGH PRIORITY
 ===========================================
 
 👥 Community
@@ -71,7 +58,7 @@ Users can choose how links open:
   - Hide game/proxy links where possible
 
 ===========================================
-	    CONTENT FEATURES
+	        CONTENT FEATURES
 ===========================================
 
 🎮 Games
@@ -95,7 +82,7 @@ Users can choose how links open:
 - Visitor counter
 
 ===========================================
-	     AUDIO FEATURES
+	         AUDIO FEATURES
 ===========================================
 
 \\ 2nd to last feature ima try and add
@@ -191,7 +178,7 @@ Secret Badges
 - (Ideas)
 
 ===========================================
-              FUTURE IDEAS
+               FUTURE IDEAS
 ===========================================
 
 - Better animations
