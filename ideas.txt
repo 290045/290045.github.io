@@ -18,8 +18,17 @@ Nothing below is currently implemented.
 <button onclick="handleLinkClick('link')">Name</button>
 
 ===========================================
-             HIGH PRIORITY
+	     HIGH PRIORITY
 ===========================================
+
+👥 Community
+- Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
+- Client-side custom game/proxy uploader
+
+🔊 Sounds
+- Button click sounds
+- Background music
+- Preset music selection
 
 🌐 Navigation
 - Search bar
@@ -42,29 +51,27 @@ Nothing below is currently implemented.
 - Cleaner, modern cards
 - Compact / Minimalist mode
 
-📊 Site Stats
-- Visitor counter
-
 ===========================================
             SECURITY FEATURES
 ===========================================
 
 🛡️ Privacy
-- about:blank launcher
-- Open links inside site
-- Open links in new tab
 - Referrer header stripping
+Users can choose how links open:
+- Embedded in the site
+- about:blank
+- New browser tab
 
 🔒 Protection
 - History flood
   - Flood history with random pages
 - Auto-timeout lock
-  - Close tab after inactivity
+  - Close the tab after inactivity
 - Inspect Element blocker
   - Hide game/proxy links where possible
 
 ===========================================
-             CONTENT FEATURES
+	    CONTENT FEATURES
 ===========================================
 
 🎮 Games
@@ -77,25 +84,22 @@ Nothing below is currently implemented.
 - More proxy links
 
 🛠️ Tools
-- Emulator collection
+- idk
 
-👥 Community
-- Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
-- Client-side custom game/proxy uploader
+📊 Site Stats
+- Visitor counter
 
 ===========================================
-             AUDIO FEATURES
+	     AUDIO FEATURES
 ===========================================
 
-🔊 Sounds
-- Button click sounds
-- Background music
-- Preset music selection
+\\ 2nd to last feature ima try and add
 
-🎵 Audio Visualizer
+
+🎵 Audio Visualizer (MAYBE!!!)
 - Spotify support
 - Apple Music support
-- SoundCloud support
+- Maybe SoundCloud supports
 - Album artwork
 - Play / Pause
 - Previous / Next
@@ -104,8 +108,11 @@ Nothing below is currently implemented.
 - Song timer
 
 ===========================================
-              BADGES & XP
+               BADGES & XP
 ===========================================
+
+\\ Last feature ima try and add
+
 
 🏆 XP System
 - Gain XP by:
@@ -179,21 +186,10 @@ Secret Badges
 - (Ideas)
 
 ===========================================
-          LINK OPENING OPTIONS
-===========================================
-
-Users can choose how links open:
-- Embedded in the site
-- about:blank
-- New browser tab
-
-===========================================
-             FUTURE IDEAS
+              FUTURE IDEAS
 ===========================================
 
 - Better animations
 - More settings
-- More games
-- More proxies
 - More tools
 - More achievements
