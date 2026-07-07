@@ -78,13 +78,18 @@ Users can choose how links open:
 - More games
 - Hacked games
 - Cheat codes
-- Built-in cheat overlay
+- JSON/Save File Decryptor
+- Blob URL Game Launcher
+	- Instead of launching a game inside a standard <iframe> or redirection link, the site converts the game's source code into a     local blob: URL string. This makes it incredibly difficult for standard web filters to block the active window, as the URL reads as an internal browser function
 
 🌐 Proxies
 - More proxy links
 
 🛠️ Tools
-- idk
+- Humanizer
+- Unblocked ChatGPT
+-Embedded emulator hub
+	- A section utilizing client-side WebAssembly emulators allowing users to drag and drop their own retro game files directly into  	  the browser to play offline
 
 📊 Site Stats
 - Visitor counter
