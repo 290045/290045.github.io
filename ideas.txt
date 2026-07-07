@@ -80,7 +80,7 @@ Nothing below is currently implemented.
 - Emulator collection
 
 👥 Community
-- Google Form suggestions
+- Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
 - Client-side custom game/proxy uploader
 
 ===========================================
