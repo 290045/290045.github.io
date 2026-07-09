@@ -12,18 +12,17 @@ html, body {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  /* Deep minimalist iOS dark mode space gradient */
-  background: #05050a;
+  background: #06060c;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
 }
 
-/* iOS 26 Ambient Lighting Backdrops */
+/* Ambient glow accents behind the engine */
 body::before {
   content: '';
   position: fixed;
@@ -34,30 +33,32 @@ body::before {
   background: radial-gradient(circle at 15% 15%, rgba(100, 200, 255, 0.08) 0%, transparent 45%),
               radial-gradient(circle at 85% 85%, rgba(150, 100, 255, 0.08) 0%, transparent 45%);
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
-/* The Magic Liquid Glass Engine Layer */
+/* Fixed positioning fixes layout centering breaking */
 #particleCanvas {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
   pointer-events: none;
-  /* The Secret: High blur + high contrast fuses individual canvas particles into moving liquid blobs */
-  filter: blur(24px) contrast(32);
-  mix-blend-mode: screen;
-  background: #05050a;
+  background: #06060c;
+  /* Forces independent GPU layer so layout variables center properly */
+  transform: translate3d(0, 0, 0); 
+  filter: blur(22px) contrast(30);
 }
 
 /* iOS Super-Elliptical Frosted Glass Container */
 .container {
   width: 90%;
   max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
   padding: 35px;
-  border-radius: 38px; /* Ultra-rounded Apple squircle spec */
+  border-radius: 38px; /* Authentic Apple squircle spec */
   position: relative;
   z-index: 10;
   
@@ -70,6 +71,11 @@ body::before {
     0 24px 64px rgba(0, 0, 0, 0.5),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.25),
     inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Hide navigation scrolls inside card viewports */
+.container::-webkit-scrollbar {
+  width: 0px;
 }
 
 h1 {
@@ -134,7 +140,7 @@ h3 {
 /* ================= COMPONENT CONTROLS - LIQUID GLASS ================= */
 button {
   padding: 15px 20px;
-  border-radius: 18px; /* Smooth rounded native controls */
+  border-radius: 18px; 
   font-size: 15px;
   cursor: pointer;
   border: none;
@@ -210,7 +216,6 @@ input[type="text"] {
   color: #ffffff;
   transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
   
-  /* Indented Liquid Glass Profile */
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
