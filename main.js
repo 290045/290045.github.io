@@ -1,5 +1,5 @@
 // Main JavaScript for 290045's Hub
-// Handles tab switching, link opening, cloaks, themes, panic hotkey, and particle effects
+// Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
 
 (function() {
   const STORAGE_KEYS = {
@@ -137,35 +137,58 @@
     }
   }
 
-  // ================= LIQUID GLASS PARTICLE ENGINE (iOS 26 SPEC) =================
+  // ================= CONSTELLATION NODE ENGINE =================
   let canvas, ctx;
   let particles = [];
-  const PARTICLE_COUNT = 15; // Clean, high-performance meta-merge blob count
+  const PARTICLE_COUNT = 65; // Higher node count to create a dense geometric grid mesh
+  const LINK_DISTANCE = 115; // Max pixel reach distance for draw lines
 
-  class LiquidBlob {
+  class NodeParticle {
     constructor() {
-      // Large dimensions keep components interlinking under the contrast mask
-      this.radius = Math.random() * 50 + 80; 
+      this.radius = Math.random() * 2 + 1.5; // Small crisp dot coordinates
       this.x = Math.random() * window.innerWidth;
       this.y = Math.random() * window.innerHeight;
-      this.vx = (Math.random() - 0.5) * 1.6;
-      this.vy = (Math.random() - 0.5) * 1.6;
+      this.vx = (Math.random() - 0.5) * 0.8; // Smooth, slow drift speeds
+      this.vy = (Math.random() - 0.5) * 0.8;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
 
-      // Bounce properties calculated relative to isolated window layout boundaries
-      if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) this.vx *= -1;
-      if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) this.vy *= -1;
+      // Wrap vectors cleanly at edge limits instead of hard bouncing
+      if (this.x < 0) this.x = canvas.width;
+      if (this.x > canvas.width) this.x = 0;
+      if (this.y < 0) this.y = canvas.height;
+      if (this.y > canvas.height) this.y = 0;
     }
 
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff'; // Solid white powers the contrast filter merges
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
       ctx.fill();
+    }
+  }
+
+  function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        // If nodes are near enough, render connection vectors matching your blueprint image
+        if (distance < LINK_DISTANCE) {
+          const opacity = (1 - distance / LINK_DISTANCE) * 0.22;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(100, 180, 255, ${opacity})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
     }
   }
 
@@ -179,9 +202,12 @@
     if (!ctx || !canvas) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    particles.forEach(blob => {
-      blob.update();
-      blob.draw();
+    // Process drawing vectors
+    drawConnections();
+
+    particles.forEach(p => {
+      p.update();
+      p.draw();
     });
 
     requestAnimationFrame(renderLoop);
@@ -198,7 +224,7 @@
 
     particles = [];
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push(new LiquidBlob());
+      particles.push(new NodeParticle());
     }
 
     renderLoop();
