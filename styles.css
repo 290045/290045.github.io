@@ -8,7 +8,7 @@ html, body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #111111; /* Dark constellation background grid */
+  background-color: #111116; /* Clean deep space background */
   overflow: hidden;
 }
 
@@ -20,14 +20,14 @@ body {
   align-items: center;
 }
 
-/* THE CONSTELLATION LAYER: Crisp background nodes */
+/* THE CONSTELLATION LAYER: Crisp background nodes (No Liquid Filters) */
 .liquid-engine-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #111111;
+  background-color: #111116;
   z-index: -10; 
   pointer-events: none;
 }
@@ -45,7 +45,7 @@ body {
   max-height: 85vh;
   overflow-y: auto;
   padding: 30px;
-  border-radius: 38px; 
+  border-radius: 38px; /* Smooth super-ellipse rounded edges */
   z-index: 10;
   position: relative;
   
@@ -60,6 +60,7 @@ body {
     inset 0 -1px 2px rgba(0, 0, 0, 0.4);
 }
 
+/* Smooth hidden scroll properties */
 .container::-webkit-scrollbar {
   width: 0px;
 }
@@ -188,6 +189,54 @@ input[type="text"] {
   outline: none;
 }
 
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+input[type="text"]:focus {
+  border-color: rgba(100, 200, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Themed Buttons */
+.btn-primary {
+  background: rgba(0, 122, 255, 0.15);
+  border-color: rgba(0, 122, 255, 0.35);
+}
+.btn-primary:hover {
+  background: rgba(0, 122, 255, 0.25);
+  border-color: rgba(0, 122, 255, 0.55);
+}
+
+.btn-danger {
+  background: rgba(255, 59, 48, 0.15);
+  border-color: rgba(255, 59, 48, 0.35);
+}
+.btn-danger:hover {
+  background: rgba(255, 59, 48, 0.25);
+  border-color: rgba(255, 59, 48, 0.55);
+}
+
+.btn-warning {
+  background: rgba(255, 159, 10, 0.15);
+  border-color: rgba(255, 159, 10, 0.35);
+  color: #ffb347;
+}
+.btn-warning:hover {
+  background: rgba(255, 159, 10, 0.25);
+  border-color: rgba(255, 159, 10, 0.55);
+}
+
+.btn-secondary {
+  background: rgba(142, 142, 147, 0.15);
+  border-color: rgba(142, 142, 147, 0.35);
+}
+.btn-secondary:hover {
+  background: rgba(142, 142, 147, 0.25);
+  border-color: rgba(142, 142, 147, 0.55);
+}
+
+/* ================= PANIC BUTTON COMPONENT ================= */
 .panic-section {
   background: rgba(45, 30, 30, 0.2);
   padding: 20px;
@@ -196,9 +245,28 @@ input[type="text"] {
   border: 1px solid rgba(255, 69, 58, 0.2);
 }
 
-.panic-section h3 { margin-top: 0; color: #ff6b6b; }
-.panic-controls { display: flex; gap: 10px; align-items: center; }
-.panic-controls button { width: auto; }
+.panic-section h3 { 
+  margin-top: 0; 
+  color: #ff6b6b; 
+}
+
+.panic-section p {
+  font-size: 14px;
+  color: #cccccc;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.panic-controls { 
+  display: flex; 
+  gap: 10px; 
+  align-items: center; 
+}
+
+.panic-controls button { 
+  width: auto; 
+}
+
 .panic-key-display {
   background: rgba(55, 30, 30, 0.35);
   padding: 12px 16px;
@@ -206,7 +274,53 @@ input[type="text"] {
   border: 1px solid rgba(255, 69, 58, 0.3);
   color: #fff;
   font-weight: 600;
+  font-size: 14px;
 }
-.panic-key-display.listening { animation: pulse 0.7s infinite alternate; }
-@keyframes pulse { from { opacity: 1; } to { opacity: 0.6; } }
-.changelog-card, .credits-card { background: rgba(35, 35, 50, 0.25); padding: 25px; border-radius: 22px; border: 1px solid rgba(100, 170, 255, 0.2); }
+
+.panic-key-display.listening { 
+  animation: pulse 0.7s infinite alternate; 
+}
+
+@keyframes pulse { 
+  from { opacity: 1; transform: scale(1); } 
+  to { opacity: 0.6; transform: scale(0.98); } 
+}
+
+/* ================= CARDS - USER INFO VIEWPORTS ================= */
+.changelog-card, .credits-card { 
+  background: rgba(35, 35, 50, 0.25); 
+  padding: 25px; 
+  border-radius: 22px; 
+  border: 1px solid rgba(100, 170, 255, 0.2); 
+  line-height: 1.6;
+}
+
+.changelog-card h2, .credits-card h2 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #64d8ff;
+}
+
+.changelog-card .date {
+  font-size: 13px;
+  color: #a0a0c0;
+  margin-bottom: 15px;
+}
+
+.changelog-card ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.changelog-card li {
+  margin-bottom: 8px;
+  color: #dddddd;
+}
+
+.footer-note {
+  font-size: 13px;
+  color: #888899;
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
+}
