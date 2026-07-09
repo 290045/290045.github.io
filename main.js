@@ -99,7 +99,6 @@
 
     function keyHandler(e) {
       e.preventDefault();
-      
       if (e.key === 'Escape') {
         listeningForPanic = false;
         display.classList.remove('listening');
@@ -107,14 +106,12 @@
         window.removeEventListener('keydown', keyHandler);
         return;
       }
-
       localStorage.setItem(STORAGE_KEYS.panic, e.key);
       listeningForPanic = false;
       display.classList.remove('listening');
       updatePanicDisplay();
       window.removeEventListener('keydown', keyHandler);
     }
-
     window.addEventListener('keydown', keyHandler);
   }
 
@@ -134,7 +131,6 @@
     if (listeningForPanic) return;
     const key = localStorage.getItem(STORAGE_KEYS.panic);
     if (!key) return;
-
     if (e.key.toLowerCase() === key.toLowerCase()) {
       e.preventDefault();
       location.replace(PANIC_REDIRECT);
@@ -144,23 +140,23 @@
   // ================= LIQUID GLASS PARTICLE ENGINE (iOS 26 SPEC) =================
   let canvas, ctx;
   let particles = [];
-  const PARTICLE_COUNT = 18; // Clean, high-performance blob consolidation count
+  const PARTICLE_COUNT = 15; // Clean, high-performance meta-merge blob count
 
   class LiquidBlob {
     constructor() {
-      // Oversized dimensions keep components interlinking under the contrast mask
-      this.radius = Math.random() * 60 + 75; 
+      // Large dimensions keep components interlinking under the contrast mask
+      this.radius = Math.random() * 50 + 80; 
       this.x = Math.random() * window.innerWidth;
       this.y = Math.random() * window.innerHeight;
-      this.vx = (Math.random() - 0.5) * 1.5;
-      this.vy = (Math.random() - 0.5) * 1.5;
+      this.vx = (Math.random() - 0.5) * 1.6;
+      this.vy = (Math.random() - 0.5) * 1.6;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
 
-      // Handle bounce properties safely relative to layout bounds
+      // Bounce properties calculated relative to isolated window layout boundaries
       if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) this.vx *= -1;
       if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) this.vy *= -1;
     }
@@ -168,7 +164,7 @@
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = '#ffffff'; // Solid white powers the contrast filter merges
       ctx.fill();
     }
   }
@@ -177,16 +173,10 @@
     if (!canvas) return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    // Re-initialize boundaries smoothly if scaling transitions dramatically
-    if (particles.length > 0) {
-      particles.forEach(p => {
-        if (p.x > canvas.width) p.x = canvas.width - p.radius;
-        if (p.y > canvas.height) p.y = canvas.height - p.radius;
-      });
-    }
   }
 
   function renderLoop() {
+    if (!ctx || !canvas) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     particles.forEach(blob => {
