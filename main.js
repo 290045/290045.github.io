@@ -43,7 +43,6 @@
     if (favicon) setFavicon(favicon);
   }
 
-  // Preset cloaks updated with valid, live image/page assets
   function setUserCloak(preset) {
     if (preset === 'reset') {
       localStorage.removeItem(STORAGE_KEYS.title);
@@ -145,24 +144,23 @@
   // ================= LIQUID GLASS PARTICLE ENGINE (iOS 26 SPEC) =================
   let canvas, ctx;
   let particles = [];
-  const PARTICLE_COUNT = 20; // Lower density makes organic liquid merges distinct
+  const PARTICLE_COUNT = 18; // Clean, high-performance blob consolidation count
 
   class LiquidBlob {
     constructor() {
-      // Large dimensions ensure shapes bleed and fuse together behind glass panels
-      this.radius = Math.random() * 50 + 65; 
+      // Oversized dimensions keep components interlinking under the contrast mask
+      this.radius = Math.random() * 60 + 75; 
       this.x = Math.random() * window.innerWidth;
       this.y = Math.random() * window.innerHeight;
-      // Smooth, drifting vector speeds
-      this.vx = (Math.random() - 0.5) * 1.6;
-      this.vy = (Math.random() - 0.5) * 1.6;
+      this.vx = (Math.random() - 0.5) * 1.5;
+      this.vy = (Math.random() - 0.5) * 1.5;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
 
-      // Smooth reflective boundaries
+      // Handle bounce properties safely relative to layout bounds
       if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) this.vx *= -1;
       if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) this.vy *= -1;
     }
@@ -170,7 +168,6 @@
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      // Pure solid white is required to power the CSS contrast filter mechanics
       ctx.fillStyle = '#ffffff';
       ctx.fill();
     }
@@ -180,6 +177,13 @@
     if (!canvas) return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    // Re-initialize boundaries smoothly if scaling transitions dramatically
+    if (particles.length > 0) {
+      particles.forEach(p => {
+        if (p.x > canvas.width) p.x = canvas.width - p.radius;
+        if (p.y > canvas.height) p.y = canvas.height - p.radius;
+      });
+    }
   }
 
   function renderLoop() {
@@ -212,10 +216,8 @@
 
   // ================= INIT EXECUTION LOOP =================
   function init() {
-    // Initialize particle system
     initParticles();
 
-    // Map functions to global scope
     window.switchTab = switchTab;
     window.handleLinkClick = handleLinkClick;
     window.setUserCloak = setUserCloak;
@@ -223,7 +225,6 @@
     window.setPanicKey = startListeningForPanicKey;
     window.clearPanicKey = clearPanicKey;
 
-    // Apply saved configurations
     const savedTitle = localStorage.getItem(STORAGE_KEYS.title);
     const savedFavicon = localStorage.getItem(STORAGE_KEYS.favicon);
     if (savedTitle || savedFavicon) applyCloak(savedTitle, savedFavicon);
@@ -231,7 +232,6 @@
     updatePanicDisplay();
     window.addEventListener('keydown', handlePanicKey);
 
-    // Default fallback to homepage
     const active = document.querySelector('.tab-content.active');
     if (!active) switchTab('homepage');
   }
