@@ -8,11 +8,11 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  background-color: #06060c; /* Native space background color */
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background: #06060c;
   color: white;
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@ body {
   position: relative;
 }
 
-/* Ambient glow accents behind the engine */
+/* Ambient glow accents behind the engine layer */
 body::before {
   content: '';
   position: fixed;
@@ -36,8 +36,8 @@ body::before {
   z-index: -1;
 }
 
-/* Fixed positioning fixes layout centering breaking */
-#particleCanvas {
+/* THE FIX: Isolated Container to execute contrast fusion safely without hiding canvas elements */
+.liquid-engine-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -45,10 +45,15 @@ body::before {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  background: #06060c;
-  /* Forces independent GPU layer so layout variables center properly */
-  transform: translate3d(0, 0, 0); 
-  filter: blur(22px) contrast(30);
+  background-color: #06060c;
+  filter: blur(20px) contrast(28); /* Creates fluid merging bonds */
+  transform: translate3d(0, 0, 0);
+}
+
+#particleCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* iOS Super-Elliptical Frosted Glass Container */
@@ -64,8 +69,8 @@ body::before {
   
   /* High-Saturate Glassmorphism Core */
   background: rgba(25, 25, 35, 0.45);
-  backdrop-filter: blur(35px) saturate(220%);
-  -webkit-backdrop-filter: blur(35px) saturate(220%);
+  backdrop-filter: blur(40px) saturate(220%);
+  -webkit-backdrop-filter: blur(40px) saturate(220%);
   border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 
     0 24px 64px rgba(0, 0, 0, 0.5),
@@ -73,7 +78,7 @@ body::before {
     inset 0 -1px 2px rgba(0, 0, 0, 0.4);
 }
 
-/* Hide navigation scrolls inside card viewports */
+/* Hide scrollbars inside container card viewports */
 .container::-webkit-scrollbar {
   width: 0px;
 }
@@ -247,39 +252,6 @@ input[type="text"]:focus {
   box-shadow: 0 12px 24px rgba(0, 122, 255, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-.btn-danger {
-  background: rgba(255, 59, 48, 0.15);
-  border-color: rgba(255, 59, 48, 0.35);
-}
-
-.btn-danger:hover {
-  background: rgba(255, 59, 48, 0.25);
-  border-color: rgba(255, 59, 48, 0.55);
-  box-shadow: 0 12px 24px rgba(255, 59, 48, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-}
-
-.btn-warning {
-  background: rgba(255, 159, 10, 0.15);
-  border-color: rgba(255, 159, 10, 0.35);
-}
-
-.btn-warning:hover {
-  background: rgba(255, 159, 10, 0.25);
-  border-color: rgba(255, 159, 10, 0.55);
-  box-shadow: 0 12px 24px rgba(255, 159, 10, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-}
-
-.btn-secondary {
-  background: rgba(142, 142, 147, 0.15);
-  border-color: rgba(142, 142, 147, 0.35);
-}
-
-.btn-secondary:hover {
-  background: rgba(142, 142, 147, 0.25);
-  border-color: rgba(142, 142, 147, 0.55);
-  box-shadow: 0 12px 24px rgba(142, 142, 147, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-}
-
 /* ================= PANIC BUTTON COMPONENT ================= */
 .panic-section {
   background: rgba(45, 30, 30, 0.25);
@@ -299,52 +271,6 @@ input[type="text"]:focus {
   letter-spacing: -0.2px;
 }
 
-.panic-section p {
-  font-size: 14px;
-  color: #e5e7eb;
-  margin-bottom: 15px;
-  line-height: 1.5;
-}
-
-.panic-controls {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.panic-controls button {
-  width: auto;
-  padding: 12px 20px;
-}
-
-.panic-key-display {
-  background: rgba(55, 30, 30, 0.35);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 69, 58, 0.35);
-  color: #fff;
-  font-weight: 600;
-  min-width: 140px;
-  text-align: center;
-  box-sizing: border-box;
-  transition: all 0.25s ease-in-out;
-}
-
-.panic-key-display.listening {
-  background: rgba(255, 69, 58, 0.3);
-  border-color: rgba(255, 69, 58, 0.7);
-  animation: pulse 0.7s ease-in-out infinite;
-  box-shadow: 0 0 32px rgba(255, 69, 58, 0.4);
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.04); opacity: 0.85; }
-}
-
 /* ================= CARDS - LIQUID GLASS ================= */
 .changelog-card, .credits-card {
   background: rgba(35, 35, 50, 0.25);
@@ -357,40 +283,4 @@ input[type="text"]:focus {
   box-shadow: 
     0 6px 20px rgba(0, 0, 0, 0.25),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-
-.changelog-card h2 {
-  margin-top: 0;
-}
-
-.changelog-card .date {
-  color: #add1ff;
-  font-size: 13px;
-  font-style: italic;
-  margin-top: -10px;
-  margin-bottom: 15px;
-}
-
-.changelog-card ul {
-  padding-left: 20px;
-  margin: 0;
-}
-
-.changelog-card li {
-  margin-bottom: 10px;
-  color: #e5e7eb;
-}
-
-.credits-card p {
-  font-size: 15px;
-  margin-bottom: 12px;
-  color: #e5e7eb;
-}
-
-.footer-note {
-  color: #9ca3af;
-  font-size: 13px;
-  text-align: center;
-  margin-top: 25px;
-  font-style: italic;
 }
