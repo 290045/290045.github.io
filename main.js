@@ -10,118 +10,6 @@
 
   const PANIC_REDIRECT = 'https://google.com';
 
-  // ================= PARTICLE SYSTEM =================
-  class Particle {
-    constructor(x, y, canvas) {
-      this.x = x;
-      this.y = y;
-      this.canvas = canvas;
-      this.vx = (Math.random() - 0.5) * 2;
-      this.vy = (Math.random() - 0.5) * 2 - 0.5;
-      this.radius = Math.random() * 2 + 0.5;
-      this.opacity = Math.random() * 0.5 + 0.2;
-      this.life = Math.random() * 100 + 50;
-      this.maxLife = this.life;
-    }
-
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      this.vy += 0.1; // gravity
-      this.life--;
-      this.opacity = (this.life / this.maxLife) * 0.5;
-    }
-
-    draw(ctx) {
-      ctx.fillStyle = `rgba(100, 200, 255, ${this.opacity})`;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    isAlive() {
-      return this.life > 0 && this.y < this.canvas.height;
-    }
-  }
-
-  let particles = [];
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-
-  function initParticles() {
-    const canvas = document.getElementById('particleCanvas');
-    if (!canvas) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const ctx = canvas.getContext('2d');
-
-    // Create initial particles
-    for (let i = 0; i < 50; i++) {
-      particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height, canvas));
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Update and draw particles
-      particles = particles.filter(p => p.isAlive());
-      particles.forEach(p => {
-        p.update();
-        p.draw(ctx);
-      });
-
-      // Add new particles occasionally
-      if (Math.random() < 0.3) {
-        particles.push(new Particle(mouseX + (Math.random() - 0.5) * 100, mouseY + (Math.random() - 0.5) * 100, canvas));
-      }
-
-      // Draw connecting lines
-      ctx.strokeStyle = 'rgba(100, 200, 255, 0.1)';
-      ctx.lineWidth = 1;
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 150) {
-            ctx.globalAlpha = 0.1 * (1 - distance / 150);
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-            ctx.globalAlpha = 1;
-          }
-        }
-      }
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  }
-
-  // Track mouse position for particle generation
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    // Generate particles on cursor
-    for (let i = 0; i < 2; i++) {
-      particles.push(new Particle(mouseX + (Math.random() - 0.5) * 50, mouseY + (Math.random() - 0.5) * 50, document.getElementById('particleCanvas')));
-    }
-  });
-
-  // Handle window resize
-  window.addEventListener('resize', () => {
-    const canvas = document.getElementById('particleCanvas');
-    if (canvas) {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-  });
-
   // ================= TAB & UI FUNCTIONS =================
   function switchTab(id) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -155,6 +43,7 @@
     if (favicon) setFavicon(favicon);
   }
 
+  // Preset cloaks updated with valid, live image/page assets
   function setUserCloak(preset) {
     if (preset === 'reset') {
       localStorage.removeItem(STORAGE_KEYS.title);
@@ -253,7 +142,75 @@
     }
   }
 
-  // Init Execution Loop
+  // ================= LIQUID GLASS PARTICLE ENGINE (iOS 26 SPEC) =================
+  let canvas, ctx;
+  let particles = [];
+  const PARTICLE_COUNT = 20; // Lower density makes organic liquid merges distinct
+
+  class LiquidBlob {
+    constructor() {
+      // Large dimensions ensure shapes bleed and fuse together behind glass panels
+      this.radius = Math.random() * 50 + 65; 
+      this.x = Math.random() * window.innerWidth;
+      this.y = Math.random() * window.innerHeight;
+      // Smooth, drifting vector speeds
+      this.vx = (Math.random() - 0.5) * 1.6;
+      this.vy = (Math.random() - 0.5) * 1.6;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Smooth reflective boundaries
+      if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) this.vx *= -1;
+      if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) this.vy *= -1;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      // Pure solid white is required to power the CSS contrast filter mechanics
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+    }
+  }
+
+  function resizeCanvas() {
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function renderLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(blob => {
+      blob.update();
+      blob.draw();
+    });
+
+    requestAnimationFrame(renderLoop);
+  }
+
+  function initParticles() {
+    canvas = document.getElementById('particleCanvas');
+    if (!canvas) return;
+    
+    ctx = canvas.getContext('2d');
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new LiquidBlob());
+    }
+
+    renderLoop();
+  }
+
+  // ================= INIT EXECUTION LOOP =================
   function init() {
     // Initialize particle system
     initParticles();
