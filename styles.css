@@ -1,8 +1,18 @@
 /* ================= GLOBAL & LAYOUT ================= */
-body {
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #000000;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
   color: white;
   display: flex;
   justify-content: center;
@@ -12,7 +22,6 @@ body {
   position: relative;
 }
 
-/* Particle Canvas Background */
 body::before {
   content: '';
   position: fixed;
@@ -20,67 +29,86 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000000;
-  z-index: -2;
+  background: radial-gradient(circle at 20% 50%, rgba(100, 200, 255, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(150, 100, 255, 0.05) 0%, transparent 50%);
   pointer-events: none;
+  z-index: 0;
 }
 
 #particleCanvas {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
   pointer-events: none;
 }
 
 .container {
   width: 90%;
   max-width: 700px;
-  background: rgba(48, 48, 48, 0.85);
   padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(100, 200, 255, 0.1);
+  border-radius: 30px;
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  
+  /* iOS Liquid Glass Effect */
+  background: rgba(30, 30, 46, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
   text-align: center;
   margin-bottom: 25px;
+  font-size: 2em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffffff, #c0e0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 h2 {
-  color: #4ade80;
+  color: #64d8ff;
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 18px;
 }
 
 h3 {
-  color: #60a5fa;
+  color: #a0d8ff;
   margin-top: 15px;
   margin-bottom: 8px;
   font-size: 15px;
 }
 
 /* ================= TAB SYSTEM LAYOUTS ================= */
-/* Hide content tabs by default */
 .tab-content {
   display: none;
 }
 
-/* Reveal active layout segment */
 .tab-content.active {
   display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Big Navigation Buttons for Homepage Menu */
 .menu-layout {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   max-width: 400px;
   margin: 0 auto;
 }
@@ -88,131 +116,169 @@ h3 {
 /* Responsive Grid layout for Games/Proxies/Settings */
 .grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  margin-bottom: 35px; /* Added spacing to separate cloaking from the panic button */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 35px;
 }
 
-/* ================= COMPONENT CONTROLS ================= */
+/* ================= COMPONENT CONTROLS - LIQUID GLASS ================= */
 button {
-  background: #f7f5f5;
-  border: none;
-  padding: 14px;
-  border-radius: 10px;
-  color: black;
-  font-size: 16px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 15px;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-  width: 100%; /* Ensures buttons fill their grid cells equally */
-  box-sizing: border-box;
+  border: none;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-}
-
-button:hover {
-  background: #dbd7d7;
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(100, 200, 255, 0.3);
+  
+  /* Liquid Glass Style */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  width: 100%;
 }
 
 button::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(100, 200, 255, 0.1) 0%, transparent 70%);
-  opacity: 0;
-  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
 button:hover::before {
-  opacity: 1;
+  left: 100%;
 }
 
-/* Back Button Style overrides */
+button:hover {
+  background: rgba(100, 200, 255, 0.25);
+  border-color: rgba(100, 200, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(100, 200, 255, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Back Button */
 .back-btn {
-  background: #ef4444;
-  color: white;
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ff6b6b;
   margin-bottom: 20px;
-  width: 100%;
-}
-.back-btn:hover {
-  background: #dc2626;
-  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
 }
 
-/* Inputs for custom cloaks */
+.back-btn:hover {
+  background: rgba(239, 68, 68, 0.35);
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 
+    0 8px 25px rgba(239, 68, 68, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Inputs - Liquid Glass */
 input[type="text"] {
-  padding: 14px;
-  border-radius: 10px;
-  border: 1px solid #444;
-  background: rgba(31, 41, 55, 0.8);
-  color: #fff;
+  padding: 14px 16px;
+  border-radius: 14px;
   font-size: 15px;
   width: 100%;
-  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   transition: all 0.3s;
+  
+  /* Liquid Glass */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #60a5fa;
-  background: rgba(37, 51, 70, 0.9);
-  box-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+  border-color: rgba(100, 200, 255, 0.6);
+  background: rgba(100, 200, 255, 0.1);
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(100, 200, 255, 0.2);
 }
 
-/* Custom Settings Button Themes - Adjusted to match regular buttons */
-.btn-primary { 
-  background: #007acc; 
-  color: white; 
-}
-.btn-primary:hover { 
-  background: #0062a3; 
-  box-shadow: 0 0 15px rgba(0, 122, 204, 0.4);
+/* Themed Buttons */
+.btn-primary {
+  background: rgba(0, 122, 204, 0.2);
+  border-color: rgba(0, 122, 204, 0.4);
 }
 
-.btn-danger { 
-  background: #cc3333; 
-  color: white; 
-}
-.btn-danger:hover { 
-  background: #ab2a2a; 
-  box-shadow: 0 0 15px rgba(204, 51, 51, 0.4);
+.btn-primary:hover {
+  background: rgba(0, 122, 204, 0.35);
+  border-color: rgba(0, 122, 204, 0.6);
+  box-shadow: 0 8px 25px rgba(0, 122, 204, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-.btn-warning { 
-  background: #ff6b6b; 
-  color: white; 
-}
-.btn-warning:hover { 
-  background: #ee5a52; 
-  box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+.btn-danger {
+  background: rgba(220, 38, 38, 0.2);
+  border-color: rgba(220, 38, 38, 0.4);
 }
 
-.btn-secondary { 
-  background: #444; 
-  color: white; 
+.btn-danger:hover {
+  background: rgba(220, 38, 38, 0.35);
+  border-color: rgba(220, 38, 38, 0.6);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
-.btn-secondary:hover { 
-  background: #555; 
-  box-shadow: 0 0 15px rgba(100, 100, 100, 0.4);
+
+.btn-warning {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+.btn-warning:hover {
+  background: rgba(255, 107, 107, 0.35);
+  border-color: rgba(255, 107, 107, 0.6);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary {
+  background: rgba(100, 100, 100, 0.2);
+  border-color: rgba(100, 100, 100, 0.4);
+}
+
+.btn-secondary:hover {
+  background: rgba(100, 100, 100, 0.35);
+  border-color: rgba(100, 100, 100, 0.6);
+  box-shadow: 0 8px 25px rgba(100, 100, 100, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 /* ================= PANIC BUTTON COMPONENT ================= */
 .panic-section {
-  background: rgba(34, 34, 34, 0.8);
+  background: rgba(40, 30, 30, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 20px;
-  border-radius: 12px;
-  margin-top: 15px; /* Balanced spacing above the section */
-  border: 2px solid #ff6b6b;
-  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  margin-top: 15px;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .panic-section h3 {
   margin-top: 0;
-  color: #ff6b6b;
+  color: #ff8080;
   font-size: 18px;
 }
 
@@ -220,7 +286,7 @@ input[type="text"]:focus {
   font-size: 14px;
   color: #d1d5db;
   margin-bottom: 15px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .panic-controls {
@@ -231,49 +297,49 @@ input[type="text"]:focus {
 }
 
 .panic-controls button {
-  width: auto; /* Keeps panic utility buttons from stretching too wide */
-  padding: 12px 20px;
+  width: auto;
+  padding: 12px 18px;
 }
 
 .panic-key-display {
-  background: rgba(51, 51, 51, 0.8);
+  background: rgba(50, 30, 30, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 12px 15px;
-  border-radius: 8px;
-  border: 2px solid #ff6b6b;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 107, 107, 0.4);
   color: #fff;
-  font-weight: bold;
-  min-width: 120px;
+  font-weight: 600;
+  min-width: 140px;
   text-align: center;
   box-sizing: border-box;
-  backdrop-filter: blur(5px);
+  transition: all 0.3s;
 }
 
 .panic-key-display.listening {
-  background: #ff6b6b;
-  color: #000;
-  animation: pulse 0.5s infinite;
-  box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+  background: rgba(255, 107, 107, 0.4);
+  border-color: rgba(255, 107, 107, 0.7);
+  animation: pulse 0.6s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
 }
 
-.panic-note {
-  color: #9ca3af;
-  font-size: 12px;
-  margin-top: 10px;
-}
-
-/* ================= CARDS (CHANGELOG/CREDITS) ================= */
+/* ================= CARDS - LIQUID GLASS ================= */
 .changelog-card, .credits-card {
-  background: rgba(31, 41, 55, 0.8);
-  padding: 20px;
-  border-radius: 12px;
-  line-height: 1.6;
-  border: 1px solid rgba(100, 200, 255, 0.1);
-  backdrop-filter: blur(5px);
+  background: rgba(40, 40, 60, 0.25);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 25px;
+  border-radius: 20px;
+  line-height: 1.7;
+  border: 1px solid rgba(100, 150, 255, 0.2);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .changelog-card h2 {
@@ -281,10 +347,10 @@ input[type="text"]:focus {
 }
 
 .changelog-card .date {
-  color: #9ca3af;
+  color: #a0c5ff;
   font-size: 13px;
   font-style: italic;
-  margin-top: -5px;
+  margin-top: -10px;
   margin-bottom: 15px;
 }
 
@@ -294,18 +360,20 @@ input[type="text"]:focus {
 }
 
 .changelog-card li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: #d1d5db;
 }
 
 .credits-card p {
-  font-size: 16px;
+  font-size: 15px;
   margin-bottom: 12px;
+  color: #d1d5db;
 }
 
 .footer-note {
-  color: #9ca3af;
+  color: #a0a0c0;
   font-size: 14px;
   text-align: center;
   margin-top: 20px;
+  font-style: italic;
 }
