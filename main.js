@@ -137,26 +137,55 @@
     }
   }
 
-  // ================= CONSTELLATION NODE ENGINE =================
+  // ================= CONSTELLATION MOUSE-INTERACTIVE ENGINE =================
   let canvas, ctx;
   let particles = [];
-  const PARTICLE_COUNT = 65; // Higher node count to create a dense geometric grid mesh
-  const LINK_DISTANCE = 115; // Max pixel reach distance for draw lines
+  const PARTICLE_COUNT = 65; 
+  const LINK_DISTANCE = 115; 
+
+  // Track mouse coordinates for dynamic interaction
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 160 // Connection area around the cursor
+  };
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  window.addEventListener('mouseout', () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
 
   class NodeParticle {
     constructor() {
-      this.radius = Math.random() * 2 + 1.5; // Small crisp dot coordinates
+      this.radius = Math.random() * 2 + 1.5; 
       this.x = Math.random() * window.innerWidth;
       this.y = Math.random() * window.innerHeight;
-      this.vx = (Math.random() - 0.5) * 0.8; // Smooth, slow drift speeds
+      this.vx = (Math.random() - 0.5) * 0.8; 
       this.vy = (Math.random() - 0.5) * 0.8;
     }
 
     update() {
+      // Pull particles slightly toward the cursor when nearby
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          this.x += (dx / dist) * force * 0.6;
+          this.y += (dy / dist) * force * 0.6;
+        }
+      }
+
       this.x += this.vx;
       this.y += this.vy;
 
-      // Wrap vectors cleanly at edge limits instead of hard bouncing
+      // Screen wrapping rules
       if (this.x < 0) this.x = canvas.width;
       if (this.x > canvas.width) this.x = 0;
       if (this.y < 0) this.y = canvas.height;
@@ -173,12 +202,28 @@
 
   function drawConnections() {
     for (let i = 0; i < particles.length; i++) {
+      // Create lines directly between particles and the cursor
+      if (mouse.x !== null && mouse.y !== null) {
+        const mdx = particles[i].x - mouse.x;
+        const mdy = particles[i].y - mouse.y;
+        const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mDist < mouse.radius) {
+          const mOpacity = (1 - mDist / mouse.radius) * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(100, 200, 255, ${mOpacity})`;
+          ctx.lineWidth = 1.0;
+          ctx.stroke();
+        }
+      }
+
+      // Create lines between neighboring nodes
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // If nodes are near enough, render connection vectors matching your blueprint image
         if (distance < LINK_DISTANCE) {
           const opacity = (1 - distance / LINK_DISTANCE) * 0.22;
           ctx.beginPath();
@@ -202,7 +247,6 @@
     if (!ctx || !canvas) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Process drawing vectors
     drawConnections();
 
     particles.forEach(p => {
@@ -234,6 +278,7 @@
   function init() {
     initParticles();
 
+    // Map features cleanly to global scope windows
     window.switchTab = switchTab;
     window.handleLinkClick = handleLinkClick;
     window.setUserCloak = setUserCloak;
