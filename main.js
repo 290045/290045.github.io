@@ -3,7 +3,7 @@
 
 // CONFIGURATION
 const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
-const DEV_PASSWORD = "yourSecretPasswordHere"; // Set your custom password here
+const DEV_PASSWORD = "DevTest"; // Set your custom password here
 
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("maintenance-overlay");
