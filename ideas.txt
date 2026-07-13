@@ -1,15 +1,25 @@
+Listed as 
+	Adding next - Adding last
+
 ===========================================
 	         ##    IDEAS   ##
 ===========================================
 
-👥 Community
-- Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
-- Client-side custom game/proxy uploader
+🖼️ UI Improvements
+- Game thumbnails
+- Proxy thumbnails
+- Compact / Minimalist mode (Setting)
 
-🔊 Sounds
+🎨 Themes (Setting)
+- Preset themes
+- Custom themes
+- Custom fonts
+- Mouse cursor themes
+
+🔊 Sounds 
 - Button click sounds
-- Background music
-- Preset music selection
+- Background music (Setting)
+- Preset music selection (Setting)
 
 🌐 Navigation
 - Search bar
@@ -17,56 +27,38 @@
   - Search proxies
 - Favorites system
   - Pin favorites to the top
-  - Yellow ★ icon
+  - Yellow star icon
 
-🎨 Themes (High Priority)
-- Preset themes
-- Custom themes
-- Custom fonts
-- Mouse cursor themes
-- Animated particle background
-
-🖼️ UI Improvements
-- Game thumbnails
-- Proxy thumbnails
-- Cleaner, modern cards
-- Compact / Minimalist mode
+👥 Community (Game / Proxy pages)
+- Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
+- Client-side custom game/proxy uploader
 
 🛡️ Privacy
-- Referrer header stripping
-Users can choose how links open in settings:
+- Users can choose how links open: (Setting)
 - Embedded in the site
 - about:blank
 - New browser tab
 
 🔒 Protection
-- History flood
+- History flood (Setting)
   - Flood history with random pages
 - Auto-timeout lock
   - Close the tab after inactivity
-- Inspect Element blocker
+- Inspect Element blocker / Referrer header stripping
   - Hide game/proxy links where possible
 
 🎮 Games
-- More games
-- Hacked games
+- Hacked/Modded games
 - JSON/Save File Decryptor
 - Blob URL Game Launcher
 	- Instead of launching a game inside a standard <iframe> or redirection link, the site converts the game's source code into a     local blob: URL string. This makes it incredibly difficult for standard web filters to block the active window, as the URL reads as an internal browser function
 
-🌐 Proxies
-- More proxy links
-
-🛠️ Tools
--Embedded emulator hub
-	- A section utilizing client-side WebAssembly emulators allowing users to drag and drop their own retro game files directly into  	  the browser to play offline
-
-📊 Site Stats
+📊 Site Stats (Footer on homepage)
 - Visitor counter
 
-🎵 Audio Visualizer (MAYBE!!!)
-- Spotify support
-- Apple Music support
+🎵 Audio Visualizer (Setting)
+- Spotify support (Link it in settings)
+- Apple Music support (Link it in settings)
 - Album artwork
 - Play / Pause
 - Previous / Next
