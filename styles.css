@@ -53,6 +53,10 @@ body {
   -webkit-backdrop-filter: none !important;
   border: none !important;
   box-shadow: none !important;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all content inside the main viewport container */
 }
 
 /* Smooth hidden scroll properties */
@@ -89,6 +93,7 @@ h3 {
 /* ================= TAB SYSTEM LAYOUTS ================= */
 .tab-content {
   display: none;
+  width: 100%;
 }
 
 .tab-content.active {
@@ -114,6 +119,7 @@ h3 {
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 10px;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 /* ================= COMPONENT CONTROLS - GLASS INTERFACE ================= */
@@ -138,11 +144,13 @@ button {
     0 4px 12px rgba(0, 0, 0, 0.2),
     inset 0 1px 1px rgba(255, 255, 255, 0.08) !important;
   
-  /* SIZING FIX: Stops the full screen stretching */
+  /* SIZING FORCE FIX: Prevents layout stretching across wide screens */
   width: auto !important;   
-  min-width: 140px;         
-  display: inline-block;    
-  margin: 6px auto;         
+  max-width: 240px !important; /* Strictly cuts button width maximums */
+  min-width: 140px !important;         
+  display: inline-block !important;    
+  margin: 6px auto !important;         
+  flex-shrink: 0 !important;   /* Stops parent containers from pulling edges out */
 }
 
 button::before {
@@ -171,9 +179,10 @@ button:active {
   transform: scale(0.98) translateY(0);
 }
 
-/* Force buttons inside grids to expand to fill their grid cells properly */
+/* Force buttons inside grid arrays to comfortably match grid slots instead of strict small boxes */
 .grid-layout button {
   width: 100% !important;
+  max-width: 100% !important;
 }
 
 .back-btn {
@@ -188,12 +197,15 @@ input[type="text"] {
   border-radius: 14px;
   font-size: 15px;
   width: 100%;
+  max-width: 480px; /* Slims down the main field size inside wide panels */
   border: 1px solid rgba(255, 255, 255, 0.08); 
   color: #ffffff;
   background: rgba(0, 0, 0, 0.35); 
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
   outline: none;
   transition: border-color 0.25s, background-color 0.25s;
+  margin: 0 auto 15px auto;
+  display: block;
 }
 
 input[type="text"]::placeholder {
@@ -252,11 +264,13 @@ input[type="text"]:focus {
   border-radius: 20px;
   margin-top: 15px;
   border: 1px solid rgba(255, 69, 58, 0.12);
+  width: 100%;
 }
 
 .panic-section h3 { 
   margin-top: 0; 
   color: #ff8181; 
+  text-align: center;
 }
 
 .panic-section p {
@@ -264,6 +278,7 @@ input[type="text"]:focus {
   color: #aaaaaa;
   line-height: 1.4;
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .panic-controls { 
@@ -271,6 +286,7 @@ input[type="text"]:focus {
   gap: 10px; 
   align-items: center; 
   justify-content: center;
+  width: 100%;
 }
 
 .panic-controls button { 
@@ -306,6 +322,7 @@ input[type="text"]:focus {
   border-radius: 22px; 
   border: 1px solid rgba(255, 255, 255, 0.08);
   line-height: 1.6;
+  width: 100%;
 }
 
 .changelog-card h2, .credits-card h2 {
@@ -336,6 +353,7 @@ input[type="text"]:focus {
   text-align: center;
   margin-top: 15px;
   font-style: italic;
+  width: 100%;
 }
 
 /* ================= MAINTENANCE OVERLAY LAYER ================= */
@@ -395,6 +413,7 @@ input[type="text"]:focus {
   border-radius: 14px;
   font-size: 15px;
   width: 100%;
+  max-width: 320px; /* Slims down the unlock screen text box */
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #ffffff;
   background: rgba(0, 0, 0, 0.35); 
@@ -406,30 +425,3 @@ input[type="text"]:focus {
 }
 
 .maintenance-box input[type="password"]:focus {
-  border-color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.maintenance-box button {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
-  width: auto !important;
-  min-width: 160px;
-}
-
-.maintenance-box button:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04) !important;
-}
-
-#error-msg {
-  color: #ffb347; 
-  font-size: 14px;
-  margin-top: 15px;
-  font-weight: 500;
-}
-
-.hidden {
-  display: none !important;
-}
