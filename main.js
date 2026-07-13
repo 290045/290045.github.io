@@ -3,30 +3,43 @@
 
 // CONFIGURATION
 const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
-const DEV_PASSWORD = "DevTest"; // Change this to your password
+const DEV_PASSWORD = "yourSecretPasswordHere"; // Set your custom password here
 
-// Run automatically when page loads
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("maintenance-overlay");
   const isDev = sessionStorage.getItem("dev_authenticated");
+  const passwordInput = document.getElementById("dev-password");
 
-  // If feature is ON and user is NOT a verified developer, show blocker
+  // Show blocker if maintenance is active and user is not verified
   if (IS_MAINTENANCE_ON && isDev !== "true") {
     overlay.classList.remove("hidden");
   }
+
+  // Allow pressing "Enter" key inside the input box to submit
+  if (passwordInput) {
+    passwordInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        checkPassword();
+      }
+    });
+  }
 });
 
-// Password validation function
 function checkPassword() {
   const input = document.getElementById("dev-password").value;
   const errorMsg = document.getElementById("error-msg");
   const overlay = document.getElementById("maintenance-overlay");
 
   if (input === DEV_PASSWORD) {
-    sessionStorage.setItem("dev_authenticated", "true"); // Keeps dev logged in for the session
-    overlay.classList.add("hidden"); // Hide the blocker
+    sessionStorage.setItem("dev_authenticated", "true");
+    overlay.classList.add("hidden");
   } else {
-    errorMsg.classList.remove("hidden"); // Show error
+    errorMsg.classList.remove("hidden");
+    // Simple shake effect on error if desired
+    document.querySelector(".maintenance-box").style.animation = "none";
+    setTimeout(() => {
+      document.querySelector(".maintenance-box").style.animation = "fadeIn 0.4s";
+    }, 10);
   }
 }
 
