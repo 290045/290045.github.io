@@ -358,20 +358,21 @@ input[type="text"]:focus {
 
 /* ================= MAINTENANCE OVERLAY LAYER ================= */
 #maintenance-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #07070a; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999; 
+  position: fixed !important; /* Forces it to stay fixed over everything */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: #07070a !important; 
+  display: flex !important; /* Uses flex layout to center the content box */
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 9999999 !important; /* Set to maximum height layer so nothing can bleed over it */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   padding: 20px;
 }
 
+/* Custom lock card utilizing the strict dark liquid glass specifications */
 .maintenance-box {
   width: 100%;
   max-width: 480px; 
@@ -380,48 +381,85 @@ input[type="text"]:focus {
   text-align: center;
   position: relative;
   
-  background: rgba(14, 14, 20, 0.65); 
-  backdrop-filter: blur(35px) saturate(140%);
-  -webkit-backdrop-filter: blur(35px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.08); 
+  background: rgba(14, 14, 20, 0.65) !important; 
+  backdrop-filter: blur(35px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(35px) saturate(140%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important; 
   box-shadow: 
     0 24px 64px rgba(0, 0, 0, 0.75),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.1), 
-    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5) !important;
   
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 
 .maintenance-box h1 {
-  background: linear-gradient(135deg, #ffffff 40%, #9e9ea7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: linear-gradient(135deg, #ffffff 40%, #9e9ea7 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin-bottom: 25px !important;
 }
 
 .maintenance-box p {
-  color: #aaaaaa;
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 25px;
+  color: #aaaaaa !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 25px !important;
 }
 
+/* Recessed Passcode input field */
 .maintenance-box input[type="password"] {
-  padding: 14px 16px;
-  border-radius: 14px;
-  font-size: 15px;
-  width: 100%;
-  max-width: 320px; /* Slims down the unlock screen text box */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.35); 
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
-  outline: none;
-  margin-bottom: 15px;
-  text-align: center;
-  transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  font-size: 15px !important;
+  width: 100% !important;
+  max-width: 320px !important; 
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  background: rgba(0, 0, 0, 0.35) !important; 
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+  outline: none !important;
+  margin-bottom: 15px !important;
+  text-align: center !important;
+  transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1) !important;
 }
 
 .maintenance-box input[type="password"]:focus {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Overriding lock screen button action animations to reflect neutral light grey/white */
+.maintenance-box button {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  width: auto !important;
+  max-width: 180px !important;
+  min-width: 140px !important;
+}
+
+.maintenance-box button:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Warm amber warning error validation indicator */
+#error-msg {
+  color: #ffb347 !important; 
+  font-size: 14px !important;
+  margin-top: 15px !important;
+  font-weight: 500 !important;
+}
+
+/* HARD OVERRIDE HIDE RULE: This forces the screen away when active */
+#maintenance-overlay.hidden, .hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -999999 !important;
+}
