@@ -2,8 +2,8 @@
 // Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
 
 // CONFIGURATION
-const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
-const DEV_PASSWORD = "yourSecretPasswordHere"; // Set your custom password here
+const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
+const DEV_PASSWORD = "DevTest"; // Set your custom password here
 
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("maintenance-overlay");
