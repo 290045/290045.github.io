@@ -1,54 +1,33 @@
 // Main JavaScript for 290045's Hub
 // Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
 
-/* Full screen blocker */
-#maintenance-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #121212;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999; /* Sits on top of everything */
-  font-family: sans-serif;
-}
+// CONFIGURATION
+const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
+const DEV_PASSWORD = "DevTest"; // Change this to your password
 
-/* Center box */
-.maintenance-box {
-  text-align: center;
-  padding: 30px;
-  background: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
+// Run automatically when page loads
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("maintenance-overlay");
+  const isDev = sessionStorage.getItem("dev_authenticated");
 
-/* Input and Button */
-.maintenance-box input, .maintenance-box button {
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 4px;
-  border: none;
-}
+  // If feature is ON and user is NOT a verified developer, show blocker
+  if (IS_MAINTENANCE_ON && isDev !== "true") {
+    overlay.classList.remove("hidden");
+  }
+});
 
-.maintenance-box button {
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
+// Password validation function
+function checkPassword() {
+  const input = document.getElementById("dev-password").value;
+  const errorMsg = document.getElementById("error-msg");
+  const overlay = document.getElementById("maintenance-overlay");
 
-#error-msg {
-  color: #ff4d4d;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-/* Helper class to hide the overlay */
-.hidden {
-  display: none !important;
+  if (input === DEV_PASSWORD) {
+    sessionStorage.setItem("dev_authenticated", "true"); // Keeps dev logged in for the session
+    overlay.classList.add("hidden"); // Hide the blocker
+  } else {
+    errorMsg.classList.remove("hidden"); // Show error
+  }
 }
 
 // ================= CLOAKING =================
