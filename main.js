@@ -3,16 +3,22 @@
 
 // CONFIGURATION
 const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
-const DEV_PASSWORD = "DevTest"; // Set your custom password here
+const DEV_PASSWORD = "yourSecretPasswordHere"; // Set your custom password here
 
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("maintenance-overlay");
   const isDev = sessionStorage.getItem("dev_authenticated");
   const passwordInput = document.getElementById("dev-password");
+  const errorMsg = document.getElementById("error-msg");
+
+  // Keep error message hidden on initial page load
+  if (errorMsg) {
+    errorMsg.classList.add("hidden");
+  }
 
   // Show blocker if maintenance is active and user is not verified
   if (IS_MAINTENANCE_ON && isDev !== "true") {
-    overlay.classList.remove("hidden");
+    if (overlay) overlay.classList.remove("hidden");
   }
 
   // Allow pressing "Enter" key inside the input box to submit
@@ -26,23 +32,31 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function checkPassword() {
-  const input = document.getElementById("dev-password").value;
+  const inputField = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
   const overlay = document.getElementById("maintenance-overlay");
+  const box = document.querySelector(".maintenance-box");
 
-  if (input === DEV_PASSWORD) {
+  if (!inputField || !errorMsg || !overlay) return;
+
+  const inputValue = inputField.value;
+
+  if (inputValue === DEV_PASSWORD) {
     sessionStorage.setItem("dev_authenticated", "true");
+    errorMsg.classList.add("hidden"); // Clear error if it was showing
     overlay.classList.add("hidden");
   } else {
-    errorMsg.classList.remove("hidden");
-    // Simple shake effect on error if desired
-    document.querySelector(".maintenance-box").style.animation = "none";
-    setTimeout(() => {
-      document.querySelector(".maintenance-box").style.animation = "fadeIn 0.4s";
-    }, 10);
+    errorMsg.classList.remove("hidden"); // Show error only on wrong attempt
+    
+    // Simple shake effect on error 
+    if (box) {
+      box.style.animation = "none";
+      setTimeout(() => {
+        box.style.animation = "fadeIn 0.4s";
+      }, 10);
+    }
   }
 }
-
 // ================= CLOAKING =================
 (function() {
   const STORAGE_KEYS = {
