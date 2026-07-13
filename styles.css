@@ -5,7 +5,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #111116; /* Matches your clean deep space background */
+  background-color: #07070a; /* Shifted to an ultra-dark deep cosmic void background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,18 +23,25 @@
   text-align: center;
   position: relative;
   
-  background: rgba(25, 25, 35, 0.45);
-  backdrop-filter: blur(35px) saturate(210%);
-  -webkit-backdrop-filter: blur(35px) saturate(210%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(14, 14, 20, 0.65); /* Deeper, darker glass foundation */
+  backdrop-filter: blur(35px) saturate(140%);
+  -webkit-backdrop-filter: blur(35px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* More subtle, clean border edge */
   box-shadow: 
-    0 24px 64px rgba(0, 0, 0, 0.5),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.25),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+    0 24px 64px rgba(0, 0, 0, 0.75),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.1), /* Pure white/silver liquid edge reflection */
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.maintenance-box h1 {
+  background: linear-gradient(135deg, #ffffff 40%, #9e9ea7 100%); /* Clean chrome/silver gradient, no blue */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .maintenance-box p {
-  color: #cccccc;
+  color: #aaaaaa; /* Softer, low-contrast text for a cleaner look */
   font-size: 15px;
   line-height: 1.6;
   margin-bottom: 25px;
@@ -46,27 +53,81 @@
   border-radius: 14px;
   font-size: 15px;
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35); /* Darker recessed input basin */
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
   outline: none;
   margin-bottom: 15px;
   text-align: center;
+  transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
 .maintenance-box input[type="password"]::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.25);
 }
 
+/* Focused input border changes to white/silver instead of blue */
 .maintenance-box input[type="password"]:focus {
-  border-color: rgba(100, 200, 255, 0.5);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.02);
 }
 
-/* Error message styled like your warning text elements */
+/* Dark Glass Core Button Setup */
+.maintenance-box button {
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  width: 100%;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
+  
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Sweep reflection overlay */
+.maintenance-box button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transition: left 0.6s cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+.maintenance-box button:hover::before {
+  left: 100%;
+}
+
+/* Hover State: Illumination border color shifts to clean white/light grey instead of blue */
+.maintenance-box button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02) translateY(-1px);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04);
+}
+
+.maintenance-box button:active {
+  transform: scale(0.98) translateY(0);
+}
+
+/* Error message warning text element */
 #error-msg {
-  color: #ff6b6b;
+  color: #ffb347; /* Replaced the red with a warm amber warning color that stands out perfectly */
   font-size: 14px;
   margin-top: 15px;
   font-weight: 500;
@@ -77,7 +138,7 @@
   display: none !important;
 }
 
-/* ================= GLOBAL & LAYOUT ================= */
+/* ================= GLOBAL & LAYOUT: DARK LIQUID GLASS ================= */
 * {
   box-sizing: border-box;
 }
@@ -87,7 +148,7 @@ html, body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #111116; /* Clean deep space background */
+  background-color: #07070a; /* Shifted to ultra-dark deep cosmic void background */
   overflow: hidden;
 }
 
@@ -106,7 +167,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #111116;
+  background-color: #07070a; /* Matches ultra-dark theme background */
   z-index: 0;
   pointer-events: none;
 }
@@ -128,15 +189,15 @@ body {
   z-index: 10;
   position: relative;
   
-  /* High-Saturate Glassmorphism Specifications */
-  background: rgba(25, 25, 35, 0.45);
-  backdrop-filter: blur(35px) saturate(210%);
-  -webkit-backdrop-filter: blur(35px) saturate(210%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  /* Saturated Dark Liquid Glass Specifications (No Blue Tints) */
+  background: rgba(14, 14, 20, 0.65);
+  backdrop-filter: blur(35px) saturate(140%);
+  -webkit-backdrop-filter: blur(35px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* More subtle, clean border edge */
   box-shadow: 
-    0 24px 64px rgba(0, 0, 0, 0.5),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.25),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.4);
+    0 24px 64px rgba(0, 0, 0, 0.75),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.1), /* White/silver liquid edge reflection */
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* Smooth hidden scroll properties */
@@ -150,21 +211,21 @@ h1 {
   font-size: 1.8em;
   font-weight: 700;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #ffffff 30%, #c0e0ff 100%);
+  background: linear-gradient(135deg, #ffffff 40%, #9e9ea7 100%); /* Clean chrome/silver gradient, no blue */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 h2 {
-  color: #64d8ff;
+  color: #ffffff; /* Removed bright light blue, changed to clean white */
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 18px;
 }
 
 h3 {
-  color: #a0d8ff;
+  color: #dddddd; /* Removed soft blue, changed to light gray */
   margin-top: 15px;
   margin-bottom: 8px;
   font-size: 15px;
@@ -212,14 +273,14 @@ button {
   position: relative;
   overflow: hidden;
   
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03); /* Darker glass foundation */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06); /* Crisp, thin dark-glass border */
   color: #ffffff;
   box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
   width: 100%;
 }
 
@@ -230,7 +291,7 @@ button::before {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
   transition: left 0.6s cubic-bezier(0.15, 1, 0.3, 1);
 }
 
@@ -239,10 +300,10 @@ button:hover::before {
 }
 
 button:hover {
-  background: rgba(100, 200, 255, 0.14);
-  border-color: rgba(100, 200, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08); /* Replaced blue with light white/grey glass fill */
+  border-color: rgba(255, 255, 255, 0.25); /* Replaced blue border with a crisp silver rim */
   transform: scale(1.02) translateY(-1px);
-  box-shadow: 0 10px 20px rgba(100, 200, 255, 0.15);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04);
 }
 
 button:active {
@@ -250,9 +311,9 @@ button:active {
 }
 
 .back-btn {
-  background: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.3);
-  color: #ff7b7b;
+  background: rgba(239, 68, 68, 0.08); /* Slightly dimmed background tint */
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #ff8e8e;
   margin-bottom: 20px;
 }
 
@@ -261,77 +322,80 @@ input[type="text"] {
   border-radius: 14px;
   font-size: 15px;
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle dark border line */
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35); /* Deeper, recessed input slot */
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
   outline: none;
+  transition: border-color 0.25s, background-color 0.25s;
 }
 
 input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.25);
 }
 
 input[type="text"]:focus {
-  border-color: rgba(100, 200, 255, 0.5);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25); /* Replaced blue focus with silver edge highlight */
+  background: rgba(255, 255, 255, 0.02);
 }
 
-/* Themed Buttons */
+/* Themed Buttons (Zero Blue) */
 .btn-primary {
-  background: rgba(0, 122, 255, 0.15);
-  border-color: rgba(0, 122, 255, 0.35);
+  background: rgba(255, 255, 255, 0.05); /* Shifted to dark steel gray glass */
+  border-color: rgba(255, 255, 255, 0.12);
 }
 .btn-primary:hover {
-  background: rgba(0, 122, 255, 0.25);
-  border-color: rgba(0, 122, 255, 0.55);
+  background: rgba(255, 255, 255, 0.12); /* White/silver illumination */
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .btn-danger {
-  background: rgba(255, 59, 48, 0.15);
-  border-color: rgba(255, 59, 48, 0.35);
+  background: rgba(255, 59, 48, 0.08);
+  border-color: rgba(255, 59, 48, 0.2);
+  color: #ff8181;
 }
 .btn-danger:hover {
-  background: rgba(255, 59, 48, 0.25);
-  border-color: rgba(255, 59, 48, 0.55);
+  background: rgba(255, 59, 48, 0.16);
+  border-color: rgba(255, 59, 48, 0.4);
 }
 
 .btn-warning {
-  background: rgba(255, 159, 10, 0.15);
-  border-color: rgba(255, 159, 10, 0.35);
-  color: #ffb347;
+  background: rgba(255, 159, 10, 0.08);
+  border-color: rgba(255, 159, 10, 0.2);
+  color: #ffc473;
 }
 .btn-warning:hover {
-  background: rgba(255, 159, 10, 0.25);
-  border-color: rgba(255, 159, 10, 0.55);
+  background: rgba(255, 159, 10, 0.16);
+  border-color: rgba(255, 159, 10, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(142, 142, 147, 0.15);
-  border-color: rgba(142, 142, 147, 0.35);
+  background: rgba(142, 142, 147, 0.08);
+  border-color: rgba(142, 142, 147, 0.2);
+  color: #cccccc;
 }
 .btn-secondary:hover {
-  background: rgba(142, 142, 147, 0.25);
-  border-color: rgba(142, 142, 147, 0.55);
+  background: rgba(142, 142, 147, 0.16);
+  border-color: rgba(142, 142, 147, 0.4);
 }
 
 /* ================= PANIC BUTTON COMPONENT ================= */
 .panic-section {
-  background: rgba(45, 30, 30, 0.2);
+  background: rgba(25, 14, 14, 0.4); /* Darker subsurface red base */
   padding: 20px;
   border-radius: 20px;
   margin-top: 15px;
-  border: 1px solid rgba(255, 69, 58, 0.2);
+  border: 1px solid rgba(255, 69, 58, 0.12); /* More subtle emergency line */
 }
 
 .panic-section h3 { 
   margin-top: 0; 
-  color: #ff6b6b; 
+  color: #ff8181; /* Dimmed, premium warning red text */
 }
 
 .panic-section p {
   font-size: 14px;
-  color: #cccccc;
+  color: #aaaaaa;
   line-height: 1.4;
   margin-bottom: 15px;
 }
@@ -347,17 +411,18 @@ input[type="text"]:focus {
 }
 
 .panic-key-display {
-  background: rgba(55, 30, 30, 0.35);
+  background: rgba(0, 0, 0, 0.35);
   padding: 12px 16px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 69, 58, 0.3);
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Clean dark liquid container framework */
+  color: #ffffff;
   font-weight: 600;
   font-size: 14px;
 }
 
 .panic-key-display.listening { 
   animation: pulse 0.7s infinite alternate; 
+  border-color: rgba(255, 69, 58, 0.35); /* Glows muted red when active */
 }
 
 @keyframes pulse { 
@@ -367,22 +432,24 @@ input[type="text"]:focus {
 
 /* ================= CARDS - USER INFO VIEWPORTS ================= */
 .changelog-card, .credits-card { 
-  background: rgba(35, 35, 50, 0.25); 
+  background: rgba(14, 14, 20, 0.65); /* Deeper dark glass foundation */
+  backdrop-filter: blur(40px) saturate(140%);
+  -webkit-backdrop-filter: blur(40px) saturate(140%);
   padding: 25px; 
   border-radius: 22px; 
-  border: 1px solid rgba(100, 170, 255, 0.2); 
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Removed blue accent rim for clean silver */
   line-height: 1.6;
 }
 
 .changelog-card h2, .credits-card h2 {
   margin-top: 0;
   font-size: 20px;
-  color: #64d8ff;
+  color: #ffffff; /* Clean neutral white text header instead of blue */
 }
 
 .changelog-card .date {
   font-size: 13px;
-  color: #a0a0c0;
+  color: #888899; /* Neutral gray tone */
   margin-bottom: 15px;
 }
 
@@ -393,12 +460,12 @@ input[type="text"]:focus {
 
 .changelog-card li {
   margin-bottom: 8px;
-  color: #dddddd;
+  color: #aaaaaa;
 }
 
 .footer-note {
   font-size: 13px;
-  color: #888899;
+  color: #666677; /* Deeper gray to stay subtle at the base */
   text-align: center;
   margin-top: 15px;
   font-style: italic;
