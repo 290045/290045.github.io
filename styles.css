@@ -148,7 +148,7 @@ html, body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #07070a; /* Shifted to ultra-dark deep cosmic void background */
+  background-color: #07070a; /* Pure, deep cosmic void dark background */
   overflow: hidden;
 }
 
@@ -167,7 +167,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #07070a; /* Matches ultra-dark theme background */
+  background-color: #07070a;
   z-index: 0;
   pointer-events: none;
 }
@@ -178,26 +178,22 @@ body {
   display: block;
 }
 
-/* THE CONTAINER CARD: Perfectly centered on screen overlay */
+/* THE CONTAINER CARD: Expanded and completely flat transparent layout */
 .container {
-  width: 90%;
-  max-width: 480px; 
-  max-height: 85vh;
+  width: 100%;             /* Stretches to full available layout width */
+  max-width: 800px;        /* Increased size from 480px for a bigger feel */
+  max-height: 90vh;
   overflow-y: auto;
-  padding: 30px;
-  border-radius: 38px; /* Smooth super-ellipse rounded edges */
+  padding: 40px;           /* Increased internal spacing for better breathability */
   z-index: 10;
   position: relative;
   
-  /* Saturated Dark Liquid Glass Specifications (No Blue Tints) */
-  background: rgba(14, 14, 20, 0.65);
-  backdrop-filter: blur(35px) saturate(140%);
-  -webkit-backdrop-filter: blur(35px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.08); /* More subtle, clean border edge */
-  box-shadow: 
-    0 24px 64px rgba(0, 0, 0, 0.75),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.1), /* White/silver liquid edge reflection */
-    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+  /* Background completely removed for a flat borderless interface */
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Smooth hidden scroll properties */
@@ -211,21 +207,21 @@ h1 {
   font-size: 1.8em;
   font-weight: 700;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #ffffff 40%, #9e9ea7 100%); /* Clean chrome/silver gradient, no blue */
+  background: linear-gradient(135deg, #ffffff 40%, #9e9ea7 100%); /* Chrome/silver gradient, no blue */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 h2 {
-  color: #ffffff; /* Removed bright light blue, changed to clean white */
+  color: #ffffff; /* Shifted to clean white */
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 18px;
 }
 
 h3 {
-  color: #dddddd; /* Removed soft blue, changed to light gray */
+  color: #dddddd; /* Shifted to light gray */
   margin-top: 15px;
   margin-bottom: 8px;
   font-size: 15px;
@@ -273,7 +269,7 @@ button {
   position: relative;
   overflow: hidden;
   
-  background: rgba(255, 255, 255, 0.03); /* Darker glass foundation */
+  background: rgba(255, 255, 255, 0.03); /* Dark glass foundation */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.06); /* Crisp, thin dark-glass border */
@@ -300,8 +296,8 @@ button:hover::before {
 }
 
 button:hover {
-  background: rgba(255, 255, 255, 0.08); /* Replaced blue with light white/grey glass fill */
-  border-color: rgba(255, 255, 255, 0.25); /* Replaced blue border with a crisp silver rim */
+  background: rgba(255, 255, 255, 0.08); /* White/gray liquid glass fill on hover */
+  border-color: rgba(255, 255, 255, 0.25); /* Crisp silver rim glow */
   transform: scale(1.02) translateY(-1px);
   box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04);
 }
@@ -311,7 +307,7 @@ button:active {
 }
 
 .back-btn {
-  background: rgba(239, 68, 68, 0.08); /* Slightly dimmed background tint */
+  background: rgba(239, 68, 68, 0.08);
   border-color: rgba(239, 68, 68, 0.2);
   color: #ff8e8e;
   margin-bottom: 20px;
@@ -335,7 +331,7 @@ input[type="text"]::placeholder {
 }
 
 input[type="text"]:focus {
-  border-color: rgba(255, 255, 255, 0.25); /* Replaced blue focus with silver edge highlight */
+  border-color: rgba(255, 255, 255, 0.25); /* Silver edge focus accent */
   background: rgba(255, 255, 255, 0.02);
 }
 
@@ -345,7 +341,7 @@ input[type="text"]:focus {
   border-color: rgba(255, 255, 255, 0.12);
 }
 .btn-primary:hover {
-  background: rgba(255, 255, 255, 0.12); /* White/silver illumination */
+  background: rgba(255, 255, 255, 0.12); /* Silver illumination */
   border-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -385,12 +381,12 @@ input[type="text"]:focus {
   padding: 20px;
   border-radius: 20px;
   margin-top: 15px;
-  border: 1px solid rgba(255, 69, 58, 0.12); /* More subtle emergency line */
+  border: 1px solid rgba(255, 69, 58, 0.12);
 }
 
 .panic-section h3 { 
   margin-top: 0; 
-  color: #ff8181; /* Dimmed, premium warning red text */
+  color: #ff8181; 
 }
 
 .panic-section p {
@@ -414,7 +410,7 @@ input[type="text"]:focus {
   background: rgba(0, 0, 0, 0.35);
   padding: 12px 16px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Clean dark liquid container framework */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #ffffff;
   font-weight: 600;
   font-size: 14px;
@@ -422,7 +418,7 @@ input[type="text"]:focus {
 
 .panic-key-display.listening { 
   animation: pulse 0.7s infinite alternate; 
-  border-color: rgba(255, 69, 58, 0.35); /* Glows muted red when active */
+  border-color: rgba(255, 69, 58, 0.35);
 }
 
 @keyframes pulse { 
@@ -437,19 +433,19 @@ input[type="text"]:focus {
   -webkit-backdrop-filter: blur(40px) saturate(140%);
   padding: 25px; 
   border-radius: 22px; 
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Removed blue accent rim for clean silver */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   line-height: 1.6;
 }
 
 .changelog-card h2, .credits-card h2 {
   margin-top: 0;
   font-size: 20px;
-  color: #ffffff; /* Clean neutral white text header instead of blue */
+  color: #ffffff;
 }
 
 .changelog-card .date {
   font-size: 13px;
-  color: #888899; /* Neutral gray tone */
+  color: #888899;
   margin-bottom: 15px;
 }
 
@@ -465,8 +461,102 @@ input[type="text"]:focus {
 
 .footer-note {
   font-size: 13px;
-  color: #666677; /* Deeper gray to stay subtle at the base */
+  color: #666677;
   text-align: center;
   margin-top: 15px;
   font-style: italic;
+}
+
+/* ================= MAINTENANCE OVERLAY LAYER ================= */
+#maintenance-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #07070a; /* Ultra-dark backdrop covering full page layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999; /* Confirms layout sits over the body layers */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Custom lock card utilizing the strict dark liquid glass specifications */
+.maintenance-box {
+  width: 100%;
+  max-width: 480px; 
+  padding: 40px 30px;
+  border-radius: 38px; 
+  text-align: center;
+  position: relative;
+  
+  background: rgba(14, 14, 20, 0.65); 
+  backdrop-filter: blur(35px) saturate(140%);
+  -webkit-backdrop-filter: blur(35px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  box-shadow: 
+    0 24px 64px rgba(0, 0, 0, 0.75),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.1), 
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.maintenance-box h1 {
+  background: linear-gradient(135deg, #ffffff 40%, #9e9ea7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.maintenance-box p {
+  color: #aaaaaa;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* Recessed Passcode input field */
+.maintenance-box input[type="password"] {
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 15px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.35); 
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  outline: none;
+  margin-bottom: 15px;
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+.maintenance-box input[type="password"]::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.maintenance-box input[type="password"]:focus {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Overriding lock screen button action animations to reflect neutral light grey/white */
+.maintenance-box button {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.maintenance-box button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04);
+}
+
+/* Warm amber warning error validation indicator */
+#error-msg {
+  color: #ffb347; 
+  font-size: 14px;
+  margin-top: 15px;
+
 }
