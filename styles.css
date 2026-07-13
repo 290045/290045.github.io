@@ -560,3 +560,25 @@ input[type="text"]:focus {
   margin-top: 15px;
 
 }
+
+/* Update button size and centering */
+button {
+  padding: 12px 24px;       /* Trimmed height slightly, added clean horizontal width */
+  font-size: 14px;          /* Perfectly balanced text scale */
+  width: auto;              /* Prevents button from stretching to full screen width */
+  min-width: 140px;         /* Ensures buttons keep a consistent, professional minimum size */
+  display: inline-block;    /* Allows multiple buttons to sit side-by-side naturally */
+  margin: 8px auto;         /* Balanced vertical spacing */
+}
+
+/* Specific layout adjustments for the buttons container */
+.menu-layout, .maintenance-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* Keeps the narrower buttons perfectly centered in your panels */
+}
+
+.grid-layout button {
+  width: 100%;              /* Keeps grid buttons filling their small designated grid cells properly */
+}
+
