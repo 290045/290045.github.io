@@ -14,10 +14,12 @@
 <div id="maintenance-overlay" class="hidden">
   <div class="maintenance-box">
     <h1>Site shutdown</h1>
-    <p>Site is broken! Fixing in progress...</p>
+    <p>Something broke, and things will be fixed soon.</p>
+    
     <input type="password" id="dev-password" placeholder="Enter Developer Password">
-    <button onclick="checkPassword()">Access Site</button>
-    <p id="error-msg" class="hidden">Incorrect password.</p>
+    <button class="btn-primary" onclick="checkPassword()">Access Site</button>
+    
+    <p id="error-msg" class="hidden">Incorrect developer password.</p>
   </div>
 </div>
 
