@@ -9,6 +9,17 @@
   <script src="main.js" defer></script>
 </head>
 <body>
+  
+<!-- Maintenance Overlay -->
+<div id="maintenance-overlay" class="hidden">
+  <div class="maintenance-box">
+    <h1>Site shutdown</h1>
+    <p>Site is broken! Fixing in progress...</p>
+    <input type="password" id="dev-password" placeholder="Enter Developer Password">
+    <button onclick="checkPassword()">Access Site</button>
+    <p id="error-msg" class="hidden">Incorrect password.</p>
+  </div>
+</div>
 
   <!-- Geometric Node Constellation Canvas Container Layer -->
   <div class="liquid-engine-wrapper">
@@ -150,10 +161,11 @@
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
       <h1>Changelog</h1>
       <div class="changelog-card">
-        <h2>Version 1.2.1</h2>
-        <p class="date">Released: 2026-07-09</p>
+        <h2>Version 1.2.2</h2>
+        <p class="date">Released: 2026-07-13</p>
         <ul>
-          <li>Fixed links being corrupted</li>
+          <li>Fixed links being corrupted!</li>
+          <li>Maintenance Screen for when site goes down</li>
           <li>Reactive particle background!</li>
           <li>Added liquid glass!</li>
           <li>Much more coming soon!</li>
