@@ -8,9 +8,9 @@ Nothing below is currently implemented.
 	          HIGH PRIORITY
 ===========================================
 
-Add a shutdown popup when the site is down
-	- Helps when something is under development
-	- Could be a password pop-up so that devs can get in, but people can't
+📣 Add a shutdown popup when the site is down
+- Helps when something is under development
+- Could be a password pop-up so that devs can get in, but people can't
 
 👥 Community
 - Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
