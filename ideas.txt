@@ -1,11 +1,5 @@
 ===========================================
-         🚧 FUTURE FEATURES 🚧
-===========================================
-These are ideas for future updates.
-Nothing below is currently implemented.
-
-===========================================
-	          HIGH PRIORITY
+	         ##    IDEAS   ##
 ===========================================
 
 👥 Community
@@ -25,7 +19,7 @@ Nothing below is currently implemented.
   - Pin favorites to the top
   - Yellow ★ icon
 
-🎨 Themes
+🎨 Themes (High Priority)
 - Preset themes
 - Custom themes
 - Custom fonts
@@ -38,13 +32,9 @@ Nothing below is currently implemented.
 - Cleaner, modern cards
 - Compact / Minimalist mode
 
-===========================================
-            SECURITY FEATURES
-===========================================
-
 🛡️ Privacy
 - Referrer header stripping
-Users can choose how links open:
+Users can choose how links open in settings:
 - Embedded in the site
 - about:blank
 - New browser tab
@@ -57,14 +47,9 @@ Users can choose how links open:
 - Inspect Element blocker
   - Hide game/proxy links where possible
 
-===========================================
-	        CONTENT FEATURES
-===========================================
-
 🎮 Games
 - More games
 - Hacked games
-- Cheat codes
 - JSON/Save File Decryptor
 - Blob URL Game Launcher
 	- Instead of launching a game inside a standard <iframe> or redirection link, the site converts the game's source code into a     local blob: URL string. This makes it incredibly difficult for standard web filters to block the active window, as the URL reads as an internal browser function
@@ -73,38 +58,21 @@ Users can choose how links open:
 - More proxy links
 
 🛠️ Tools
-- Humanizer
-- Unblocked ChatGPT
 -Embedded emulator hub
 	- A section utilizing client-side WebAssembly emulators allowing users to drag and drop their own retro game files directly into  	  the browser to play offline
 
 📊 Site Stats
 - Visitor counter
 
-===========================================
-	         AUDIO FEATURES
-===========================================
-
-\\ 2nd to last feature ima try and add
-
-
 🎵 Audio Visualizer (MAYBE!!!)
 - Spotify support
 - Apple Music support
-- Maybe SoundCloud supports
 - Album artwork
 - Play / Pause
 - Previous / Next
 - Volume slider
 - Progress bar
 - Song timer
-
-===========================================
-               BADGES & XP
-===========================================
-
-\\ Last feature ima try and add
-
 
 🏆 XP System
 - Gain XP by:
@@ -177,11 +145,3 @@ Secret Badges
 
 - (Ideas)
 
-===========================================
-               FUTURE IDEAS
-===========================================
-
-- Better animations
-- More settings
-- More tools
-- More achievements
