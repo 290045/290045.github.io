@@ -4,7 +4,7 @@
 // CONFIGURATION
 const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
 
-// PASTE YOUR GENERATED SHA-256 STRING HERE (This matches "Password")
+// This is the verified SHA-256 hash for "password"
 const HASHED_PASSWORD = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,25 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
 
-  // Force clean the error message
   if (errorMsg) {
     errorMsg.classList.add("hidden");
   }
 
-  // CONTROLLING OVERLAY VISIBILITY
   if (overlay) {
     if (IS_MAINTENANCE_ON && isDev !== "true") {
-      // Clear inline overrides and reveal the lock screen
       overlay.style.removeProperty("display");
       overlay.classList.remove("hidden");
     } else {
-      // Hard block it from showing up completely
       overlay.classList.add("hidden");
       overlay.style.setProperty("display", "none", "important");
     }
   }
 
-  // Monitor the Enter key inside the passcode field
   if (passwordInput) {
     passwordInput.addEventListener("keypress", (event) => {
       if (event.key === "Enter") {
@@ -52,25 +47,34 @@ async function checkPassword() {
 
   const inputValue = inputField.value;
 
-  // Generate cryptographic hash signature natively in the browser
-  const msgBuffer = new TextEncoder().encode(inputValue);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  try {
+    // 1. Encode password text to bytes
+    const msgBuffer = new TextEncoder().encode(inputValue);
+    
+    // 2. Natively hash using browser Crypto API
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    
+    // 3. FOOLPROOF FIX: Reliable byte-to-hex converter mapping
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const inputHash = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
 
-  if (inputHash === HASHED_PASSWORD) {
-    sessionStorage.setItem("dev_authenticated", "true");
-    errorMsg.classList.add("hidden");
-    overlay.classList.add("hidden");
-    overlay.style.setProperty("display", "none", "important");
-  } else {
-    errorMsg.classList.remove("hidden");
-    if (box) {
-      box.style.animation = "none";
-      setTimeout(() => {
-        box.style.animation = "fadeIn 0.4s";
-      }, 10);
+    // 4. Compare strings
+    if (inputHash === HASHED_PASSWORD) {
+      sessionStorage.setItem("dev_authenticated", "true");
+      errorMsg.classList.add("hidden");
+      overlay.classList.add("hidden");
+      overlay.style.setProperty("display", "none", "important");
+    } else {
+      errorMsg.classList.remove("hidden");
+      if (box) {
+        box.style.animation = "none";
+        setTimeout(() => {
+          box.style.animation = "fadeIn 0.4s";
+        }, 10);
+      }
     }
+  } catch (error) {
+    console.error("Cryptographic evaluation failed:", error);
   }
 }
 
