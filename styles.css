@@ -364,12 +364,16 @@ input[type="text"]:focus {
   width: 100vw !important;
   height: 100vh !important;
   background-color: #07070a !important; 
-  display: flex !important; /* Uses flex layout to center the content box */
-  justify-content: center !important;
-  align-items: center !important;
   z-index: 9999999 !important; /* Set to maximum height layer so nothing can bleed over it */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   padding: 20px;
+}
+
+/* Apply flex layout ONLY when the overlay is active (not hidden) */
+#maintenance-overlay:not(.hidden) {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 /* Custom lock card utilizing the strict dark liquid glass specifications */
