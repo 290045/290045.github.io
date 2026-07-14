@@ -26,19 +26,17 @@ Listed as
 - Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
 - Client-side custom game/proxy uploader
 
-🛡️ Privacy
-- Users can choose how links open: (Setting)
-- Embedded in the site
-- about:blank
-- New browser tab
-
-🔒 Protection
+🛡️ Privacy/Protection
 - History flood (Setting)
   - Flood history with random pages
 - Auto-timeout lock
   - Close the tab after inactivity
 - Inspect Element blocker / Referrer header stripping
   - Hide game/proxy links where possible
+- Users can choose how links open: (Setting)
+- Embedded in the site
+- about:blank
+- New browser tab
 
 🎮 Games
 - Allow users to download the game to play in a file
