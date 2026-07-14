@@ -159,6 +159,46 @@
         </div>
       </div>
     </div>
+    
+      <!-- 🎨 Custom Themes & Aesthetics Section -->
+      <div class="theme-section" style="margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 25px;">
+        <h3>🎨 Theme & Customization</h3>
+        <p>Modify your workspace design, select presets, customize fonts, or apply distinct target cursors.</p>
+        
+        <div class="menu-layout" style="gap: 12px; margin-bottom: 20px;">
+          <!-- 1. Preset Selector -->
+          <label style="color: var(--text-muted); font-size: 14px;">Select Design Preset:</label>
+          <select id="preset-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
+            <option value="dark">Dark Liquid Glass</option>
+            <option value="light">Light Minimalist</option>
+            <option value="cyberpunk">Cyberpunk Neon</option>
+            <option value="custom">Custom Theme</option>
+          </select>
+
+          <!-- Dynamic Color Mixers (Hidden by default until 'Custom Theme' is chosen) -->
+          <div id="custom-theme-controls" class="hidden" style="display: flex; gap: 15px; margin: 10px 0;">
+            <label style="font-size: 14px;">BG: <input type="color" id="custom-bg" value="#07070a" style="border: none; background: transparent; cursor: pointer;"></label>
+            <label style="font-size: 14px;">Text: <input type="color" id="custom-text" value="#ffffff" style="border: none; background: transparent; cursor: pointer;"></label>
+          </div>
+
+          <!-- 2. Font Selector -->
+          <label style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Typography Interface:</label>
+          <select id="font-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
+            <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Default System Sans</option>
+            <option value="'Courier New', Courier, monospace">Retro Monospace</option>
+            <option value="'Georgia', serif">Classic Academic Serif</option>
+          </select>
+
+          <!-- 3. Mouse Cursor Selector -->
+          <label style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Target Mouse Pointer:</label>
+          <select id="cursor-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
+            <option value="default">Standard Pointer</option>
+            <option value="pointer">Action Link Hand</option>
+            <option value="crosshair">Precision Crosshair</option>
+            <option value="help">Help Indicator</option>
+          </select>
+        </div>
+      </div>
 
     <!-- ================= CHANGELOG TAB ================= -->
     <div id="changelog" class="tab-content">
@@ -168,6 +208,7 @@
         <h2>Version 1.2.6</h2>
         <p class="date">Released: 2026-07-14</p>
         <ul>
+          <li>Finally Themes are here!!!</li>
           <li>Lots of bug fixes!</li>
           <li>Maintenance Screen for when site goes down</li>
           <li>Much more coming soon!</li>
