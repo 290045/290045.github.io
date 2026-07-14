@@ -48,6 +48,7 @@ Listed as
   - Hide game/proxy links where possible
 
 🎮 Games
+- Allow users to download the game to play in a file
 - Hacked/Modded games
 - JSON/Save File Decryptor
 - Blob URL Game Launcher
