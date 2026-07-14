@@ -4,7 +4,7 @@
 // CONFIGURATION
 const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
 
-// PASTE YOUR GENERATED SHA-256 STRING HERE (This matches "DevTest")
+// PASTE YOUR GENERATED SHA-256 STRING HERE (This matches "Password")
 const HASHED_PASSWORD = "c672b144bc343272900bfa51c8db1a196e9da89f2a009d6f83ec5cbf5d70b793";
 
 document.addEventListener("DOMContentLoaded", () => {
