@@ -126,9 +126,9 @@
         <button onclick="handleLinkClick('https://www.britannica.com/chatbot')">Britanica AI</button>
         <button onclick="handleLinkClick('https://highoctavelearning.neocities.org/')">VoidGPT</button>
       </div>
-    </div>
-
-    <!-- ================= SETTINGS TAB ================= -->
+    </div>  
+    
+<!-- ================= SETTINGS TAB ================= -->
     <div id="settings" class="tab-content">
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
       <h1>Settings</h1>
@@ -158,15 +158,13 @@
           <button onclick="clearPanicKey()" class="btn-secondary">Clear</button>
         </div>
       </div>
-    </div>
-    
-      <!-- 🎨 Custom Themes & Aesthetics Section -->
+
+      <!-- 🎨 Theme & Customization Section INSIDE the settings block -->
       <div class="theme-section" style="margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 25px;">
         <h3>🎨 Theme & Customization</h3>
         <p>Modify your workspace design, select presets, customize fonts, or apply distinct target cursors.</p>
         
         <div class="menu-layout" style="gap: 12px; margin-bottom: 20px;">
-          <!-- 1. Preset Selector -->
           <label style="color: var(--text-muted); font-size: 14px;">Select Design Preset:</label>
           <select id="preset-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
             <option value="dark">Dark Liquid Glass</option>
@@ -175,13 +173,11 @@
             <option value="custom">Custom Theme</option>
           </select>
 
-          <!-- Dynamic Color Mixers (Hidden by default until 'Custom Theme' is chosen) -->
           <div id="custom-theme-controls" class="hidden" style="display: flex; gap: 15px; margin: 10px 0;">
             <label style="font-size: 14px;">BG: <input type="color" id="custom-bg" value="#07070a" style="border: none; background: transparent; cursor: pointer;"></label>
             <label style="font-size: 14px;">Text: <input type="color" id="custom-text" value="#ffffff" style="border: none; background: transparent; cursor: pointer;"></label>
           </div>
 
-          <!-- 2. Font Selector -->
           <label style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Typography Interface:</label>
           <select id="font-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
             <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Default System Sans</option>
@@ -189,7 +185,6 @@
             <option value="'Georgia', serif">Classic Academic Serif</option>
           </select>
 
-          <!-- 3. Mouse Cursor Selector -->
           <label style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Target Mouse Pointer:</label>
           <select id="cursor-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
             <option value="default">Standard Pointer</option>
@@ -199,6 +194,7 @@
           </select>
         </div>
       </div>
+    </div>
 
     <!-- ================= CHANGELOG TAB ================= -->
     <div id="changelog" class="tab-content">
