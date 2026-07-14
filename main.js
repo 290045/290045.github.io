@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // CONFIGURATION
-const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
+const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
 
 // This is the verified SHA-256 hash for "password"
 const HASHED_PASSWORD = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
