@@ -11,13 +11,16 @@
 <body>
   
 <!-- Maintenance Overlay -->
-<div id="maintenance-overlay">
+<!-- FIX 1: Added class="hidden" to hide it safely by default -->
+<div id="maintenance-overlay" class="hidden">
   <div class="maintenance-box">
     <h1>Site shutdown</h1>
     <p>Something broke, and things will be fixed soon.</p>
     
     <input type="password" id="dev-password" placeholder="Enter Developer Password">
-    <button onclick="checkPassword(event)">Access Site</button>
+    
+    <!-- FIX 2: Removed "(event)" to match your clean JavaScript function -->
+    <button onclick="checkPassword()">Access Site</button>
     
     <p id="error-msg" class="hidden">Incorrect developer password.</p>
   </div>
