@@ -1,6 +1,83 @@
 // Main JavaScript for 290045's Hub
 // Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
 
+// CONFIGURATION
+const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
+
+// This is the verified SHA-256 hash for "password"
+const HASHED_PASSWORD = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("maintenance-overlay");
+  const isDev = sessionStorage.getItem("dev_authenticated");
+  const passwordInput = document.getElementById("dev-password");
+  const errorMsg = document.getElementById("error-msg");
+
+  if (errorMsg) {
+    errorMsg.classList.add("hidden");
+  }
+
+  if (overlay) {
+    if (IS_MAINTENANCE_ON && isDev !== "true") {
+      overlay.style.removeProperty("display");
+      overlay.classList.remove("hidden");
+    } else {
+      overlay.classList.add("hidden");
+      overlay.style.setProperty("display", "none", "important");
+    }
+  }
+
+  if (passwordInput) {
+    passwordInput.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        checkPassword();
+      }
+    });
+  }
+});
+
+// Securely hash the text passcode input and evaluate
+async function checkPassword() {
+  const inputField = document.getElementById("dev-password");
+  const errorMsg = document.getElementById("error-msg");
+  const overlay = document.getElementById("maintenance-overlay");
+  const box = document.querySelector(".maintenance-box");
+
+  if (!inputField || !errorMsg || !overlay) return;
+
+  const inputValue = inputField.value;
+
+  try {
+    // 1. Encode password text to bytes
+    const msgBuffer = new TextEncoder().encode(inputValue);
+    
+    // 2. Natively hash using browser Crypto API
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    
+    // 3. FOOLPROOF FIX: Reliable byte-to-hex converter mapping
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const inputHash = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+
+    // 4. Compare strings
+    if (inputHash === HASHED_PASSWORD) {
+      sessionStorage.setItem("dev_authenticated", "true");
+      errorMsg.classList.add("hidden");
+      overlay.classList.add("hidden");
+      overlay.style.setProperty("display", "none", "important");
+    } else {
+      errorMsg.classList.remove("hidden");
+      if (box) {
+        box.style.animation = "none";
+        setTimeout(() => {
+          box.style.animation = "fadeIn 0.4s";
+        }, 10);
+      }
+    }
+  } catch (error) {
+    console.error("Cryptographic evaluation failed:", error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Grab Theme Element Targets
   const presetSelect = document.getElementById("preset-selector");
@@ -91,83 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-// CONFIGURATION
-const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
-
-// This is the verified SHA-256 hash for "password"
-const HASHED_PASSWORD = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
-
-document.addEventListener("DOMContentLoaded", () => {
-  const overlay = document.getElementById("maintenance-overlay");
-  const isDev = sessionStorage.getItem("dev_authenticated");
-  const passwordInput = document.getElementById("dev-password");
-  const errorMsg = document.getElementById("error-msg");
-
-  if (errorMsg) {
-    errorMsg.classList.add("hidden");
-  }
-
-  if (overlay) {
-    if (IS_MAINTENANCE_ON && isDev !== "true") {
-      overlay.style.removeProperty("display");
-      overlay.classList.remove("hidden");
-    } else {
-      overlay.classList.add("hidden");
-      overlay.style.setProperty("display", "none", "important");
-    }
-  }
-
-  if (passwordInput) {
-    passwordInput.addEventListener("keypress", (event) => {
-      if (event.key === "Enter") {
-        checkPassword();
-      }
-    });
-  }
-});
-
-// Securely hash the text passcode input and evaluate
-async function checkPassword() {
-  const inputField = document.getElementById("dev-password");
-  const errorMsg = document.getElementById("error-msg");
-  const overlay = document.getElementById("maintenance-overlay");
-  const box = document.querySelector(".maintenance-box");
-
-  if (!inputField || !errorMsg || !overlay) return;
-
-  const inputValue = inputField.value;
-
-  try {
-    // 1. Encode password text to bytes
-    const msgBuffer = new TextEncoder().encode(inputValue);
-    
-    // 2. Natively hash using browser Crypto API
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    
-    // 3. FOOLPROOF FIX: Reliable byte-to-hex converter mapping
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const inputHash = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
-
-    // 4. Compare strings
-    if (inputHash === HASHED_PASSWORD) {
-      sessionStorage.setItem("dev_authenticated", "true");
-      errorMsg.classList.add("hidden");
-      overlay.classList.add("hidden");
-      overlay.style.setProperty("display", "none", "important");
-    } else {
-      errorMsg.classList.remove("hidden");
-      if (box) {
-        box.style.animation = "none";
-        setTimeout(() => {
-          box.style.animation = "fadeIn 0.4s";
-        }, 10);
-      }
-    }
-  } catch (error) {
-    console.error("Cryptographic evaluation failed:", error);
-  }
-}
 
 // ================= CLOAKING =================
 (function() {
