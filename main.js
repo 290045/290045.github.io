@@ -1,6 +1,97 @@
 // Main JavaScript for 290045's Hub
 // Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
 
+document.addEventListener("DOMContentLoaded", () => {
+  // Grab Theme Element Targets
+  const presetSelect = document.getElementById("preset-selector");
+  const customControls = document.getElementById("custom-theme-controls");
+  const customBgInput = document.getElementById("custom-bg");
+  const customTextInput = document.getElementById("custom-text");
+  const fontSelect = document.getElementById("font-selector");
+  const cursorSelect = document.getElementById("cursor-selector");
+
+  // Read saved client specifications out of storage
+  const savedPreset = localStorage.getItem("theme-preset") || "dark";
+  const savedFont = localStorage.getItem("theme-font") || "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+  const savedCursor = localStorage.getItem("theme-cursor") || "default";
+
+  // Assign interface positions 
+  if (presetSelect) presetSelect.value = savedPreset;
+  if (fontSelect) fontSelect.value = savedFont;
+  if (cursorSelect) cursorSelect.value = savedCursor;
+
+  // Process system visibility mappings instantly on boot
+  applyThemePreset(savedPreset);
+  document.documentElement.style.setProperty("--font-family", savedFont);
+  document.documentElement.style.setProperty("--cursor-type", savedCursor);
+
+  // Monitor Theme Changes
+  if (presetSelect) {
+    presetSelect.addEventListener("change", (e) => {
+      const selection = e.target.value;
+      localStorage.setItem("theme-preset", selection);
+      applyThemePreset(selection);
+    });
+  }
+
+  function applyThemePreset(preset) {
+    if (!customControls) return;
+    
+    if (preset === "custom") {
+      customControls.style.setProperty("display", "flex", "important");
+      customControls.classList.remove("hidden");
+      
+      const customBg = localStorage.getItem("custom-bg-color") || "#07070a";
+      const customText = localStorage.getItem("custom-text-color") || "#ffffff";
+      
+      if (customBgInput) customBgInput.value = customBg;
+      if (customTextInput) customTextInput.value = customText;
+      
+      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.style.setProperty("--bg-color", customBg);
+      document.documentElement.style.setProperty("--text-main", customText);
+    } else {
+      customControls.style.setProperty("display", "none", "important");
+      customControls.classList.add("hidden");
+      document.documentElement.style.removeProperty("--bg-color");
+      document.documentElement.style.removeProperty("--text-main");
+      document.documentElement.setAttribute("data-theme", preset);
+    }
+  }
+
+  // Monitor Custom Hex Inputs live tracking
+  [customBgInput, customTextInput].forEach(input => {
+    if (input) {
+      input.addEventListener("input", () => {
+        if (presetSelect && presetSelect.value === "custom") {
+          document.documentElement.style.setProperty("--bg-color", customBgInput.value);
+          document.documentElement.style.setProperty("--text-main", customTextInput.value);
+          localStorage.setItem("custom-bg-color", customBgInput.value);
+          localStorage.setItem("custom-text-color", customTextInput.value);
+        }
+      });
+    }
+  });
+
+  // Typography Engine Mapping
+  if (fontSelect) {
+    fontSelect.addEventListener("change", (e) => {
+      const selectedFont = e.target.value;
+      document.documentElement.style.setProperty("--font-family", selectedFont);
+      localStorage.setItem("theme-font", selectedFont);
+    });
+  }
+
+  // Custom System Cursor Engine Mapping
+  if (cursorSelect) {
+    cursorSelect.addEventListener("change", (e) => {
+      const selectedCursor = e.target.value;
+      document.documentElement.style.setProperty("--cursor-type", selectedCursor);
+      localStorage.setItem("theme-cursor", selectedCursor);
+    });
+  }
+});
+
 // CONFIGURATION
 const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
 
