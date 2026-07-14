@@ -22,16 +22,21 @@
   --text-muted: #ff007f;
 }
 
-/* Connect Variables directly to core system frameworks */
-body, html {
+/* Force the body and ALL layout structures to adopt the dynamic background variable */
+body, html, .tab-content, #homepage, #settings {
   background-color: var(--bg-color) !important;
   color: var(--text-main) !important;
   font-family: var(--font-family) !important;
   cursor: var(--cursor-type) !important;
-  transition: background-color 0.25s ease, color 0.25s ease; /* Fluid color shifting */
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Ensure buttons and fields respect custom cursors */
+/* Make your text layers dynamic too */
+h1, h2, h3, p, label {
+  color: var(--text-main);
+}
+
+/* Ensure buttons and fields respect custom cursors globally */
 button, input, select, a {
   cursor: var(--cursor-type) !important;
 }
