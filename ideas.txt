@@ -6,15 +6,8 @@ Listed as
 ===========================================
 
 🖼️ UI Improvements
-- Game thumbnails
-- Proxy thumbnails
-- Compact / Minimalist mode (Setting)
-
-🎨 Themes (Setting)
-- Preset themes
-- Custom themes
-- Custom fonts
-- Mouse cursor themes
+- Game thumbnails/icons
+- Proxy thumbnails/icons
 
 🔊 Sounds 
 - Button click sounds
