@@ -4,20 +4,8 @@
 // CONFIGURATION
 const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
 
-// PASTE YOUR GENERATED SHA-256 STRING HERE (Example below matches "DevTest")
+// PASTE YOUR GENERATED SHA-256 STRING HERE (This matches "DevTest")
 const HASHED_PASSWORD = "c672b144bc343272900bfa51c8db1a196e9da89f2a009d6f83ec5cbf5d70b793";
-
-// Failsafe: Run immediately to protect from page flashing
-(function () {
-  if (!IS_MAINTENANCE_ON) {
-    const isDev = sessionStorage.getItem("dev_authenticated");
-    if (isDev !== "true") {
-      const style = document.createElement("style");
-      style.innerHTML = "#maintenance-overlay { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }";
-      document.head.appendChild(style);
-    }
-  }
-})();
 
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("maintenance-overlay");
@@ -25,25 +13,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
 
-  if (errorMsg) errorMsg.classList.add("hidden");
+  // Force clean the error message
+  if (errorMsg) {
+    errorMsg.classList.add("hidden");
+  }
 
+  // CONTROLLING OVERLAY VISIBILITY
   if (overlay) {
     if (IS_MAINTENANCE_ON && isDev !== "true") {
+      // Clear inline overrides and reveal the lock screen
+      overlay.style.removeProperty("display");
       overlay.classList.remove("hidden");
     } else {
+      // Hard block it from showing up completely
       overlay.classList.add("hidden");
       overlay.style.setProperty("display", "none", "important");
     }
   }
 
+  // Monitor the Enter key inside the passcode field
   if (passwordInput) {
     passwordInput.addEventListener("keypress", (event) => {
-      if (event.key === "Enter") checkPassword();
+      if (event.key === "Enter") {
+        checkPassword();
+      }
     });
   }
 });
 
-// Securely hash input and compare
+// Securely hash the text passcode input and evaluate
 async function checkPassword() {
   const inputField = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
@@ -54,13 +52,12 @@ async function checkPassword() {
 
   const inputValue = inputField.value;
 
-  // Convert input text into a secure SHA-256 hash using native browser Crypto API
+  // Generate cryptographic hash signature natively in the browser
   const msgBuffer = new TextEncoder().encode(inputValue);
   const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-  // Compare the hashes, NOT cleartext
   if (inputHash === HASHED_PASSWORD) {
     sessionStorage.setItem("dev_authenticated", "true");
     errorMsg.classList.add("hidden");
@@ -70,7 +67,9 @@ async function checkPassword() {
     errorMsg.classList.remove("hidden");
     if (box) {
       box.style.animation = "none";
-      setTimeout(() => { box.style.animation = "fadeIn 0.4s"; }, 10);
+      setTimeout(() => {
+        box.style.animation = "fadeIn 0.4s";
+      }, 10);
     }
   }
 }
