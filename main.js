@@ -2,8 +2,22 @@
 // Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
 
 // CONFIGURATION
-const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
-const DEV_PASSWORD = "DevTest"; // Set your custom password here
+const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
+
+// PASTE YOUR GENERATED SHA-256 STRING HERE (Example below matches "DevTest")
+const HASHED_PASSWORD = "c672b144bc343272900bfa51c8db1a196e9da89f2a009d6f83ec5cbf5d70b793";
+
+// Failsafe: Run immediately to protect from page flashing
+(function () {
+  if (!IS_MAINTENANCE_ON) {
+    const isDev = sessionStorage.getItem("dev_authenticated");
+    if (isDev !== "true") {
+      const style = document.createElement("style");
+      style.innerHTML = "#maintenance-overlay { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }";
+      document.head.appendChild(style);
+    }
+  }
+})();
 
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("maintenance-overlay");
@@ -11,27 +25,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
 
-  // Keep error message hidden on initial page load
-  if (errorMsg) {
-    errorMsg.classList.add("hidden");
+  if (errorMsg) errorMsg.classList.add("hidden");
+
+  if (overlay) {
+    if (IS_MAINTENANCE_ON && isDev !== "true") {
+      overlay.classList.remove("hidden");
+    } else {
+      overlay.classList.add("hidden");
+      overlay.style.setProperty("display", "none", "important");
+    }
   }
 
-  // Show blocker if maintenance is active and user is not verified
-  if (IS_MAINTENANCE_ON && isDev !== "true") {
-    if (overlay) overlay.classList.remove("hidden");
-  }
-
-  // Allow pressing "Enter" key inside the input box to submit
   if (passwordInput) {
     passwordInput.addEventListener("keypress", (event) => {
-      if (event.key === "Enter") {
-        checkPassword();
-      }
+      if (event.key === "Enter") checkPassword();
     });
   }
 });
 
-function checkPassword() {
+// Securely hash input and compare
+async function checkPassword() {
   const inputField = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
   const overlay = document.getElementById("maintenance-overlay");
@@ -41,22 +54,27 @@ function checkPassword() {
 
   const inputValue = inputField.value;
 
-  if (inputValue === DEV_PASSWORD) {
+  // Convert input text into a secure SHA-256 hash using native browser Crypto API
+  const msgBuffer = new TextEncoder().encode(inputValue);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+  // Compare the hashes, NOT cleartext
+  if (inputHash === HASHED_PASSWORD) {
     sessionStorage.setItem("dev_authenticated", "true");
-    errorMsg.classList.add("hidden"); // Clear error if it was showing
+    errorMsg.classList.add("hidden");
     overlay.classList.add("hidden");
+    overlay.style.setProperty("display", "none", "important");
   } else {
-    errorMsg.classList.remove("hidden"); // Show error only on wrong attempt
-    
-    // Simple shake effect on error 
+    errorMsg.classList.remove("hidden");
     if (box) {
       box.style.animation = "none";
-      setTimeout(() => {
-        box.style.animation = "fadeIn 0.4s";
-      }, 10);
+      setTimeout(() => { box.style.animation = "fadeIn 0.4s"; }, 10);
     }
   }
 }
+
 // ================= CLOAKING =================
 (function() {
   const STORAGE_KEYS = {
