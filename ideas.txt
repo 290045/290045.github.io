@@ -31,8 +31,6 @@ Listed as
   - Flood history with random pages
 - Auto-timeout lock
   - Close the tab after inactivity
-- Inspect Element blocker / Referrer header stripping
-  - Hide game/proxy links where possible
 - Users can choose how links open: (Setting)
 - Embedded in the site
 - about:blank
