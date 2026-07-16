@@ -5,15 +5,6 @@ Listed as
 	         ##    IDEAS   ##
 ===========================================
 
-🖼️ UI Improvements
-- Game thumbnails/icons
-- Proxy thumbnails/icons
-
-🔊 Sounds 
-- Button click sounds
-- Background music (Setting)
-- Preset music selection (Setting)
-
 🌐 Navigation
 - Search bar
   - Search games
@@ -23,6 +14,11 @@ Listed as
   - Yellow star icon
 - Random button
 	- Opens a random game, proxy, or tool
+
+🔊 Sounds 
+- Button click sounds
+- Background music (Setting)
+- Preset music selection (Setting)
 
 👥 Community (Game / Proxy pages)
 - Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
@@ -38,12 +34,14 @@ Listed as
 - about:blank
 - New browser tab
 
+🖼️ UI Improvements
+- Game thumbnails/icons
+- Proxy thumbnails/icons
+
 🎮 Games
 - Allow users to download the game to play in a file
 - Hacked/Modded games
 - JSON/Save File Decryptor
-- Blob URL Game Launcher
-	- Instead of launching a game inside a standard <iframe> or redirection link, the site converts the game's source code into a     local blob: URL string. This makes it incredibly difficult for standard web filters to block the active window, as the URL reads as an internal browser function
 
 📊 Site Stats (Footer on homepage)
 - Visitor counter
