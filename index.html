@@ -157,16 +157,20 @@
         <button onclick="setUserCloak('reset')" class="btn-danger">Reset to Default</button>
       </div>
 
-      <!-- Emergency Panic Button Section -->
-      <div class="panic-section">
-        <h3>🚨 Emergency Panic Button</h3>
-        <p>Press "Set Hotkey", then press any key on your keyboard to set it. Pressing that key anytime closes this tab instantly.</p>
-        <div class="panic-controls">
-          <div class="panic-key-display" id="panicKeyDisplay">No Key Set</div>
-          <button onclick="setPanicKey()" class="btn-warning">Set Hotkey</button>
-          <button onclick="clearPanicKey()" class="btn-secondary">Clear</button>
-        </div>
-      </div>
+      <!-- ================= PANIC BUTTON PANEL ================= -->
+<div class="panic-section">
+  <h3>🚨 Emergency Panic Button</h3>
+  <p>Press "Set Hotkey", then press any key on your keyboard to set it. Pressing that key anytime closes this tab instantly.</p>
+  
+  <!-- FIX: Added both the ID for main.js and the Class for styles.css -->
+  <div id="panicKeyDisplay" class="panic-key-display">No Key Set</div>
+  
+  <div class="panic-controls">
+    <!-- FIX: Added the specific ID your script checks to trigger listening mode -->
+    <button id="record-panic-btn" onclick="setPanicKey()">Set Hotkey</button>
+    <button onclick="clearPanicKey()">Clear</button>
+  </div>
+</div>
 
       <!-- 🎨 Theme & Customization Section INSIDE the settings block -->
       <div class="theme-section" style="margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 25px;">
