@@ -57,14 +57,14 @@ button, input, select, a {
   box-sizing: border-box;
 }
 
-/* THE CONSTELLATION LAYER: Positioned behind all components */
+/* THE CONSTELLATION LAYER: Layered over the body base, under the content container */
 .liquid-engine-wrapper {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: -1 !important; 
+  z-index: 1 !important; 
   pointer-events: none !important;
 }
 
@@ -74,14 +74,14 @@ button, input, select, a {
   display: block;
 }
 
-/* THE CONTAINER CARD: Expanded flat layout bounds */
+/* THE CONTAINER CARD: Configured at a higher index to rest smoothly over the canvas layer */
 .container {
   width: 100%;             
   max-width: 800px;        
   max-height: 90vh;
   overflow-y: auto;
   padding: 40px;           
-  z-index: 10;
+  z-index: 2 !important;
   position: relative;
   background: transparent !important;
   box-shadow: none !important;
