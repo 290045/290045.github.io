@@ -1,8 +1,7 @@
 // Main JavaScript for 290045's Hub
-// Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
+// Handles tab switching, link opening, cloaks, themes, and panic hotkeys safely
 
-// ================= GLOBAL CONFIGURATION LAYER =================
-const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
+const IS_MAINTENANCE_ON = false;
 const HASHED_PASSWORD = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
 const PANIC_REDIRECT = 'https://google.com';
 
@@ -12,16 +11,19 @@ const STORAGE_KEYS = {
   panic: 'panicKey'
 };
 
+// ================= SAFETY LAYER FOR ELEMENT LOOKUPS =================
+function safeListener(id, event, callback) {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener(event, callback);
+}
+
 // ================= MAINTENANCE OVERLAY SYSTEM =================
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("maintenance-overlay");
   const isDev = sessionStorage.getItem("dev_authenticated");
-  const passwordInput = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
 
-  if (errorMsg) {
-    errorMsg.classList.add("hidden");
-  }
+  if (errorMsg) errorMsg.classList.add("hidden");
 
   if (overlay) {
     if (IS_MAINTENANCE_ON && isDev !== "true") {
@@ -33,16 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (passwordInput) {
-    passwordInput.addEventListener("keypress", (event) => {
-      if (event.key === "Enter") {
-        checkPassword();
-      }
-    });
-  }
+  safeListener("dev-password", "keypress", (event) => {
+    if (event.key === "Enter") checkPassword();
+  });
 });
 
-// Securely hash the text passcode input and evaluate
 async function checkPassword() {
   const inputField = document.getElementById("dev-password");
   const errorMsg = document.getElementById("error-msg");
@@ -51,10 +48,8 @@ async function checkPassword() {
 
   if (!inputField || !errorMsg || !overlay) return;
 
-  const inputValue = inputField.value;
-
   try {
-    const msgBuffer = new TextEncoder().encode(inputValue);
+    const msgBuffer = new TextEncoder().encode(inputField.value);
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const inputHash = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
@@ -68,9 +63,7 @@ async function checkPassword() {
       errorMsg.classList.remove("hidden");
       if (box) {
         box.style.animation = "none";
-        setTimeout(() => {
-          box.style.animation = "fadeIn 0.4s";
-        }, 10);
+        setTimeout(() => { box.style.animation = "fadeIn 0.4s"; }, 10);
       }
     }
   } catch (error) {
@@ -78,12 +71,9 @@ async function checkPassword() {
   }
 }
 
-// ================= DYNAMIC WORKSPACE THEME PICKER =================
+// ================= DYNAMIC THEME SYSTEM =================
 document.addEventListener("DOMContentLoaded", () => {
   const presetSelect = document.getElementById("preset-selector");
-  const customControls = document.getElementById("custom-theme-controls");
-  const customBgInput = document.getElementById("custom-bg");
-  const customTextInput = document.getElementById("custom-text");
   const fontSelect = document.getElementById("font-selector");
   const cursorSelect = document.getElementById("cursor-selector");
 
@@ -99,72 +89,66 @@ document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.style.setProperty("--font-family", savedFont);
   document.documentElement.style.setProperty("--cursor-type", savedCursor);
 
-  if (presetSelect) {
-    presetSelect.addEventListener("change", (e) => {
-      const selection = e.target.value;
-      localStorage.setItem("theme-preset", selection);
-      applyThemePreset(selection);
-    });
-  }
+  safeListener("preset-selector", "change", (e) => {
+    localStorage.setItem("theme-preset", e.target.value);
+    applyThemePreset(e.target.value);
+  });
 
   function applyThemePreset(preset) {
-    if (!customControls) return;
-    
+    const customControls = document.getElementById("custom-theme-controls");
     if (preset === "custom") {
-      customControls.style.setProperty("display", "flex", "important");
-      customControls.classList.remove("hidden");
-      
+      if (customControls) {
+        customControls.style.setProperty("display", "flex", "important");
+        customControls.classList.remove("hidden");
+      }
       const customBg = localStorage.getItem("custom-bg-color") || "#07070a";
       const customText = localStorage.getItem("custom-text-color") || "#ffffff";
       
-      if (customBgInput) customBgInput.value = customBg;
-      if (customTextInput) customTextInput.value = customText;
+      const bgInput = document.getElementById("custom-bg");
+      const textInput = document.getElementById("custom-text");
+      if (bgInput) bgInput.value = customBg;
+      if (textInput) textInput.value = customText;
       
       document.documentElement.removeAttribute("data-theme");
       document.documentElement.style.setProperty("--bg-color", customBg);
       document.documentElement.style.setProperty("--text-main", customText);
     } else {
-      customControls.style.setProperty("display", "none", "important");
-      customControls.classList.add("hidden");
+      if (customControls) {
+        customControls.style.setProperty("display", "none", "important");
+        customControls.classList.add("hidden");
+      }
       document.documentElement.style.removeProperty("--bg-color");
       document.documentElement.style.removeProperty("--text-main");
       document.documentElement.setAttribute("data-theme", preset);
     }
   }
 
-  [customBgInput, customTextInput].forEach(input => {
-    if (input) {
-      input.addEventListener("input", () => {
-        if (presetSelect && presetSelect.value === "custom") {
-          document.documentElement.style.setProperty("--bg-color", customBgInput.value);
-          document.documentElement.style.setProperty("--text-main", customTextInput.value);
-          localStorage.setItem("custom-bg-color", customBgInput.value);
-          localStorage.setItem("custom-text-color", customTextInput.value);
-        }
-      });
-    }
+  ['custom-bg', 'custom-text'].forEach(id => {
+    safeListener(id, "input", () => {
+      const bgInput = document.getElementById("custom-bg");
+      const textInput = document.getElementById("custom-text");
+      const presetSelect = document.getElementById("preset-selector");
+      if (presetSelect && presetSelect.value === "custom" && bgInput && textInput) {
+        document.documentElement.style.setProperty("--bg-color", bgInput.value);
+        document.documentElement.style.setProperty("--text-main", textInput.value);
+        localStorage.setItem("custom-bg-color", bgInput.value);
+        localStorage.setItem("custom-text-color", textInput.value);
+      }
+    });
   });
 
-  if (fontSelect) {
-    fontSelect.addEventListener("change", (e) => {
-      const selectedFont = e.target.value;
-      document.documentElement.style.setProperty("--font-family", selectedFont);
-      localStorage.setItem("theme-font", selectedFont);
-    });
-  }
+  safeListener("font-selector", "change", (e) => {
+    document.documentElement.style.setProperty("--font-family", e.target.value);
+    localStorage.setItem("theme-font", e.target.value);
+  });
 
-  if (cursorSelect) {
-    cursorSelect.addEventListener("change", (e) => {
-      const selectedCursor = e.target.value;
-      document.documentElement.style.setProperty("--cursor-type", selectedCursor);
-      localStorage.setItem("theme-cursor", selectedCursor);
-    });
-  }
+  safeListener("cursor-selector", "change", (e) => {
+    document.documentElement.style.setProperty("--cursor-type", e.target.value);
+    localStorage.setItem("theme-cursor", e.target.value);
+  });
 });
 
-// ================= CORE MODULES & ROUTING ACTIONS =================
-
-// Tab System Toggle Routing
+// ================= GLOBAL ACTIONS =================
 function switchTab(id) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   const target = document.getElementById(id);
@@ -172,17 +156,11 @@ function switchTab(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Security Target Redirect Tracker
 function handleLinkClick(url) {
   if (!url || url === 'test') return alert('Coming soon...');
-  try {
-    window.open(url, '_blank', 'noopener,noreferrer');
-  } catch (e) {
-    location.href = url;
-  }
+  try { window.open(url, '_blank', 'noopener,noreferrer'); } catch (e) { location.href = url; }
 }
 
-// Cloaking Utilities
 function setFavicon(href) {
   let link = document.querySelector("link[rel~='icon']");
   if (!link) {
@@ -206,18 +184,10 @@ function setUserCloak(preset) {
     location.reload();
     return;
   }
-
   let title = null, favicon = null;
-  if (preset === 'googleDrive') {
-    title = 'My Drive - Google Drive';
-    favicon = 'https://gstatic.com';
-  } else if (preset === 'googleClassroom') {
-    title = 'Home';
-    favicon = 'https://gstatic.com';
-  } else if (preset === 'canvas') {
-    title = 'Dashboard';
-    favicon = 'https://cloudfront.net';
-  }
+  if (preset === 'googleDrive') { title = 'My Drive - Google Drive'; favicon = 'https://gstatic.com'; }
+  else if (preset === 'googleClassroom') { title = 'Home'; favicon = 'https://gstatic.com'; }
+  else if (preset === 'canvas') { title = 'Dashboard'; favicon = 'https://cloudfront.net'; }
 
   if (title) localStorage.setItem(STORAGE_KEYS.title, title);
   if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
@@ -229,25 +199,19 @@ function applyCustomCloak() {
   const titleInput = document.getElementById('customTitleInput');
   const iconInput = document.getElementById('customIconInput');
   if (!titleInput || !iconInput) return alert('Inputs not found');
-
   const title = titleInput.value.trim();
   const favicon = iconInput.value.trim();
-
   if (!title && !favicon) return alert('Please enter a title or URL first.');
-
   if (title) localStorage.setItem(STORAGE_KEYS.title, title);
   if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
   applyCloak(title, favicon);
   alert('Custom configuration applied!');
 }
 
-// Emergency Panic Key Mapping
 let listeningForPanic = false;
-
 function startListeningForPanicKey() {
   const display = document.getElementById('panicKeyDisplay');
   if (!display || listeningForPanic) return;
-
   listeningForPanic = true;
   display.classList.add('listening');
   display.textContent = 'Press any key...';
@@ -277,8 +241,8 @@ function clearPanicKey() {
 
 function updatePanicDisplay() {
   const display = document.getElementById('panicKeyDisplay');
-  const key = localStorage.getItem(STORAGE_KEYS.panic);
   if (!display) return;
+  const key = localStorage.getItem(STORAGE_KEYS.panic);
   display.textContent = key ? `Key: ${key.toUpperCase()}` : 'No Key Set';
 }
 
@@ -287,3 +251,17 @@ function handlePanicKey(e) {
   const key = localStorage.getItem(STORAGE_KEYS.panic);
   if (!key) return;
   if (e.key.toLowerCase() === key.toLowerCase()) {
+    e.preventDefault();
+    location.replace(PANIC_REDIRECT);
+  }
+}
+
+// Global scope mapping
+window.switchTab = switchTab;
+window.handleLinkClick = handleLinkClick;
+window.setUserCloak = setUserCloak;
+window.applyCustomCloak = applyCustomCloak;
+window.setPanicKey = startListeningForPanicKey;
+window.clearPanicKey = clearPanicKey;
+
+document.addEventListener("DOMContentLoaded", () => {
