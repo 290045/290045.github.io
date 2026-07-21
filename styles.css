@@ -1,7 +1,11 @@
 /* ================= GLOBAL SYSTEM VARIABLE DESIGN LAYERS ================= */
 :root, [data-theme="dark"] {
   --bg-color: #07070a;
-  --card-bg: transparent; /* Changed from rgba tint to totally clear */
+  --card-bg: rgba(14, 14, 20, 0.65);
+  --text-main: #ffffff;
+  --text-muted: #aaaaaa;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --cursor-type: default;
 }
 
 [data-theme="light"] {
@@ -18,9 +22,19 @@
   --text-muted: #ff007f;
 }
 
-/* Force the body and ALL layout structures to adopt the dynamic background variable */
-body, html, .tab-content, #homepage, #settings {
+/* Force only the main document layers to hold the absolute base theme background */
+body, html {
   background-color: var(--bg-color) !important;
+  color: var(--text-main) !important;
+  font-family: var(--font-family) !important;
+  cursor: var(--cursor-type) !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* FIX: Forces all structural pages to be perfectly clear so your particles show through */
+.tab-content, #homepage, #settings {
+  background: transparent !important;
+  background-color: transparent !important;
   color: var(--text-main) !important;
   font-family: var(--font-family) !important;
   cursor: var(--cursor-type) !important;
@@ -47,7 +61,6 @@ html, body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #07070a; /* Pure, deep cosmic void dark background */
   overflow: hidden;
 }
 
@@ -135,8 +148,10 @@ h3 {
   width: 100%;
 }
 
+/* FIX: Ensures active sub-tabs don't bring back hidden solid layers */
 .tab-content.active {
   display: block;
+  background: transparent !important;
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -167,7 +182,6 @@ button {
   border-radius: 16px;
   font-size: 14px;          /* Perfectly balanced text scale */
   cursor: pointer;
-  border: none;
   font-weight: 500;
   letter-spacing: -0.1px;
   transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
@@ -353,6 +367,7 @@ input[type="text"]:focus {
 }
 
 /* ================= CARDS - USER INFO VIEWPORTS ================= */
+/* FIX: Removed solid tinted backdrops so particles clear right through cards */
 .changelog-card, .credits-card { 
   background: transparent !important; 
   backdrop-filter: none !important;
