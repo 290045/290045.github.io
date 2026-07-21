@@ -4,35 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>290045's Hub</title>
-  <!-- Cache buster tracking key forces instant cache updates -->
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <!-- Cache buster tracking key forces instant layout updates -->
+  <link rel="stylesheet" href="styles.css?v=5" />
   <script src="main.js" defer></script>
 </head>
 <body>
   
-<!-- Maintenance Overlay -->
-<!-- FIX 1: Added class="hidden" to hide it safely by default -->
-<div id="maintenance-overlay" class="hidden">
-  <div class="maintenance-box">
-    <h1>Site shutdown</h1>
-    <p>Something broke, and things will be fixed soon.</p>
-    
-    <input type="password" id="dev-password" placeholder="Enter Developer Password">
-    
-    <!-- FIX 2: Removed "(event)" to match your clean JavaScript function -->
-    <button onclick="checkPassword()">Access Site</button>
-    
-    <p id="error-msg" class="hidden">Incorrect developer password.</p>
+  <!-- ================= MAINTENANCE OVERLAY ================= -->
+  <div id="maintenance-overlay" class="hidden">
+    <div class="maintenance-box">
+      <h1>Site shutdown</h1>
+      <p>Something broke, and things will be fixed soon.</p>
+      <input type="password" id="dev-password" placeholder="Enter Developer Password">
+      <button onclick="checkPassword()">Access Site</button>
+      <p id="error-msg" class="hidden">Incorrect developer password.</p>
+    </div>
   </div>
-</div>
-  
-  <!-- Geometric Node Constellation Canvas Container Layer -->
+
+  <!-- ================= GEOMETRIC CANVAS BACKGROUND CONSTELLATION ================= -->
   <div class="liquid-engine-wrapper">
-    <!-- FIX: Added default pixel dimensions so the JavaScript engine initializes correctly -->
-    <canvas id="particleCanvas" width="1920" height="1080"></canvas>
+    <canvas id="particleCanvas"></canvas>
   </div>
-  
-<!-- ================= HOMEPAGE TAB ================= -->
+
+  <!-- ================= MAIN VIEWPORT CONTAINER BOX ================= -->
+  <main class="container">
+
+    <!-- ================= HOMEPAGE TAB ================= -->
     <div id="homepage" class="tab-content active">
       <h1>290045's Hub</h1>
       <nav class="menu-layout">
@@ -136,87 +133,107 @@
         <button onclick="handleLinkClick('test')">More soon...</button>
       </div>
     </div>  
-    
-<!-- ================= SETTINGS TAB ================= -->
+    !-- ================= SETTINGS TAB ================= -->
     <div id="settings" class="tab-content">
-      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-      <h1>Settings</h1>
-
-      <h2>Preset Tab Cloaks</h2>
-      <div class="grid-layout" style="margin-bottom: 20px;">
-        <button onclick="setUserCloak('googleDrive')">Google Drive Cloak</button>
-        <button onclick="setUserCloak('googleClassroom')">Classroom Cloak</button>
-        <button onclick="setUserCloak('canvas')">Canvas Cloak</button>
-      </div>
-
-      <h2>Custom Cloak Manager</h2>
-      <div class="menu-layout" style="gap: 12px; margin-bottom: 30px;">
-        <input id="customTitleInput" type="text" placeholder="Custom Title (e.g. 'Dashboard')">
-        <input id="customIconInput" type="text" placeholder="Custom Favicon URL (https://...)">
-        <button onclick="applyCustomCloak()" class="btn-primary">Apply Custom Cloak</button>
-        <button onclick="setUserCloak('reset')" class="btn-danger">Reset to Default</button>
-      </div>
-
-      <!-- ================= PANIC BUTTON PANEL ================= -->
-<div class="panic-section">
-  <h3>🚨 Emergency Panic Button</h3>
-  <p>Press "Set Hotkey", then press any key on your keyboard to set it. Pressing that key anytime closes this tab instantly.</p>
-  
-  <!-- FIX: Added both the ID for main.js and the Class for styles.css -->
-  <div id="panicKeyDisplay" class="panic-key-display">No Key Set</div>
-  
-  <div class="panic-controls">
-    <!-- FIX: Added the specific ID your script checks to trigger listening mode -->
-    <button id="record-panic-btn" onclick="setPanicKey()">Set Hotkey</button>
-    <button onclick="clearPanicKey()">Clear</button>
-  </div>
-</div>
-
-      <!-- 🎨 Theme & Customization Section INSIDE the settings block -->
-      <div class="theme-section" style="margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 25px;">
-        <h3>🎨 Theme & Customization</h3>
-        <p>Modify your workspace design, select presets, customize fonts, or apply distinct target cursors.</p>
-        
-        <div class="menu-layout" style="gap: 12px; margin-bottom: 20px;">
-          <label style="color: var(--text-muted); font-size: 14px;">Select Design Preset:</label>
-          <select id="preset-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
-            <option value="dark">Dark Liquid Glass</option>
-            <option value="cyberpunk">Cyberpunk Neon</option>
-            <option value="custom">Custom Theme</option>
-          </select>
-
-          <div id="custom-theme-controls" class="hidden" style="display: flex; gap: 15px; margin: 10px 0;">
-            <label style="font-size: 14px;">BG: <input type="color" id="custom-bg" value="#07070a" style="border: none; background: transparent; cursor: pointer;"></label>
-            <label style="font-size: 14px;">Text: <input type="color" id="custom-text" value="#ffffff" style="border: none; background: transparent; cursor: pointer;"></label>
-          </div>
-
-          <label style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Typography Interface:</label>
-          <select id="font-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
-            <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Default System Sans</option>
-            <option value="'Courier New', Courier, monospace">Retro Monospace</option>
-            <option value="'Georgia', serif">Classic Academic Serif</option>
-          </select>
-
-          <label style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">Target Mouse Pointer:</label>
-          <select id="cursor-selector" style="padding: 10px; border-radius: 8px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid rgba(255,255,255,0.08);">
-            <option value="default">Standard Pointer</option>
-            <option value="pointer">Action Link Hand</option>
-            <option value="crosshair">Precision Crosshair</option>
-            <option value="help">Help Indicator</option>
-          </select>
+      <h2>⚙️ Settings & Customization</h2>
+      <button class="back-btn" onclick="switchTab('homepage')">← Back to Hub</button>
+      
+      <!-- Tab Mask Cloaking Options -->
+      <div class="panic-section" style="margin-bottom: 20px;">
+        <h3>🎭 Tab Cloaking Mask</h3>
+        <p>Disguise your browser tab instantly to look like everyday school or work platforms.</p>
+        <div class="grid-layout" style="margin-bottom: 15px;">
+          <button onclick="setUserCloak('googleDrive')">Google Drive</button>
+          <button onclick="setUserCloak('googleClassroom')">Classroom</button>
+          <button onclick="setUserCloak('canvas')">Canvas LMS</button>
         </div>
+        
+        <input type="text" id="customTitleInput" placeholder="Custom Tab Title (e.g. 'Dashboard')">
+        <input type="text" id="customIconInput" placeholder="Custom Favicon Link URL (https://...)">
+        <div class="panic-controls">
+          <button onclick="applyCustomCloak()">Apply Custom Cloak</button>
+          <button class="back-btn" style="margin: 6px auto !important;" onclick="setUserCloak('reset')">Reset to Default</button>
+        </div>
+      </div>
+
+      <!-- Emergency Panic Controls Section -->
+      <div class="panic-section" style="margin-bottom: 20px;">
+        <h3>🚨 Emergency Panic Button</h3>
+        <p>Press "Set Hotkey", then click any key on your keyboard to save it. Hitting that key anytime redirects your current tab out instantly.</p>
+        
+        <!-- Connected to your script lookups and style selectors perfectly -->
+        <div id="panicKeyDisplay" class="panic-key-display" style="text-align: center; margin: 15px auto;">No Key Set</div>
+        
+        <div class="panic-controls">
+          <button id="record-panic-btn" onclick="setPanicKey()">Set Hotkey</button>
+          <button onclick="clearPanicKey()">Clear</button>
+        </div>
+      </div>
+
+      <!-- Theme Select Dropdown Options -->
+      <div class="panic-section">
+        <h3>🎨 Interface Theme Preset</h3>
+        <p>Modify your workspace design, select presets, customize background variables, or modify your cursor.</p>
+        <select id="preset-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; outline: none;">
+          <option value="dark">Default Cosmic Dark Void</option>
+          <option value="light">Refined Light Slate</option>
+          <option value="cyberpunk">Neon Cyberpunk Matrix</option>
+          <option value="custom">Engine Custom Configuration</option>
+        </select>
+
+        <!-- Custom Theme Hex Selectors -->
+        <div id="custom-theme-controls" class="hidden" style="display: flex; flex-direction: column; gap: 10px;">
+          <label>Background Fill Hex Code:</label>
+          <input type="text" id="custom-bg" placeholder="#07070a">
+          <label>Main Text Color Hex Code:</label>
+          <input type="text" id="custom-text" placeholder="#ffffff">
+        </div>
+
+        <label style="display: block; margin-top: 15px; margin-bottom: 5px;">Typography Font Family:</label>
+        <select id="font-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; outline: none;">
+          <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Standard Minimal System Font</option>
+          <option value="'Courier New', Courier, monospace">Developer Monospace Code</option>
+          <option value="'Georgia', serif">Classic Elegant Serif</option>
+        </select>
+
+        <label style="display: block; margin-bottom: 5px;">Workspace Cursor Layout Style:</label>
+        <select id="cursor-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); outline: none;">
+          <option value="default">Standard Arrow Point</option>
+          <option value="pointer">Hand Link Action Selector</option>
+          <option value="crosshair">Target Crosshair Reticle</option>
+        </select>
       </div>
     </div>
 
     <!-- ================= CHANGELOG TAB ================= -->
     <div id="changelog" class="tab-content">
-      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-      <h1>Changelog</h1>
       <div class="changelog-card">
-        <h2>Version 1.3.6</h2>
-        <p class="date">Released: 2026-07-21</p>
+        <h2>📋 System Update Logs</h2>
+        <div class="date">Build Version v3.5.0 - Active</div>
+        <button class="back-btn" onclick="switchTab('homepage')">← Back to Hub</button>
         <ul>
-          <li>More transparency!</li>
-          <li>Bug fixes!</li>
-          <li>More games soon!</li>
-          <li>Much more coming soon!</li>
+          <li>Completely migrated workspace core layout to transparent cosmic layer.</li>
+          <li>Optimized performance frame structures of the constellation particle engine loop thread.</li>
+          <li>Restructured emergency hotkey trackers and fixed silent script collision loops.</li>
+          <li>Removed custom asset typography overlaps to enforce uniform element alignment.</li>
+        </ul>
+        <div class="footer-note">290045 Network Development Systems - All Rights Reserved</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= CANVAS DIMENSION RESOLUTION TRIGGER FALLBACK ================= -->
+  <script>
+    window.addEventListener('load', () => {
+      const canvas = document.getElementById('particleCanvas');
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        window.dispatchEvent(new Event('resize'));
+      }
+    });
+  </script>
+
+</body>
+</html>
