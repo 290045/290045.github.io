@@ -25,15 +25,13 @@
     <p id="error-msg" class="hidden">Incorrect developer password.</p>
   </div>
 </div>
-
+  
   <!-- Geometric Node Constellation Canvas Container Layer -->
   <div class="liquid-engine-wrapper">
-    <canvas id="particleCanvas"></canvas>
+    <!-- FIX: Added default pixel dimensions so the JavaScript engine initializes correctly -->
+    <canvas id="particleCanvas" width="1920" height="1080"></canvas>
   </div>
-
-  <!-- Perfectly Centered Frosted Glass Interface Container Box -->
-  <main class="container">
-
+  
     <!-- ================= HOMEPAGE TAB ================= -->
     <div id="homepage" class="tab-content active">
       <h1>290045's Hub</h1>
@@ -211,9 +209,10 @@
       <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
       <h1>Changelog</h1>
       <div class="changelog-card">
-        <h2>Version 1.3.4</h2>
+        <h2>Version 1.3.5</h2>
         <p class="date">Released: 2026-07-21</p>
         <ul>
           <li>More transparency!</li>
+          <li>Bug fixes!</li>
           <li>More games soon!</li>
           <li>Much more coming soon!</li>
