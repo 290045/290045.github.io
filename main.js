@@ -162,124 +162,128 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ================= CORE MODULES & WRAPPERS =================
-(() => {
-  
-  // Tab System Toggle Routing
-  function switchTab(id) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    const target = document.getElementById(id);
-    if (target) target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// ================= CORE MODULES & ROUTING ACTIONS =================
+
+// Tab System Toggle Routing
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Security Target Redirect Tracker
+function handleLinkClick(url) {
+  if (!url || url === 'test') return alert('Coming soon...');
+  try {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  } catch (e) {
+    location.href = url;
+  }
+}
+
+// Cloaking Utilities
+function setFavicon(href) {
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'icon';
+    document.head.appendChild(link);
+  }
+  link.href = href;
+}
+
+function applyCloak(title, favicon) {
+  if (title) document.title = title;
+  if (favicon) setFavicon(favicon);
+}
+
+function setUserCloak(preset) {
+  if (preset === 'reset') {
+    localStorage.removeItem(STORAGE_KEYS.title);
+    localStorage.removeItem(STORAGE_KEYS.favicon);
+    alert('Tab settings restored! Reloading page...');
+    location.reload();
+    return;
   }
 
-  // Security Target Redirect Tracker
-  function handleLinkClick(url) {
-    if (!url || url === 'test') return alert('Coming soon...');
-    try {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    } catch (e) {
-      location.href = url;
-    }
+  let title = null, favicon = null;
+  if (preset === 'googleDrive') {
+    title = 'My Drive - Google Drive';
+    favicon = 'https://gstatic.com';
+  } else if (preset === 'googleClassroom') {
+    title = 'Home';
+    favicon = 'https://gstatic.com';
+  } else if (preset === 'canvas') {
+    title = 'Dashboard';
+    favicon = 'https://cloudfront.net';
   }
 
-  // Cloaking Utilities
-  function setFavicon(href) {
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.head.appendChild(link);
-    }
-    link.href = href;
-  }
+  if (title) localStorage.setItem(STORAGE_KEYS.title, title);
+  if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
+  applyCloak(title, favicon);
+  alert(`${preset} cloak applied successfully!`);
+}
 
-  function applyCloak(title, favicon) {
-    if (title) document.title = title;
-    if (favicon) setFavicon(favicon);
-  }
+function applyCustomCloak() {
+  const titleInput = document.getElementById('customTitleInput');
+  const iconInput = document.getElementById('customIconInput');
+  if (!titleInput || !iconInput) return alert('Inputs not found');
 
-  function setUserCloak(preset) {
-    if (preset === 'reset') {
-      localStorage.removeItem(STORAGE_KEYS.title);
-      localStorage.removeItem(STORAGE_KEYS.favicon);
-      alert('Tab settings restored! Reloading page...');
-      location.reload();
-      return;
-    }
+  const title = titleInput.value.trim();
+  const favicon = iconInput.value.trim();
 
-    let title = null, favicon = null;
-    if (preset === 'googleDrive') {
-      title = 'My Drive - Google Drive';
-      favicon = 'https://gstatic.com';
-    } else if (preset === 'googleClassroom') {
-      title = 'Home';
-      favicon = 'https://gstatic.com';
-    } else if (preset === 'canvas') {
-      title = 'Dashboard';
-      favicon = 'https://cloudfront.net';
-    }
+  if (!title && !favicon) return alert('Please enter a title or URL first.');
 
-    if (title) localStorage.setItem(STORAGE_KEYS.title, title);
-    if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
-    applyCloak(title, favicon);
-    alert(`${preset} cloak applied successfully!`);
-  }
+  if (title) localStorage.setItem(STORAGE_KEYS.title, title);
+  if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
+  applyCloak(title, favicon);
+  alert('Custom configuration applied!');
+}
 
-  function applyCustomCloak() {
-    const titleInput = document.getElementById('customTitleInput');
-    const iconInput = document.getElementById('customIconInput');
-    if (!titleInput || !iconInput) return alert('Inputs not found');
+// Emergency Panic Key Mapping
+let listeningForPanic = false;
 
-    const title = titleInput.value.trim();
-    const favicon = iconInput.value.trim();
+function startListeningForPanicKey() {
+  const display = document.getElementById('panicKeyDisplay');
+  if (!display || listeningForPanic) return;
 
-    if (!title && !favicon) return alert('Please enter a title or URL first.');
+  listeningForPanic = true;
+  display.classList.add('listening');
+  display.textContent = 'Press any key...';
 
-    if (title) localStorage.setItem(STORAGE_KEYS.title, title);
-    if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
-    applyCloak(title, favicon);
-    alert('Custom configuration applied!');
-  }
-
-  // Emergency Panic Key Mapping
-  let listeningForPanic = false;
-
-  function startListeningForPanicKey() {
-    const display = document.getElementById('panicKeyDisplay');
-    if (!display || listeningForPanic) return;
-
-    listeningForPanic = true;
-    display.classList.add('listening');
-    display.textContent = 'Press any key...';
-
-    function keyHandler(e) {
-      e.preventDefault();
-      if (e.key === 'Escape') {
-        listeningForPanic = false;
-        display.classList.remove('listening');
-        updatePanicDisplay();
-        window.removeEventListener('keydown', keyHandler);
-        return;
-      }
-      localStorage.setItem(STORAGE_KEYS.panic, e.key);
+  function keyHandler(e) {
+    e.preventDefault();
+    if (e.key === 'Escape') {
       listeningForPanic = false;
       display.classList.remove('listening');
       updatePanicDisplay();
       window.removeEventListener('keydown', keyHandler);
+      return;
     }
-    window.addEventListener('keydown', keyHandler);
-  }
-
-  function clearPanicKey() {
-    localStorage.removeItem(STORAGE_KEYS.panic);
+    localStorage.setItem(STORAGE_KEYS.panic, e.key);
+    listeningForPanic = false;
+    display.classList.remove('listening');
     updatePanicDisplay();
+    window.removeEventListener('keydown', keyHandler);
   }
+  window.addEventListener('keydown', keyHandler);
+}
 
-  function updatePanicDisplay() {
-    const display = document.getElementById('panicKeyDisplay');
-    const key = localStorage.getItem(STORAGE_KEYS.panic);
-    if (!display) return;
-    display.textContent = key ? `Key: ${key.toUpperCase()}` : 'No Key Set';
-  }
+function clearPanicKey() {
+  localStorage.removeItem(STORAGE_KEYS.panic);
+  updatePanicDisplay();
+}
 
+function updatePanicDisplay() {
+  const display = document.getElementById('panicKeyDisplay');
+  const key = localStorage.getItem(STORAGE_KEYS.panic);
+  if (!display) return;
+  display.textContent = key ? `Key: ${key.toUpperCase()}` : 'No Key Set';
+}
+
+function handlePanicKey(e) {
+  if (listeningForPanic) return;
+  const key = localStorage.getItem(STORAGE_KEYS.panic);
+  if (!key) return;
+  if (e.key.toLowerCase() === key.toLowerCase()) {
