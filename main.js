@@ -267,21 +267,18 @@ function startListeningForPanicKey() {
   window.addEventListener('keydown', keyHandler);
 }
 
-// Map the HTML click listener naming safely to your function hook
-function setPanicKey() {
-  startListeningForPanicKey();
-}
+// Explicit global wrapper hooks ensure HTML onclick hooks read them seamlessly
+window.switchTab = switchTab;
+window.handleLinkClick = handleLinkClick;
+window.setUserCloak = setUserCloak;
+window.applyCustomCloak = applyCustomCloak;
+window.setPanicKey = startListeningForPanicKey;
 
 function clearPanicKey() {
   localStorage.removeItem(STORAGE_KEYS.panic);
   updatePanicDisplay();
 }
+window.clearPanicKey = clearPanicKey;
 
 function updatePanicDisplay() {
   const display = document.getElementById('panicKeyDisplay');
-  const key = localStorage.getItem(STORAGE_KEYS.panic);
-  if (!display) return;
-  display.textContent = key ? `Key: ${key.toUpperCase()}` : 'No Key Set';
-}
-
-function handlePanicKey(e) {
