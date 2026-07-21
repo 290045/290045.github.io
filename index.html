@@ -4,8 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>290045's Hub</title>
-  <!-- Cache buster tracking key forces instant layout updates -->
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
   
@@ -20,12 +19,12 @@
     </div>
   </div>
 
-  <!-- ================= GEOMETRIC CANVAS BACKGROUND CONSTELLATION ================= -->
+  <!-- ================= BACKGROUND CONSTELLATION CANVAS ================= -->
   <div class="liquid-engine-wrapper">
     <canvas id="particleCanvas"></canvas>
   </div>
 
-  <!-- ================= MAIN VIEWPORT CONTAINER BOX ================= -->
+  <!-- ================= MAIN CONTAINER VIEWPORT ================= -->
   <main class="container">
 
     <!-- ================= HOMEPAGE TAB ================= -->
@@ -42,8 +41,8 @@
   
     <!-- ================= GAMES TAB ================= -->
     <div id="games" class="tab-content">
-      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-      <h1>Games</h1>
+      <h2>🎮 Games</h2>
+      <button class="back-btn" onclick="switchTab('homepage')">← Back to Hub</button>
       <div class="grid-layout">
         <button onclick="handleLinkClick('https://skempisty.github.io/rocket_league_2d/')">2D Rocket Leauge</button>
         <button onclick="handleLinkClick('https://pizagame.pages.dev/')">Pizza Games</button>
@@ -61,7 +60,7 @@
         <button onclick="handleLinkClick('https://nativegames.netlify.app/')">Native Games</button>
         <button onclick="handleLinkClick('https://othermgwebsite.github.io/')">Math Games 66</button>
         <button onclick="handleLinkClick('https://29021.github.io/beeswarm/')">Beeswarm</button>
-        <button onclick="handleLinkClick(' https://29021.github.io/balatro/')">Balatro</button>
+        <button onclick="handleLinkClick('https://29021.github.io/balatro/')">Balatro</button>
         <button onclick="handleLinkClick('https://telatro.tomcat.sh/')">Balatro (Alt)</button>
         <button onclick="handleLinkClick('https://d3lta.netlify.app/')">Netfly</button>
         <button onclick="handleLinkClick('https://hypackellite1.github.io/')">Hypacke</button>
@@ -71,9 +70,9 @@
 
     <!-- ================= PROXIES TAB ================= -->
     <div id="proxies" class="tab-content">
-      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-      <h1>Proxies</h1>
-      <div class="grid-layout">
+      <h2>🌐 Proxies</h2>
+      <button class="back-btn" onclick="switchTab('homepage')">← Back to Hub</button>
+      <div class="menu-layout">
         <button onclick="handleLinkClick('https://cdn.jsdelivr.net/gh/nautilus-os/GUST@latest/svg/site.svg')">Gust (Unblockable)</button>
         <button onclick="handleLinkClick('https://gust-browser.vercel.app/')">Gust (Unblockable)</button>
         <button onclick="handleLinkClick('https://chroma67.github.io/index.html')">Selenite</button>
@@ -117,8 +116,8 @@
 
     <!-- ================= TOOLS TAB ================= -->
     <div id="tools" class="tab-content">
-      <button class="back-btn" onclick="switchTab('homepage')">⬅ Back to Home</button>
-      <h1>Tools</h1>
+      <h2>🛠️ Tools</h2>
+      <button class="back-btn" onclick="switchTab('homepage')">← Back to Hub</button>
       <div class="grid-layout">
         <button onclick="handleLinkClick('https://www.1flex.org/')">1flex Movies</button>
         <button onclick="handleLinkClick('https://docs.google.com/presentation/d/1BBouYN7q_KPCOMMk1upRNVN3kki5ZI-wQyYT4S9t65w/edit?slide=id.p#slide=id.p')">Movies</button>
@@ -148,7 +147,7 @@
           <button onclick="setUserCloak('canvas')">Canvas LMS</button>
         </div>
         
-        <input type="text" id="customTitleInput" placeholder="Custom Tab Title (e.g. 'Dashboard')">
+        <input type="text" id="customTitleInput" placeholder="Custom Tab Title">
         <input type="text" id="customIconInput" placeholder="Custom Favicon Link URL (https://...)">
         <div class="panic-controls">
           <button onclick="applyCustomCloak()">Apply Custom Cloak</button>
@@ -160,10 +159,7 @@
       <div class="panic-section" style="margin-bottom: 20px;">
         <h3>🚨 Emergency Panic Button</h3>
         <p>Press "Set Hotkey", then click any key on your keyboard to save it. Hitting that key anytime redirects your current tab out instantly.</p>
-        
-        <!-- Connected to your script lookups and style selectors perfectly -->
         <div id="panicKeyDisplay" class="panic-key-display" style="text-align: center; margin: 15px auto;">No Key Set</div>
-        
         <div class="panic-controls">
           <button id="record-panic-btn" onclick="setPanicKey()">Set Hotkey</button>
           <button onclick="clearPanicKey()">Clear</button>
@@ -209,8 +205,9 @@
     <div id="changelog" class="tab-content">
       <div class="changelog-card">
         <h2>📋 System Update Logs</h2>
-        <div class="date">Build Version v1.5.9 - Active</div>
+        <div class="date">Build Version v1.6.0 - Active</div>
         <button class="back-btn" onclick="switchTab('homepage')">← Back to Hub</button>
+        <!-- UPDATED LOGS BLOCK -->
         <ul>
           <li>More transparency!</li>
           <li>Many bug fixes!</li>
@@ -223,23 +220,10 @@
 
   </main>
 
-  <!-- ================= CANVAS DIMENSION RESOLUTION TRIGGER FALLBACK ================= -->
-  <script>
-    window.addEventListener('load', () => {
-      const canvas = document.getElementById('particleCanvas');
-      if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        window.dispatchEvent(new Event('resize'));
-      }
-    });
-  </script>  
-  
-<!-- ================= RUNTIME ACTIONS & CANVAS SCRIPT ENGINE ================= -->
-  <!-- 1. Loads your main functional variables and tab controls -->
+  <!-- ================= MASTER APPLICATION SCRIPTS ================= -->
   <script src="main.js"></script>
 
-  <!-- 2. Independently draws your interactive connecting webs -->
+    <!-- SELF-CONTAINED BACKGROUND ENGINE TO INSULATE PARSE EXECUTION -->
   <script>
     window.addEventListener('load', () => {
       const canvas = document.getElementById('particleCanvas');
@@ -307,6 +291,7 @@
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(mouse.x, mouse.y);
               ctx.strokeStyle = `rgba(100, 200, 255, ${mOpacity})`;
+              ctx.lineWidth = 1.0;
               ctx.stroke();
             }
           }
@@ -320,6 +305,7 @@
               ctx.moveTo(particles[i].x, particles[i].y);
               ctx.lineTo(particles[j].x, particles[j].y);
               ctx.strokeStyle = `rgba(100, 180, 255, ${opacity})`;
+              ctx.lineWidth = 0.8;
               ctx.stroke();
             }
           }
