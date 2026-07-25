@@ -2,7 +2,7 @@
 // Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
 
 // CONFIGURATION
-const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
+const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
 
 
 const HASHED_PASSWORD = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
