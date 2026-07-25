@@ -2,7 +2,7 @@
 // Handles maintenance mode, SHA-256 secure login, tab systems, proxy routing, cloaking, panic keys, and constellation graphics
 
 // ================= GLOBAL CONFIGURATION LAYER =================
-const IS_MAINTENANCE_ON = false; // Set to true to lock site, false to open
+const IS_MAINTENANCE_ON = true; // Set to true to lock site, false to open
 const HASHED_PASSWORD = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
 const PANIC_REDIRECT = 'https://google.com';
 
