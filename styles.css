@@ -7,13 +7,6 @@
   --cursor-type: default;
 }
 
-[data-theme="light"] {
-  --bg-color: #f4f4f7;
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --text-main: #111115;
-  --text-muted: #55555c;
-}
-
 [data-theme="cyberpunk"] {
   --bg-color: #0c0014;
   --card-bg: rgba(20, 0, 35, 0.8);
