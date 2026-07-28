@@ -472,3 +472,55 @@ document.addEventListener("DOMContentLoaded", () => {
     init();
   }
 })();
+
+// Scrambled Base64 database of game destinations
+const secureRegistry = {
+  "app_rl2d": "aHR0cHM6Ly9za2VtcGlzdHkuZ2l0aHViLmlvL3JvY2tldF9sZWFndWVfMmQv",
+  "app_pizza": "aHR0cHM6Ly9waXphZ2FtZS5wYWdlcy5kZXYv",
+  "app_kriptic": "aHR0cHM6Ly9rcmlwdGljZWRpdGlvbjIubmVvY2l0aWVzLm9yZy8=",
+  "app_kriptic_alt": "aHR0cHM6Ly9rcmlwdGljZS1lZGl0aW9uLTMtMC52ZXJjZWwuYXBwLw==",
+  "app_vertex": "aHR0cHM6Ly9nb2xkLXN0YXRpYy5wYWdlcy5kZXYv",
+  "app_biolyze": "aHR0cHM6Ly9iaW9seXplOTAubG9sLw==",
+  "app_mario": "aHR0cHM6Ly9tYXRoYWR2ZW50dXJlMS5naXRodWIuaW8vc202NC9zbTY0L2luZGV4Lmh0bWw=",
+  "app_gba": "aHR0cHM6Ly9jYXR0bi5naXRodWIuaW8vZ2JhLw==",
+  "app_grate": "aHR0cHM6Ly9nYW1lcmF0ZW9mZmljaWFsLndlZWJseS5jb20v",
+  "app_human": "aHR0cHM6Ly9odW1hbm9ybm90LnNvLw==",
+  "app_geo": "aHR0cHM6Ly93d3cuZ2VvZ3Vlc3NyLmNvbS8=",
+  "app_wordle": "aHR0cHM6Ly93d3cubnl0aW1lcy5jb20vZ2FtZXMvd29yZGxlL2luZGV4Lmh0bWw=",
+  "app_otter": "aHR0cHM6Ly9vdHRlcmdhbWVzLm9yZy8=",
+  "app_native": "aHR0cHM6Ly9uYXRpdmVnYW1lcy5uZXRsaWZ5LmFwcC8=",
+  "app_mg66": "aHR0cHM6Ly9vdGhlcm1nd2Vic2l0ZS5naXRodWIuaW8v",
+  "app_beeswarm": "aHR0cHM6Ly8yOTAyMS5naXRodWIuaW8vYmVlc3dhcm0v",
+  "app_balatro": "aHR0cHM6Ly8yOTAyMS5naXRodWIuaW8vYmFsYXRyby8=",
+  "app_balatro_alt": "aHR0cHM6Ly90ZWxhdHJvLnRvbWNhdC5zaC8=",
+  "app_netfly": "aHR0cHM6Ly9kM2x0YS5uZXRsaWZ5LmFwcC8=",
+  "app_hypacke": "aHR0cHM6Ly9oeXBhY2tlbGxpdGUxLmdpdGh1Yi5pby8=",
+  "app_clicker": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLUNsaWNrZXItR2FtZS8=",
+  "app_fish": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLWZsYXBweS1maXNoLw==",
+  "app_rock": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvL3doYXQtYmVhdHMtcm9jay8="
+};
+
+// Global Event listener for stealth application modules
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("games");
+  if (!container) return;
+
+  container.addEventListener("click", (event) => {
+    const targetButton = event.target.closest("button[data-id]");
+    if (!targetButton) return;
+
+    const appId = targetButton.getAttribute("data-id");
+    const scrambledUrl = secureRegistry[appId];
+
+    if (scrambledUrl) {
+      const decodedUrl = atob(scrambledUrl);
+      
+      // Hooks right back into your custom handling function
+      if (typeof handleLinkClick === "function") {
+        handleLinkClick(decodedUrl);
+      } else {
+        window.open(decodedUrl, "_blank");
+      }
+    }
+  });
+});
