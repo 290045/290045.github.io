@@ -2,10 +2,10 @@
 	         ##    IDEAS   ##
 ===========================================
 
+Fix Themes!!!
+
 🌐 Navigation
-- Search bar
-  - Search games
-  - Search proxies
+- Search bar for games, proxies, and tools
 - Favorites system
   - Pin favorites to the top
   - Yellow star icon
