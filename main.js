@@ -73,40 +73,6 @@ async function checkPassword() {
   }
 }
 
-// =========================================================================
-// CENTRAL NAVIGATION TAB ENGINE (FIXED: Cleaned to match your layout)
-// =========================================================================
-function switchTab(tabId) {
-  // Wiped out the old proxies keyword to align 100% with your secure ID setup
-  const tabs = ['homepage', 'games', 'routing', 'tools', 'settings', 'changelog'];
-  
-  tabs.forEach(id => {
-    const element = document.getElementById(id);
-    if (element) {
-      if (id === tabId) {
-        element.style.display = 'block'; 
-      } else {
-        element.style.display = 'none';  
-      }
-    }
-  });
-}
-
-function handleLinkClick(url) {
-  const link = document.createElement('a');
-  link.href = url;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer'; 
-  document.body.appendChild(link);
-  link.click(); 
-  document.body.removeChild(link);
-}
-
-// =========================================================================
-// INTERFACE CONTROLS & ENVIRONMENT INITIALIZATION
-// =========================================================================
-document.addEventListener("DOMContentLoaded", () => {
-
   // =========================================================================
   // WORKSPACE ENVIRONMENTAL SYSTEM CONTROLS (THEMES Engine)
   // =========================================================================
@@ -119,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fontSelect = document.getElementById("font-selector");
   const cursorSelect = document.getElementById("cursor-selector");
 
-  // Read saved client specifications out of storage
+  // Read saved client specifications out of storage (Using uniform dash naming)
   const savedPreset = localStorage.getItem("theme-preset") || "dark";
   const savedBgAnim = localStorage.getItem("theme-bg-anim") || "constellation"; 
   const savedParticleColor = localStorage.getItem("theme-particle-color") || "#ffffff"; 
@@ -162,12 +128,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (particleColorInput) {
     particleColorInput.addEventListener("input", (e) => {
       localStorage.setItem("theme-particle-color", e.target.value);
+      // Tells the particle engine to update immediately if it has a redraw check
+      if (typeof updateParticleColors === "function") updateParticleColors();
     });
   }
 
   function applyThemePreset(preset) {
     if (!customControls) return;
     
+    // FIXED: Enforced lowercase matching to hide controls on boot if not "custom"
     if (preset === "custom") {
       customControls.style.setProperty("display", "flex", "important");
       customControls.classList.remove("hidden");
@@ -182,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.style.setProperty("--bg-color", customBg);
       document.documentElement.style.setProperty("--text-main", customText);
     } else {
+      // Safely hides custom textboxes if a standard theme is picked
       customControls.style.setProperty("display", "none", "important");
       customControls.classList.add("hidden");
       document.documentElement.style.removeProperty("--bg-color");
@@ -221,8 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("theme-cursor", selectedCursor);
     });
   }
-});
-
 // ================= CLOAKING =================
 (function() {
   const STORAGE_KEYS = {
