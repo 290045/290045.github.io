@@ -1,6 +1,3 @@
-
-*** Encrypt or Obfuscate Your Links: If you hardcode URLs to proxy networks or game files directly in your JavaScript, the school filter will scrape your GitHub, see those URLs, and block your entire GitHub site instantly.
-
 ===========================================
 	         ##    IDEAS   ##
 ===========================================
