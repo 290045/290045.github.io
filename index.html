@@ -30,17 +30,18 @@
   <!-- ================= MAIN CONTAINER VIEWPORT ================= -->
   <main class="container">
 
-    <!-- ================= HOMEPAGE TAB ================= -->
-    <div id="homepage" class="tab-content active">
-      <h1>290045's Hub</h1>
-      <nav class="menu-layout">
-        <button onclick="switchTab('games')">🎮 Interactive Applications</button>
-        <button onclick="switchTab('proxies')">🌐 Network Gateways</button>
-        <button onclick="switchTab('tools')">🛠️ Development Utilities</button>
-        <button onclick="switchTab('settings')">⚙️ Settings</button>
-        <button onclick="switchTab('changelog')">📋 Changelog</button>
-      </nav>
-    </div>
+<!-- ================= HOMEPAGE TAB ================= -->
+<div id="homepage" class="tab-content active">
+  <h1>290045's Hub</h1>
+  <nav class="menu-layout">
+    <button onclick="switchTab('games')">🎮 Interactive Applications</button>
+    <!-- FIXED: Changed from 'proxies' to 'routing' to match your secure tab block ID -->
+    <button onclick="switchTab('routing')">🌐 Network Gateways</button>
+    <button onclick="switchTab('tools')">🛠️ Development Utilities</button>
+    <button onclick="switchTab('settings')">⚙️ Settings</button>
+    <button onclick="switchTab('changelog')">📋 Changelog</button>
+  </nav>
+</div>
   
    <!-- ================= INTERACTIVE APPLICATION MODULES ================= -->
 <div id="games" class="tab-content">
