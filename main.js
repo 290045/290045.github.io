@@ -1,10 +1,6 @@
-// Main JavaScript for 290045's Hub
-// Handles tab switching, link opening, cloaks, themes, panic hotkey, and constellation particle effects
-
 // ==========================================================
 // CONFIGURATION ENGINE
 // ==========================================================
-// REPLACED: Changed obvious config keys to sound like system initialization variables
 const SYSTEM_BUILD_STABLE = false; // Set to FALSE to activate terminal lock, TRUE to unlock site
 const MODULE_CHECKSUM = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
 
@@ -473,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 // ==========================================
-// 1. GAME DATA REGISTRY
+// 1. APPLICATION MODULE REGISTRY
 // ==========================================
 const secureRegistry = {
   "app_rl2d": "aHR0cHM6Ly9za2VtcGlzdHkuZ2l0aHViLmlvL3JvY2tldF9sZWFndWVfMmQv",
@@ -498,7 +494,25 @@ const secureRegistry = {
   "app_hypacke": "aHR0cHM6Ly9oeXBhY2tlbGxpdGUxLmdpdGh1Yi5pby8=",
   "app_clicker": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLUNsaWNrZXItR2FtZS8=",
   "app_fish": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLWZsYXBweS1maXNoLw==",
-  "app_rock": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvL3doYXQtYmVhdHMtcm9jay8="
+  "app_rock": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvL3doYXQtYmVhdHMtcm9jay8=",
+  "app_mathplay": "aHR0cHM6Ly93d3cubWF0aHBsYXlncm91bmQuY29tLw==",
+  "app_slope": "aHR0cHM6Ly9zbG9wZS1vbmxpbmUuZ2l0aHViLmlvLw==",
+  "app_bloxcraft": "aHR0cHM6Ly9ibG94Y3JhZnQud2luLw==",
+  "app_uno": "aHR0cHM6Ly91bm9nYW1lb25saW5lLmdpdGh1Yi5pby8=",
+  "app_minecraft": "aHR0cHM6Ly9lbGl0ZTRyLmdpdGh1Yi5pby9SZXNlbnQtQ2xpZW50L2dhbWUuaHRtbA==",
+  "app_sitesdotcom": "aHR0cHM6Ly9nYW1lcy1iMzc0OS53ZWIuYXBwLw==",
+  "app_classroom6x": "aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvY2xhc3Nyb29tNngv",
+  "app_pgis": "aHR0cHM6Ly9wZ2lzLngxMC5teC8=",
+  "app_ccported": "aHR0cHM6Ly9hcmFuZG9tZGV2MTIuZ2l0aHViLmlvLw==",
+  "app_pgis2": "aHR0cHM6Ly8wODAwd2ViZGV2LmdpdGh1Yi5pby9QR0lTLw==",
+  "app_slopeunb": "aHR0cHM6Ly9zbG9wZS11bmJsb2NrZWQtMTB4LmdpdGh1Yi5pby8=",
+  "app_duckmath1": "aHR0cHM6Ly91bnBrZy5jb20vY2xhc3Nyb29tZHVja0AxLjAuMC9pbmRleC5odG1s",
+  "app_duckmath2": "aHR0cHM6Ly91bnBrZy5jb20vY2xhc3Nyb29tZHVja0AxLjAuMC9pbmRleC5zdmc=",
+  "app_duckmath3": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL21hdGhsZXNzb25zL2R1Y2ttYXRoLnN2Zw==",
+  "app_duckmath4": "aHR0cHM6Ly9kdWNrc3VtLmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC8=",
+  "app_gba3": "aHR0cHM6Ly9jYXR0bi5naXRodWIuaW8vZ2JhLw==",
+  "app_unbleeked": "aHR0cHM6Ly91bmJsZWVrZWQudmVyY2VsLmFwcC9tYWluLmh0bWw=",
+  "app_zane": "aHR0cHM6Ly96YW5lMzUzNS5naXRodWIuaW8vbWF0aGNhbGMuZ2l0aHViLmlvLw=="
 };
 
 // ==========================================
