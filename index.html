@@ -183,38 +183,65 @@
       </div>
 
       <!-- Theme Select Dropdown Options -->
-      <div class="panic-section">
-        <h3>🎨 Interface Theme Preset</h3>
-        <p>Modify your workspace design, select presets, customize background variables, or modify your cursor.</p>
-        <select id="preset-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; outline: none;">
-          <option value="dark">Default Cosmic Dark Void</option>
-          <option value="cyberpunk">Neon Cyberpunk Matrix</option>
-          <option value="custom">Engine Custom Configuration</option>
-        </select>
+<div class="panic-section">
+  <h3>🎨 Workspace Environmental Engine</h3>
+  <p>Modify design presets, swap canvas animation wrappers, adjust particle vectors, or reconfigure user cursors.</p>
+  
+  <!-- Sub-Section 1: Design Presets -->
+  <label style="display: block; margin-bottom: 5px; font-weight: 500;">Interface Design Preset:</label>
+  <select id="preset-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; outline: none;">
+    <option value="dark">Default Cosmic Dark Void</option>
+    <option value="light">Clinical Research Light Mode</option>
+    <option value="cyberpunk">Neon Cyberpunk Matrix</option>
+    <option value="dracula">Gothic Vampire (Dracula Pro)</option>
+    <option value="tokyonight">Tokyo Night Street Racing</option>
+    <option value="custom">Engine Custom Configuration</option>
+  </select>
 
-        <!-- Custom Theme Hex Selectors -->
-        <div id="custom-theme-controls" class="hidden" style="display: flex; flex-direction: column; gap: 10px;">
-          <label>Background Fill Hex Code:</label>
-          <input type="text" id="custom-bg" placeholder="#07070a">
-          <label>Main Text Color Hex Code:</label>
-          <input type="text" id="custom-text" placeholder="#ffffff">
-        </div>
+  <!-- Sub-Section 2: Background Animation Selection -->
+  <label style="display: block; margin-bottom: 5px; font-weight: 500;">Background Animation Vector Engine:</label>
+  <select id="background-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; outline: none;">
+    <option value="constellation">Interstellar Node Constellation Matrix</option>
+    <option value="matrix">Digital Rain Code Cascades (Stealth look)</option>
+    <option value="none">Solid Color Low-Power Terminal</option>
+  </select>
 
-        <label style="display: block; margin-top: 15px; margin-bottom: 5px;">Typography Font Family:</label>
-        <select id="font-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; outline: none;">
-          <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Standard Minimal System Font</option>
-          <option value="'Courier New', Courier, monospace">Developer Monospace Code</option>
-          <option value="'Georgia', serif">Classic Elegant Serif</option>
-        </select>
+  <!-- Custom Design Engine Variable Inputs -->
+  <div id="custom-theme-controls" class="hidden" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+    <label>Background Fill Hex Code:</label>
+    <input type="text" id="custom-bg" placeholder="#07070a">
+    <label>Main Text Color Hex Code:</label>
+    <input type="text" id="custom-text" placeholder="#ffffff">
+  </div>
 
-        <label style="display: block; margin-bottom: 5px;">Workspace Cursor Layout Style:</label>
-        <select id="cursor-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); outline: none;">
-          <option value="default">Standard Arrow Point</option>
-          <option value="pointer">Hand Link Action Selector</option>
-          <option value="crosshair">Target Crosshair Reticle</option>
-        </select>
-      </div>
-    </div>
+  <!-- Sub-Section 3: Particle Color Picker -->
+  <div id="particle-color-wrapper" style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px;">
+    <label>Particle Network Render Color Hex:</label>
+    <input type="text" id="particle-color-input" placeholder="#ffffff" style="margin-bottom: 0;">
+  </div>
+
+  <!-- Sub-Section 4: Expanded Typography Selector -->
+  <label style="display: block; margin-bottom: 5px; font-weight: 500;">Typography Font Family:</label>
+  <select id="font-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 15px; outline: none;">
+    <option value="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Standard Minimal System Font</option>
+    <option value="'Courier New', Courier, monospace">Developer Monospace Code</option>
+    <option value="'Georgia', serif">Classic Elegant Serif</option>
+    <option value="'Fira Code', 'Consolas', monospace">Fira Code (Ligature Terminal Font)</option>
+    <option value="'Comic Sans MS', cursive, sans-serif">Troll/Unprofessional Mode (Comic Sans)</option>
+    <option value="'Impact', Charcoal, sans-serif">Bold Accent / Meme Layout (Impact)</option>
+  </select>
+
+  <!-- Sub-Section 5: Expanded Workspace Cursor Selector -->
+  <label style="display: block; margin-bottom: 5px; font-weight: 500;">Workspace Cursor Layout Style:</label>
+  <select id="cursor-selector" style="width: 100%; padding: 12px; border-radius: 12px; background: rgba(0,0,0,0.35); color: white; border: 1px solid rgba(255,255,255,0.08); outline: none;">
+    <option value="default">Standard Arrow Point</option>
+    <option value="pointer">Hand Link Action Selector</option>
+    <option value="crosshair">Target Crosshair Reticle</option>
+    <option value="text">Vertical Text Insertion Beam</option>
+    <option value="wait">Loading Spinner / Busy Wheel</option>
+    <option value="not-allowed">Prohibited Restriction Circle</option>
+  </select>
+</div>
 
   <!-- ================= CHANGELOG TAB ================= -->
 <div id="changelog" class="tab-content">
