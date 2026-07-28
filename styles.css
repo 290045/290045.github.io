@@ -282,9 +282,12 @@ input[type="text"]:focus {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  /* Keeps layout clear so your particle canvas engine seamlessly shows through */
-  background: transparent !important; 
   z-index: 9999999 !important; 
+  
+  /* FIXED: Blurs out the main hub elements completely so they cannot bleed through */
+  background: rgba(7, 7, 10, 0.6) !important; /* Semi-transparent dark tinted sheet */
+  backdrop-filter: blur(25px) !important;      /* Aggressive blur to completely fog out background buttons */
+  -webkit-backdrop-filter: blur(25px) !important;
 }
 
 #maintenance-overlay:not(.hidden) {
@@ -297,27 +300,26 @@ input[type="text"]:focus {
   width: 90%;
   max-width: 420px; 
   padding: 40px 35px;
-  border-radius: 22px; /* Matches your changelog and panel theme corners */
+  border-radius: 22px; 
   text-align: center;
   
-  /* Inherits your exact liquid glass layout variables dynamically */
+  /* Keeps the card block clear since the backdrop mask handles the layout blur */
   background: var(--card-bg) !important; 
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4) !important;
   
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
 }
 
-/* Polished Typography Styles inheriting your native layout headers */
+/* Polished Typography Styles */
 .maintenance-box h1 {
   margin: 0 0 15px 0 !important;
 }
 
 .maintenance-box p {
-  color: var(--text-muted) !important; /* Uses your global secondary text token */
+  color: var(--text-muted) !important; 
   font-size: 14px;
   line-height: 1.6;
   margin: 0 0 24px 0;
@@ -328,7 +330,6 @@ input[type="text"]:focus {
 #dev-password {
   margin-bottom: 20px !important;
   text-align: center;
-  /* Crucial text-security rules that force typed text into secure dots */
   -webkit-text-security: disc !important; 
   text-security: disc !important;
 }
@@ -342,7 +343,7 @@ input[type="text"]:focus {
 
 /* System Exception Output Alert text layout style mapping */
 #error-msg {
-  color: #ff8e8e !important; /* Uses your custom warning color token mapping */
+  color: #ff8e8e !important; 
   font-size: 13px;
   font-weight: 500;
   margin: 16px 0 0 0;
