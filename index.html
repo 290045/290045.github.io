@@ -33,7 +33,7 @@
       <nav class="menu-layout">
         <button onclick="switchTab('games')">🎮 Interactive Applications</button>
         <button onclick="switchTab('proxies')">🌐 Network Gateways</button>
-        <button onclick="switchTab('tools')">🛠️ Tools</button>
+        <button onclick="switchTab('tools')">🛠️ Development Utilities</button>
         <button onclick="switchTab('settings')">⚙️ Settings</button>
         <button onclick="switchTab('changelog')">📋 Changelog</button>
       </nav>
@@ -117,23 +117,24 @@
   </div>
 </div>
 
-    <!-- ================= TOOLS TAB ================= -->
-    <div id="tools" class="tab-content">
-      <h2>🛠️ Tools</h2>
-      <button class="back-btn" onclick="switchTab('homepage')">← Back to Hub</button>
-      <div class="grid-layout">
-        <button onclick="handleLinkClick('https://www.1flex.org/')">1flex Movies</button>
-        <button onclick="handleLinkClick('https://docs.google.com/presentation/d/1BBouYN7q_KPCOMMk1upRNVN3kki5ZI-wQyYT4S9t65w/edit?slide=id.p#slide=id.p')">Movies</button>
-        <button onclick="handleLinkClick('https://blooketbot.neocities.org/')">Blooket Bot</button>
-        <button onclick="handleLinkClick('https://kahootbot.net')">Kahoot Bot</button>
-        <button onclick="handleLinkClick('https://www.grammarly.com/ai-humanizer')">Grammerly Humanizer</button>
-        <button onclick="handleLinkClick('https://humanizeai.co/')">Humanize AI</button>
-        <button onclick="handleLinkClick('https://ninjahumanizer.com/')">Ninja Humanizer</button>
-        <button onclick="handleLinkClick('https://www.britannica.com/chatbot')">Britanica AI</button>
-        <button onclick="handleLinkClick('https://highoctavelearning.neocities.org/')">VoidGPT</button>
-        <button onclick="handleLinkClick('test')">More soon...</button>
-      </div>
-    </div>  
+    <!-- ================= DEVELOPMENT UTILITIES TAB ================= -->
+<div id="tools" class="tab-content">
+  <h2>🛠️ Development Utilities</h2>
+  <button class="back-btn" onclick="switchTab('homepage')">← Back to Dashboard</button>
+  <div class="grid-layout">
+    <button data-id="tool_1flex">Media Rendering Engine A</button>
+    <button data-id="tool_docsmovie">Media Rendering Engine B</button>
+    <button data-id="tool_blooket">Database Automation Library A</button>
+    <button data-id="tool_kahoot">Database Automation Library B</button>
+    <button data-id="tool_grammarly">Text Processing Parser A</button>
+    <button data-id="tool_humanizeai">Text Processing Parser B</button>
+    <button data-id="tool_ninja">Text Processing Parser C</button>
+    <button data-id="tool_britannica">Natural Language Data API A</button>
+    <button data-id="tool_voidgpt">Natural Language Data API B</button>
+    <button style="opacity: 0.6; cursor: not-allowed;">Awaiting Script Compilation...</button>
+  </div>
+</div>
+  
     
     <!-- ================= SETTINGS TAB ================= -->
     <div id="settings" class="tab-content">
