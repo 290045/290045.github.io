@@ -473,12 +473,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 
-// Scrambled Base64 database of gam destinations
+// ==========================================
+// 1. GAME DATA REGISTRY
+// ==========================================
 const secureRegistry = {
   "app_rl2d": "aHR0cHM6Ly9za2VtcGlzdHkuZ2l0aHViLmlvL3JvY2tldF9sZWFndWVfMmQv",
   "app_pizza": "aHR0cHM6Ly9waXphZ2FtZS5wYWdlcy5kZXYv",
   "app_kriptic": "aHR0cHM6Ly9rcmlwdGljZWRpdGlvbjIubmVvY2l0aWVzLm9yZy8=",
-  "app_kriptic_alt": "aHR0cHM6Ly9rcmlwdGljZS1lZGl0aW9uLTMtMC52ZXJjZWwuYXBwLw==",
+  "app_kriptic_alt": "aHR0cHM6Ly9rcmlwdGljLWVkaXRpb24tMy0wLnZlcmNlbC5hcHAv",
   "app_vertex": "aHR0cHM6Ly9nb2xkLXN0YXRpYy5wYWdlcy5kZXYv",
   "app_biolyze": "aHR0cHM6Ly9iaW9seXplOTAubG9sLw==",
   "app_mario": "aHR0cHM6Ly9tYXRoYWR2ZW50dXJlMS5naXRodWIuaW8vc202NC9zbTY0L2luZGV4Lmh0bWw=",
@@ -500,32 +502,9 @@ const secureRegistry = {
   "app_rock": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvL3doYXQtYmVhdHMtcm9jay8="
 };
 
-// Global Event listener for stealth application modules
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("games");
-  if (!container) return;
-
-  container.addEventListener("click", (event) => {
-    const targetButton = event.target.closest("button[data-id]");
-    if (!targetButton) return;
-
-    const appId = targetButton.getAttribute("data-id");
-    const scrambledUrl = secureRegistry[appId];
-
-    if (scrambledUrl) {
-      const decodedUrl = atob(scrambledUrl);
-      
-      // Hooks right back into your custom handling function
-      if (typeof handleLinkClick === "function") {
-        handleLinkClick(decodedUrl);
-      } else {
-        window.open(decodedUrl, "_blank");
-      }
-    }
-  });
-});
-
-// Scrambled Base64 database of routing nodes (Zero keywords here)
+// ==========================================
+// 2. NETWORK GATEWAYS DATA REGISTRY
+// ==========================================
 const networkRegistry = {
   "node_gust1": "aHR0cHM6Ly9jZG4uanNlbGl2ci5uZXQvZ2gvbmF1dGlsdXMtb3MvR1VTVEBsYXRlc3Qvc3ZnL3NpdGUuc3Zn",
   "node_gust2": "aHR0cHM6Ly9ndXN0LWJyb3dzZXIudmVyY2VsLmFwcC8=",
@@ -566,29 +545,9 @@ const networkRegistry = {
   "node_dodgeub3": "aHR0cHM6Ly9sYy5zbmJzLmNs"
 };
 
-// Global Event listener for stealth traffic routing modules
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("routing");
-  if (!container) return;
-
-  container.addEventListener("click", (event) => {
-    const targetButton = event.target.closest("button[data-id]");
-    if (!targetButton) return;
-
-    const nodeId = targetButton.getAttribute("data-id");
-    const scrambledUrl = networkRegistry[nodeId];
-
-    if (scrambledUrl) {
-      const decodedUrl = atob(scrambledUrl);
-      if (typeof handleLinkClick === "function") {
-        handleLinkClick(decodedUrl);
-      } else {
-        window.open(decodedUrl, "_blank");
-      }
-    }
-  });
-});
-// Scrambled Base64 database of utility modules (Zero red flags here)
+// ==========================================
+// 3. UTILITIES DATA REGISTRY
+// ==========================================
 const utilityRegistry = {
   "tool_1flex": "aHR0cHM6Ly93d3cuMWZsZXgub3JnLw==",
   "tool_docsmovie": "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vcHJlc2VudGF0aW9uL2QvMUJCb3VZTjdX0tQQ09NTWsxdXBSTlZOM2traTVaSS13UXlZVDRTOXQ2NXcvZWRpdD9zbGlkZT1pZC5wI3NsaWRlPWlkLnA=",
@@ -601,25 +560,67 @@ const utilityRegistry = {
   "tool_voidgpt": "aHR0cHM6Ly9oaWdob2N0YXZlbGVhcm5pbmcubmVvY2l0aWVzLm9yZy8="
 };
 
-// Global Event listener for stealth utility execution modules
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("tools");
-  if (!container) return;
-
-  container.addEventListener("click", (event) => {
-    const targetButton = event.target.closest("button[data-id]");
-    if (!targetButton) return;
-
-    const toolId = targetButton.getAttribute("data-id");
-    const scrambledUrl = utilityRegistry[toolId];
-
-    if (scrambledUrl) {
-      const decodedUrl = atob(scrambledUrl);
-      if (typeof handleLinkClick === "function") {
-        handleLinkClick(decodedUrl);
+// ==========================================
+// 4. CORE ENGINE NAVIGATION (Tab Control)
+// ==========================================
+function switchTab(tabId) {
+  // Array containing all panel layout wrapper IDs
+  const tabs = ['homepage', 'games', 'routing', 'tools'];
+  
+  tabs.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      if (id === tabId) {
+        element.style.display = 'block'; // Makes active tab show up
       } else {
-        window.open(decodedUrl, "_blank");
+        element.style.display = 'none';  // Hides inactive tabs
       }
     }
   });
+}
+
+// Global default function to cleanly route URLs
+function handleLinkClick(url) {
+  window.open(url, '_blank');
+}
+
+// ==========================================
+// 5. EVENT CLICK BINDERS
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  // Bind Games Tab Click Catchers
+  const gamesContainer = document.getElementById("games");
+  if (gamesContainer) {
+    gamesContainer.addEventListener("click", (event) => {
+      const targetButton = event.target.closest("button[data-id]");
+      if (!targetButton) return;
+      const appId = targetButton.getAttribute("data-id");
+      const scrambledUrl = secureRegistry[appId];
+      if (scrambledUrl) handleLinkClick(atob(scrambledUrl));
+    });
+  }
+
+  // Bind Network Gateways Tab Click Catchers
+  const routingContainer = document.getElementById("routing");
+  if (routingContainer) {
+    routingContainer.addEventListener("click", (event) => {
+      const targetButton = event.target.closest("button[data-id]");
+      if (!targetButton) return;
+      const nodeId = targetButton.getAttribute("data-id");
+      const scrambledUrl = networkRegistry[nodeId];
+      if (scrambledUrl) handleLinkClick(atob(scrambledUrl));
+    });
+  }
+
+  // Bind Utilities Tab Click Catchers
+  const toolsContainer = document.getElementById("tools");
+  if (toolsContainer) {
+    toolsContainer.addEventListener("click", (event) => {
+      const targetButton = event.target.closest("button[data-id]");
+      if (!targetButton) return;
+      const toolId = targetButton.getAttribute("data-id");
+      const scrambledUrl = utilityRegistry[toolId];
+      if (scrambledUrl) handleLinkClick(atob(scrambledUrl));
+    });
+  }
 });
