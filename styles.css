@@ -5,6 +5,14 @@
   --text-main: #ffffff;
   --text-muted: #aaaaaa;
   --cursor-type: default;
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg-color: #f4f4f7;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --text-main: #111115;
+  --text-muted: #55555c;
 }
 
 [data-theme="cyberpunk"] {
@@ -14,11 +22,28 @@
   --text-muted: #ff007f;
 }
 
+/* NEW COMPILER PRESET: Dracula Pro Premium Gothic Theme */
+[data-theme="dracula"] {
+  --bg-color: #282a36;
+  --card-bg: rgba(40, 42, 54, 0.7);
+  --text-main: #f8f8f2;
+  --text-muted: #6272a4;
+}
+
+/* NEW COMPILER PRESET: Tokyo Night Asset Configuration */
+[data-theme="tokyonight"] {
+  --bg-color: #1a1b26;
+  --card-bg: rgba(26, 27, 38, 0.75);
+  --text-main: #73daca;
+  --text-muted: #565f89;
+}
+
 /* Force only the main root window base layer to hold the solid background color */
 body, html {
   background-color: var(--bg-color) !important;
   color: var(--text-main) !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  /* FIXED: Dynamically pulls font properties from the live settings engine variables */
+  font-family: var(--font-family) !important;
   cursor: var(--cursor-type) !important;
   transition: background-color 0.25s ease, color 0.25s ease;
   margin: 0;
@@ -35,14 +60,15 @@ body {
 }
 
 /* Force all structural sub-pages to remain clear so particles show through */
-.tab-content, #homepage, #settings, #games, #proxies, #tools, #changelog {
+.tab-content, #homepage, #settings, #games, #routing, #tools, #changelog {
   background: transparent !important;
   background-color: transparent !important;
 }
 
-/* Ensure buttons and inputs respect custom cursors globally */
+/* Ensure buttons and inputs respect custom cursors and fonts globally */
 button, input, select, a {
   cursor: var(--cursor-type) !important;
+  font-family: var(--font-family) !important;
 }
 
 /* ================= GLOBAL & LAYOUT: LIQUID GLASS CONSTRAINTS ================= */
@@ -99,13 +125,13 @@ h1 {
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-family) !important;
   display: block !important;
 }
 
 h2, h3, p, label, li {
   color: var(--text-main) !important; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-family: var(--font-family) !important;
 }
 
 h2 {
