@@ -8,16 +8,19 @@
 </head>
 <body>
   
-  <!-- ================= MAINTENANCE OVERLAY ================= -->
-  <div id="maintenance-overlay" class="hidden">
-    <div class="maintenance-box">
-      <h1>Site shutdown</h1>
-      <p>Something broke, and things will be fixed soon.</p>
-      <input type="password" id="dev-password" placeholder="Enter Developer Password">
-      <button onclick="checkPassword()">Access Site</button>
-      <p id="error-msg" class="hidden">Incorrect developer password.</p>
-    </div>
+  <!-- ================= COMPILATION CONSOLE OVERLAY ================= -->
+<div id="maintenance-overlay" class="hidden">
+  <div class="maintenance-box">
+    <h1>System Initialization Pending</h1>
+    <p>Asset synchronization in progress. Please authenticate to access the development terminal environment.</p>
+    
+    <!-- Changed type to text and added stealth CSS class to hide text styling -->
+    <input type="text" id="dev-password" placeholder="Enter Authorization Token" class="masked-input">
+    
+    <button onclick="checkPassword()">Verify Credentials</button>
+    <p id="error-msg" class="hidden">Authorization token mismatch. Access denied.</p>
   </div>
+</div>
 
   <!-- ================= BACKGROUND CONSTELLATION CANVAS ================= -->
   <div class="liquid-engine-wrapper">
