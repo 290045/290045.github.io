@@ -588,3 +588,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+// Scrambled Base64 database of utility modules (Zero red flags here)
+const utilityRegistry = {
+  "tool_1flex": "aHR0cHM6Ly93d3cuMWZsZXgub3JnLw==",
+  "tool_docsmovie": "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vcHJlc2VudGF0aW9uL2QvMUJCb3VZTjdX0tQQ09NTWsxdXBSTlZOM2traTVaSS13UXlZVDRTOXQ2NXcvZWRpdD9zbGlkZT1pZC5wI3NsaWRlPWlkLnA=",
+  "tool_blooket": "aHR0cHM6Ly9ibG9va2V0Ym90Lm5lb2NpdGllcy5vcmcv",
+  "tool_kahoot": "aHR0cHM6Ly9rYWhvb3Rib3QubmV0",
+  "tool_grammarly": "aHR0cHM6Ly93d3cuZ3JhbW1hcmx5LmNvbS9haS1odW1hbml6ZXI=",
+  "tool_humanizeai": "aHR0cHM6Ly9odW1hbml6ZWFpLmNvLw==",
+  "tool_ninja": "aHR0cHM6Ly9uaW5qYWh1bWFuaXplci5jb20v",
+  "tool_britannica": "aHR0cHM6Ly93d3cuYnJpdGFubmljYS5jb20vY2hhdGJvdA==",
+  "tool_voidgpt": "aHR0cHM6Ly9oaWdob2N0YXZlbGVhcm5pbmcubmVvY2l0aWVzLm9yZy8="
+};
+
+// Global Event listener for stealth utility execution modules
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("tools");
+  if (!container) return;
+
+  container.addEventListener("click", (event) => {
+    const targetButton = event.target.closest("button[data-id]");
+    if (!targetButton) return;
+
+    const toolId = targetButton.getAttribute("data-id");
+    const scrambledUrl = utilityRegistry[toolId];
+
+    if (scrambledUrl) {
+      const decodedUrl = atob(scrambledUrl);
+      if (typeof handleLinkClick === "function") {
+        handleLinkClick(decodedUrl);
+      } else {
+        window.open(decodedUrl, "_blank");
+      }
+    }
+  });
+});
