@@ -75,11 +75,9 @@ async function checkPassword() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ==========================================
-// 8. ENVIRONMENTAL ENGINE & SELECTION RULES
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => { // FIXED: Added this required opening bracket!
-  // Grab Theme Element Targets
+  // =========================================================================
+  // WORKSPACE ENVIRONMENTAL SYSTEM CONTROLS (THEMES Engine)
+  // =========================================================================
   const presetSelect = document.getElementById("preset-selector");
   const backgroundSelect = document.getElementById("background-selector"); 
   const customControls = document.getElementById("custom-theme-controls");
@@ -111,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => { // FIXED: Added this requi
   // Initialize background switcher engine if available on boot
   if (typeof initBackgroundEngine === "function") initBackgroundEngine(); 
 
-  // Monitor Theme Changes
+  // Monitor Theme Preset Changes
   if (presetSelect) {
     presetSelect.addEventListener("change", (e) => {
       const selection = e.target.value;
@@ -191,8 +189,7 @@ document.addEventListener("DOMContentLoaded", () => { // FIXED: Added this requi
       localStorage.setItem("theme-cursor", selectedCursor);
     });
   }
-});
-
+  
 // ================= CLOAKING =================
 (function() {
   const STORAGE_KEYS = {
