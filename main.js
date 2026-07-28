@@ -74,21 +74,32 @@ async function checkPassword() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  // ==========================================
+// 8. ENVIRONMENTAL ENGINE & SELECTION RULES
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => { // FIXED: Added this required opening bracket!
   // Grab Theme Element Targets
   const presetSelect = document.getElementById("preset-selector");
+  const backgroundSelect = document.getElementById("background-selector"); 
   const customControls = document.getElementById("custom-theme-controls");
   const customBgInput = document.getElementById("custom-bg");
   const customTextInput = document.getElementById("custom-text");
+  const particleColorInput = document.getElementById("particle-color-input"); 
   const fontSelect = document.getElementById("font-selector");
   const cursorSelect = document.getElementById("cursor-selector");
 
   // Read saved client specifications out of storage
   const savedPreset = localStorage.getItem("theme-preset") || "dark";
+  const savedBgAnim = localStorage.getItem("theme-bg-anim") || "constellation"; 
+  const savedParticleColor = localStorage.getItem("theme-particle-color") || "#ffffff"; 
   const savedFont = localStorage.getItem("theme-font") || "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
   const savedCursor = localStorage.getItem("theme-cursor") || "default";
 
   // Assign interface positions 
   if (presetSelect) presetSelect.value = savedPreset;
+  if (backgroundSelect) backgroundSelect.value = savedBgAnim; 
+  if (particleColorInput) particleColorInput.value = savedParticleColor; 
   if (fontSelect) fontSelect.value = savedFont;
   if (cursorSelect) cursorSelect.value = savedCursor;
 
@@ -96,6 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
   applyThemePreset(savedPreset);
   document.documentElement.style.setProperty("--font-family", savedFont);
   document.documentElement.style.setProperty("--cursor-type", savedCursor);
+  
+  // Initialize background switcher engine if available on boot
+  if (typeof initBackgroundEngine === "function") initBackgroundEngine(); 
 
   // Monitor Theme Changes
   if (presetSelect) {
@@ -103,6 +117,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const selection = e.target.value;
       localStorage.setItem("theme-preset", selection);
       applyThemePreset(selection);
+    });
+  }
+
+  // Monitor Background Animation Switcher changes
+  if (backgroundSelect) {
+    backgroundSelect.addEventListener("change", (e) => {
+      localStorage.setItem("theme-bg-anim", e.target.value);
+      if (typeof initBackgroundEngine === "function") initBackgroundEngine(); 
+    });
+  }
+
+  // Monitor Particle Hex Color input changes
+  if (particleColorInput) {
+    particleColorInput.addEventListener("input", (e) => {
+      localStorage.setItem("theme-particle-color", e.target.value);
     });
   }
 
