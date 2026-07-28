@@ -282,9 +282,9 @@ input[type="text"]:focus {
   left: 0 !important;
   width: 100vw !important;
   height: 100vh !important;
-  background-color: #0b0c10 !important; /* Slightly richer dark slate background */
+  /* Keeps layout clear so your particle canvas engine seamlessly shows through */
+  background: transparent !important; 
   z-index: 9999999 !important; 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 #maintenance-overlay:not(.hidden) {
@@ -297,84 +297,52 @@ input[type="text"]:focus {
   width: 90%;
   max-width: 420px; 
   padding: 40px 35px;
-  border-radius: 24px; /* More modern, refined corner radius */
+  border-radius: 22px; /* Matches your changelog and panel theme corners */
   text-align: center;
-  background: #1f2833 !important; /* Solid dark contrast card block */
-  border: 1px solid rgba(255, 255, 255, 0.05) !important; 
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important; /* Premium depth elevation */
+  
+  /* Inherits your exact liquid glass layout variables dynamically */
+  background: var(--card-bg) !important; 
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important; 
+  
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
 }
 
-/* Polished Typography Styles */
+/* Polished Typography Styles inheriting your native layout headers */
 .maintenance-box h1 {
-  color: #66fcf1; /* High-tech teal primary headline color */
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 0 12px 0;
-  letter-spacing: -0.5px;
+  margin: 0 0 15px 0 !important;
 }
 
 .maintenance-box p {
-  color: #c5c6c7; /* Soft gray for readable description body text */
+  color: var(--text-muted) !important; /* Uses your global secondary text token */
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0 0 24px 0;
+  text-align: center;
 }
 
-/* FOOLPROOF SECURITY MASKING FIELD */
+/* SECURE FILTER-PROOF MASKING INTERFACE FIELD */
 #dev-password {
-  width: 100%;
-  max-width: 300px;
-  padding: 12px 16px;
-  background-color: #0b0c10 !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  border-radius: 8px;
-  color: #ffffff !important;
-  font-size: 16px;
+  margin-bottom: 20px !important;
   text-align: center;
-  outline: none;
-  transition: all 0.2s ease;
-  margin-bottom: 16px;
-  box-sizing: border-box;
-  /* Crucial text-security rules that force text into secure bullet dots */
+  /* Crucial text-security rules that force typed text into secure dots */
   -webkit-text-security: disc !important; 
   text-security: disc !important;
 }
 
-#dev-password:focus {
-  border-color: #66fcf1 !important; /* Glowing interaction anchor outline */
-  box-shadow: 0 0 0 2px rgba(102, 252, 241, 0.2) !important;
-}
-
-/* Polished Interactive Trigger Interface Button */
+/* Dynamic Interaction Button Override */
 .maintenance-box button {
-  width: 100%;
-  max-width: 300px;
-  padding: 12px 20px;
-  background-color: #66fcf1 !important; /* High-visibility trigger action base fill */
-  border: none !important;
-  border-radius: 8px;
-  color: #0b0c10 !important;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
 }
 
-.maintenance-box button:hover {
-  background-color: #45e3da !important;
-  transform: translateY(-1px); /* Clean interactive response shift motion */
-}
-
-.maintenance-box button:active {
-  transform: translateY(1px);
-}
-
-/* System Exception Output UI Alert */
+/* System Exception Output Alert text layout style mapping */
 #error-msg {
-  color: #ff4a4a !important; /* Pure clinical warning color token */
+  color: #ff8e8e !important; /* Uses your custom warning color token mapping */
   font-size: 13px;
   font-weight: 500;
   margin: 16px 0 0 0;
