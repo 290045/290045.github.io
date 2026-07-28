@@ -73,6 +73,38 @@ async function checkPassword() {
   }
 }
 
+// =========================================================================
+// CENTRAL NAVIGATION TAB ENGINE (FIXED: Cleaned to match your layout)
+// =========================================================================
+function switchTab(tabId) {
+  // Wiped out the old proxies keyword to align 100% with your secure ID setup
+  const tabs = ['homepage', 'games', 'routing', 'tools', 'settings', 'changelog'];
+  
+  tabs.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      if (id === tabId) {
+        element.style.display = 'block'; 
+      } else {
+        element.style.display = 'none';  
+      }
+    }
+  });
+}
+
+function handleLinkClick(url) {
+  const link = document.createElement('a');
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer'; 
+  document.body.appendChild(link);
+  link.click(); 
+  document.body.removeChild(link);
+}
+
+// =========================================================================
+// INTERFACE CONTROLS & ENVIRONMENT INITIALIZATION
+// =========================================================================
 document.addEventListener("DOMContentLoaded", () => {
 
   // =========================================================================
@@ -189,7 +221,8 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("theme-cursor", selectedCursor);
     });
   }
-  
+});
+
 // ================= CLOAKING =================
 (function() {
   const STORAGE_KEYS = {
