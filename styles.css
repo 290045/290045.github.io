@@ -1,4 +1,6 @@
-/* ================= GLOBAL SYSTEM VARIABLE DESIGN LAYERS ================= */
+/* =========================================================================
+   1. GLOBAL SYSTEM VARIABLE DESIGN LAYERS & PREMIUM THEMES
+   ========================================================================= */
 :root, [data-theme="dark"] {
   --bg-color: #07070a;
   --card-bg: rgba(14, 14, 20, 0.65);
@@ -22,7 +24,7 @@
   --text-muted: #ff007f;
 }
 
-/* NEW COMPILER PRESET: Dracula Pro Premium Gothic Theme */
+/* Dracula Pro Premium Gothic Theme Layout */
 [data-theme="dracula"] {
   --bg-color: #282a36;
   --card-bg: rgba(40, 42, 54, 0.7);
@@ -30,7 +32,7 @@
   --text-muted: #6272a4;
 }
 
-/* NEW COMPILER PRESET: Tokyo Night Asset Configuration */
+/* Tokyo Night Street Racing Neon Layout */
 [data-theme="tokyonight"] {
   --bg-color: #1a1b26;
   --card-bg: rgba(26, 27, 38, 0.75);
@@ -42,9 +44,8 @@
 body, html {
   background-color: var(--bg-color) !important;
   color: var(--text-main) !important;
-  /* FIXED: Dynamically pulls font properties from the live settings engine variables */
-  font-family: var(--font-family) !important;
-  cursor: var(--cursor-type) !important;
+  font-family: var(--font-family) !important; /* Dynamically switches with user font select */
+  cursor: var(--cursor-type) !important;     /* Dynamically switches with user cursor select */
   transition: background-color 0.25s ease, color 0.25s ease;
   margin: 0;
   padding: 0;
@@ -60,7 +61,7 @@ body {
 }
 
 /* Force all structural sub-pages to remain clear so particles show through */
-.tab-content, #homepage, #settings, #games, #routing, #tools, #changelog {
+.tab-content, #homepage, #settings, #games, #proxies, #routing, #tools, #changelog {
   background: transparent !important;
   background-color: transparent !important;
 }
@@ -71,7 +72,9 @@ button, input, select, a {
   font-family: var(--font-family) !important;
 }
 
-/* ================= GLOBAL & LAYOUT: LIQUID GLASS CONSTRAINTS ================= */
+/* =========================================================================
+   2. GLOBAL & LAYOUT: LIQUID GLASS CONSTRAINTS
+   ========================================================================= */
 * {
   box-sizing: border-box;
 }
@@ -114,7 +117,9 @@ button, input, select, a {
   width: 0px;
 }
 
-/* ================= TYPOGRAPHY & VISIBLE TEXT LAYERS ================= */
+/* =========================================================================
+   3. TYPOGRAPHY & VISIBLE TEXT LAYERS
+   ========================================================================= */
 h1 {
   text-align: center;
   margin-bottom: 25px;
@@ -145,6 +150,174 @@ h3 {
   margin-bottom: 8px;
   font-size: 15px;
 }
+
+/* =========================================================================
+   4. TAB SYSTEM NAVIGATION INFRASTRUCTURE
+   ========================================================================= */
+.tab-content {
+  display: none;
+  width: 100%;
+}
+
+.tab-content.active {
+  display: block !important;
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.menu-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 12px;
+  width: 100%;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Auto-fits side-by-side cleanly */
+  gap: 15px;
+  margin-bottom: 25px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* =========================================================================
+   5. GLASS UI INTERFACE CONTROLS & BUTTONS
+   ========================================================================= */
+button {
+  padding: 12px 24px;       
+  border-radius: 16px;
+  font-size: 14px;          
+  cursor: pointer;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-family) !important;
+  
+  background: rgba(255, 255, 255, 0.03) !important; 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06) !important; 
+  color: #ffffff !important;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08) !important;
+  
+  width: auto !important;   
+  max-width: 240px !important; 
+  min-width: 140px !important;         
+  display: inline-block !important;    
+  margin: 6px auto !important;         
+  flex-shrink: 0 !important;   
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transition: left 0.6s cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.08) !important; 
+  border-color: rgba(255, 255, 255, 0.25) !important; 
+  transform: scale(1.02) translateY(-1px);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04) !important;
+}
+
+button:active {
+  transform: scale(0.98) translateY(0);
+}
+
+.grid-layout button {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.back-btn {
+  background: rgba(239, 68, 68, 0.08) !important;
+  border-color: rgba(239, 68, 68, 0.2) !important;
+  color: #ff8e8e !important;
+  margin-bottom: 20px;
+}
+
+/* =========================================================================
+   6. FIELDS & INPUT SHEET METRICS
+   ========================================================================= */
+input[type="text"], input[type="password"], select {
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 15px;
+  width: 100%;
+  max-width: 480px; 
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  color: #ffffff !important;
+  background: rgba(0, 0, 0, 0.35) !important; 
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  outline: none;
+  transition: border-color 0.25s, background-color 0.25s;
+  margin: 0 auto 15px auto;
+  display: block;
+  font-family: var(--font-family) !important;
+}
+
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+input[type="text"]:focus, select:focus {
+  border-color: rgba(255, 255, 255, 0.25); 
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* =========================================================================
+   7. STRUCTURAL INTERFACE CONTENT PANELS
+   ========================================================================= */
+.changelog-card, .credits-card, .panic-section { 
+  background: transparent !important; 
+  padding: 25px; 
+  border-radius: 22px; 
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.6;
+  width: 100%;
+}
+
+.changelog-card .date {
+  font-size: 13px;
+  color: #888899;
+  margin-bottom: 15px;
+}
+
+.changelog-card ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.footer-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 25px;
+  opacity: 0.5;
+  letter-spacing: 0.5px;
+}
+
 
 /* ================= TAB SYSTEM MANAGEMENT ================= */
 .tab-content {
