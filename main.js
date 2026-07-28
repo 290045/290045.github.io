@@ -505,7 +505,6 @@ const secureRegistry = {
 // 2. NETWORK GATEWAYS DATA REGISTRY
 // ==========================================
 const networkRegistry = {
-  "node_gust1": "aHR0cHM6Ly9jZG4uanNlbGl2ci5uZXQvZ2gvbmF1dGlsdXMtb3MvR1VTVEBsYXRlc3Qvc3ZnL3NpdGUuc3Zn",
   "node_gust2": "aHR0cHM6Ly9ndXN0LWJyb3dzZXIudmVyY2VsLmFwcC8=",
   "node_selenite": "aHR0cHM6Ly9jaHJvbWE2Ny5naXRodWIuaW8vaW5kZXguaHRtbA==",
   "node_daydream": "aHR0cHM6Ly90aG91Z2h0cy5mb3J3YXJkZXJzb2Z0LmNvbS8=",
@@ -514,12 +513,7 @@ const networkRegistry = {
   "node_galaxy": "aHR0cHM6Ly9oYW5kLmhhbmQtdW5kLWhlcnouYXQvb25ib2FyZGluZy8=",
   "node_ttt": "aHR0cHM6Ly90dW5ndHVuZ2xhYi5uZWtvd2ViLm9yZy8=",
   "node_void1": "aHR0cHM6Ly9xanFrcS5yZWFzb25tYW4uY29tLz8v",
-  "node_void2": "aHR0cHM6Ly9yc2ZlLnNleHVhbGlkYWRlc3Jvc2FyaW8uY29tLmFyLz8v",
-  "node_lunar1": "aHR0cHM6Ly9oaWdoc2Nob29sYWNhZGVteS5vbmxpbmUv",
   "node_lunar2": "aHR0cHM6Ly91b2FzbWFuLmxvbC8=",
-  "node_quasar": "aHR0cHM6Ly9tYXRobm90ZXMuY3Vlb2dyYXBoaXguYXQv",
-  "node_lunar3": "aHR0cHM6Ly9sdW5hci52Y3NhLmdwdTc0LnJ1Lw==",
-  "node_shadow1": "aHR0cHM6Ly9tYXhnZW8ubWlzc2lvbmdyZWVuY29tLm9yZy8=",
   "node_shadow2": "aHR0cHM6Ly9sdW5hcndyaXRpbmcubGFjaXVkYWRjb21vdGV4dG8uY2wv",
   "node_shadow3": "aHR0cHM6Ly9tZWdhcmVhZGluZy5taXNzaW9uZ3JlZW53YXkub3JnLw==",
   "node_shadow4": "aHR0cHM6Ly9xdWlja3BvZW1zLm1pc3Npb25ncmVlbndheS5vcmcv",
@@ -532,15 +526,10 @@ const networkRegistry = {
   "node_boredom1": "aHR0cHM6Ly9tYW51YWxseS1yZWxheGVkLWFsaWVuLmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC8=",
   "node_boredom2": "aHR0cHM6Ly9hbGktaW4tYS1uZXctZHJlc3MuZ2xvYmFsLnNzbC5mYXN0bHkubmV0Lw==",
   "node_boredom3": "aHR0cHM6Ly9ib3JlZG9uYXNuZGtmLmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC8=",
-  "node_petezah": "aHR0cHM6Ly9jZG4uanNlbGl2ci5uZXQvZ2gvcGluZWFwcGxlLXBldGV6YWgvaG9tZXdvcmsvbWFpbi5zdmc=",
-  "node_reds": "aHR0cHM6Ly9oYXBweS5jcmVvZ3JhcGhpeC5hdC8=",
-  "node_rammerhead": "aHR0cHM6Ly9yYy0xMTQwLm1hcnRpbmdydWJpbmdlci5hdC8=",
   "node_utopia": "aHR0cHM6Ly9zaG9vbGlrZWRpbW5hdG9xb3VydXMuYWlxLXRlc3QucnUv",
   "node_helios": "aHR0cHM6Ly9oZWxpb3MtYmx1ZS52ZXJjZWwuYXBwLw==",
   "node_seraph": "aHR0cHM6Ly9qb2VtYW1hOTgwLmdpdGh1Yi5pby9nYW1lcy9pbmRleC5odG1s",
   "node_unblokkked": "aHR0cHM6Ly91bmJsb2tra2VkLndlYi5hcHAv",
-  "node_dodgeub1": "aHR0cHM6Ly9lZHUudGhlYXB2ZW50dXJlLnh5ei8=",
-  "node_dodgeub2": "aHR0cHM6Ly9jZG4uanNlbGl2ci5uZXQvZ2gvZG9nZXViLy0vaW5kZXguc3ZnIy8=",
   "node_dodgeub3": "aHR0cHM6Ly9sYy5zbmJzLmNs"
 };
 
