@@ -1,54 +1,89 @@
-===========================================
-	         ##    IDEAS   ##
-===========================================
-
 Fix Themes!!!
+	- Lots of bugs with themes
+===========================================
+Organize "index.html" into a folder
+	- Tabs Folder
+		- Homepage
+		- Games
+		- Proxies
+		- Tools
+		- Settings
+			- Particles
+			- Themes
+			- Panic button
+			- Cloaking
+		- Change log
+	- Maintenance
 
-🌐 Navigation
-- Search bar for games, proxies, and tools
+Organize "main.js" into a folder
+	- Maintenance
+	- Settings
+		- Particles
+		- Themes
+		- Panic button
+		- Cloaking
+	- Tabs Folder
+		- Games
+		- Proxies
+		- Tools
+		- Change log
+		- Settings
+			- Particles
+			- Themes
+			- Panic button
+			- Cloaking
+
+Organize "styles.css" into a folder
+	- Main (Has like all the tabs containers)
+	- Global systems
+		- Glass UI
+		- Base
+	- Themes
+	- Maintenace 
+===========================================
+Navigation:
+- Search bar for games, proxies, and tools 
 - Favorites system
-  - Pin favorites to the top
-  - Yellow star icon
+	- Pin favorites to the top
+	- white outline star when not favorited
+	- Yellow star when favorited
 - Random button
 	- Opens a random game, proxy, or tool
-
-🔊 Sounds 
+===========================================
+Sounds:
 - Button click sounds
-- Background music (Setting)
-- Preset music selection (Setting)
+- Background music 
+	- Add into settings
+- Preset music selection
+	- Add into settings
 
-👥 Community (Game / Proxy pages)
-- Google Form suggestions (https://forms.gle/L2bxiCCBDWZsPR4DA)
-- Client-side custom game/proxy uploader
-
-🛡️ Privacy/Protection
-- History flood (Setting)
-  - Flood history with random pages
-- Auto-timeout lock
-  - Close the tab after inactivity
-- Users can choose how links open: (Setting)
-- Embedded in the site
-- about:blank
-- New browser tab
-
-🎮 Games
-- Allow users to download the game to play in a file
-- Hacked/Modded games
-- JSON/Save File Decryptor
-
-📊 Site Stats (Footer on homepage)
-- Visitor counter
-
-🎵 Audio Visualizer (Setting)
-- Spotify support (Link it in settings)
-- Apple Music support (Link it in settings)
+- Spotify/Apple Music support
+	- Allow users to link their account/playlist in settings
 - Album artwork (Popup)
 - Play / Pause (Popup)
 - Previous / Next (Popup)
 - Volume slider (Popup)
 - Progress bar (Popup)
 - Song timer (Popup)
-
+===========================================
+Quality of life:
+- Client-side custom game/proxy/tool uploader
+	- Allows users to upload their own link to the site, which will add a button for their client
+- Users can choose how links open (Setting)
+	- Embedded in the site
+	- about:blank
+	- New browser tab
+When switching tabs the site changes to canvas (visual)
+===========================================
+Privacy/Protection:
+- History flood (Setting)
+  - Flood history with random pages
+- Auto-timeout lock (Feature)
+  - Close the tab after inactivity
+===========================================
+Site Stats (Footer on homepage)
+- Visitor counter
+===========================================
 🏆 XP System
 - Gain XP by:
   - Time spent
