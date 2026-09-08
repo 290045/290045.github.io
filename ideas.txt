@@ -1,5 +1,5 @@
 Fix Themes!!!
-	- Lots of bugs with themes
+	- White text on white background
 ===========================================
 Organize "index.html" into a folder
 	- Tabs Folder
