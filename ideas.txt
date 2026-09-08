@@ -2,6 +2,7 @@ Fix Themes!!!
 	- White text on white background
 Change log doesn't work
 ===========================================
+Make a file version of the site incase school blocks main site
 Organize "index.html" into a folder
 	- Tabs Folder
 		- Homepage
