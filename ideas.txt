@@ -1,5 +1,6 @@
 Fix Themes!!!
 	- White text on white background
+Change log doesn't work
 ===========================================
 Organize "index.html" into a folder
 	- Tabs Folder
