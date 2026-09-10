@@ -596,8 +596,8 @@ const utilityRegistry = {
 // 4. CORE ENGINE NAVIGATION (Tab Control)
 // ==========================================
 function switchTab(tabId) {
-  // Array containing all panel layout wrapper IDs
-  const tabs = ['homepage', 'games', 'routing', 'tools'];
+  // Array containing all panel layout wrapper IDs - FIXED: Added 'settings' and 'changelog'
+  const tabs = ['homepage', 'games', 'routing', 'tools', 'settings', 'changelog'];
   
   tabs.forEach(id => {
     const element = document.getElementById(id);
