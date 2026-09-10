@@ -61,9 +61,10 @@ body {
 }
 
 /* Force all structural sub-pages to remain clear so particles show through */
-.tab-content, #homepage, #settings, #games, #proxies, #routing, #tools, #changelog {
+.tab-content, #homepage, #settings, #games, #routing, #tools, #changelog {
   background: transparent !important;
   background-color: transparent !important;
+  color: var(--text-main) !important;
 }
 
 /* Ensure buttons and inputs respect custom cursors and fonts globally */
@@ -114,7 +115,20 @@ button, input, select, a {
 }
 
 .container::-webkit-scrollbar {
-  width: 0px;
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* =========================================================================
@@ -179,12 +193,10 @@ h3 {
 
 .grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Auto-fits side-by-side cleanly */
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
   margin-bottom: 25px;
   width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
 /* =========================================================================
@@ -286,6 +298,19 @@ input[type="text"]:focus, select:focus {
   background: rgba(255, 255, 255, 0.02) !important;
 }
 
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+select option {
+  background: #07070a;
+  color: #ffffff;
+}
+
 /* =========================================================================
    7. STRUCTURAL INTERFACE CONTENT PANELS
    ========================================================================= */
@@ -296,17 +321,36 @@ input[type="text"]:focus, select:focus {
   border: 1px solid rgba(255, 255, 255, 0.08);
   line-height: 1.6;
   width: 100%;
+  color: var(--text-main) !important;
 }
 
 .changelog-card .date {
   font-size: 13px;
-  color: #888899;
+  color: var(--text-muted);
   margin-bottom: 15px;
 }
 
 .changelog-card ul {
   padding-left: 20px;
   margin: 0;
+  color: var(--text-main) !important;
+}
+
+.changelog-card li {
+  margin-bottom: 10px;
+  color: var(--text-main) !important;
+}
+
+.changelog-card strong {
+  color: var(--text-main) !important;
+}
+
+.changelog-card code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #00ffcc;
+  font-family: 'Courier New', monospace;
 }
 
 .footer-note {
@@ -318,153 +362,69 @@ input[type="text"]:focus, select:focus {
   letter-spacing: 0.5px;
 }
 
-
-/* ================= TAB SYSTEM MANAGEMENT ================= */
-.tab-content {
-  display: none;
-  width: 100%;
-}
-
-.tab-content.active {
-  display: block !important;
-  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.96) translateY(12px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.menu-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  gap: 12px;
-  width: 100%;
-}
-
-.grid-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
-  margin-bottom: 25px;
-  width: 100%;
-}
-
-/* ================= GLASS UI INTERFACE BUTTONS ================= */
-button {
-  padding: 12px 24px;       
-  border-radius: 16px;
-  font-size: 14px;          
-  cursor: pointer;
-  font-weight: 500;
-  letter-spacing: -0.1px;
-  transition: all 0.25s cubic-bezier(0.15, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-  
-  background: rgba(255, 255, 255, 0.03) !important; 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06) !important; 
-  color: #ffffff !important;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.08) !important;
-  
-  width: auto !important;   
-  max-width: 240px !important; 
-  min-width: 140px !important;         
-  display: inline-block !important;    
-  margin: 6px auto !important;         
-  flex-shrink: 0 !important;   
-}
-
-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-  transition: left 0.6s cubic-bezier(0.15, 1, 0.3, 1);
-}
-
-button:hover::before {
-  left: 100%;
-}
-
-button:hover {
-  background: rgba(255, 255, 255, 0.08) !important; 
-  border-color: rgba(255, 255, 255, 0.25) !important; 
-  transform: scale(1.02) translateY(-1px);
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.04) !important;
-}
-
-button:active {
-  transform: scale(0.98) translateY(0);
-}
-
-.grid-layout button {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.back-btn {
-  background: rgba(239, 68, 68, 0.08) !important;
-  border-color: rgba(239, 68, 68, 0.2) !important;
-  color: #ff8e8e !important;
+/* ================= PANIC CONTROLS SECTION ================= */
+.panic-section {
   margin-bottom: 20px;
 }
 
-/* ================= FIELDS & INPUT CONTROLS ================= */
-input[type="text"], input[type="password"] {
-  padding: 14px 16px;
-  border-radius: 14px;
-  font-size: 15px;
-  width: 100%;
-  max-width: 480px; 
-  border: 1px solid rgba(255, 255, 255, 0.08); 
-  color: #ffffff !important;
-  background: rgba(0, 0, 0, 0.35) !important; 
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
-  outline: none;
-  transition: border-color 0.25s, background-color 0.25s;
-  margin: 0 auto 15px auto;
-  display: block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
-}
-
-input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.25);
-}
-
-input[type="text"]:focus {
-  border-color: rgba(255, 255, 255, 0.25); 
-  background: rgba(255, 255, 255, 0.02) !important;
-}
-
-/* ================= CARDS PANELS ================= */
-.changelog-card, .credits-card, .panic-section { 
-  background: transparent !important; 
-  padding: 25px; 
-  border-radius: 22px; 
+.panic-key-display {
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  line-height: 1.6;
-  width: 100%;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px auto;
+  font-weight: 500;
+  color: var(--text-main) !important;
+  text-align: center;
 }
 
-.changelog-card .date {
-  font-size: 13px;
-  color: #888899;
+.panic-key-display.listening {
+  border-color: rgba(100, 200, 255, 0.4);
+  background: rgba(100, 200, 255, 0.05);
+}
+
+.panic-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.panic-controls button {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* ================= CUSTOM THEME CONTROLS ================= */
+#custom-theme-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
-.changelog-card ul {
-  padding-left: 20px;
-  margin: 0;
+#custom-theme-controls label {
+  color: var(--text-main) !important;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+#custom-theme-controls input {
+  width: 100%;
+  max-width: 100%;
+}
+
+#particle-color-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+#particle-color-wrapper label {
+  color: var(--text-main) !important;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 /* ================= MAINTENANCE OVERLAY LAYER ================= */
@@ -476,9 +436,8 @@ input[type="text"]:focus {
   height: 100vh !important;
   z-index: 9999999 !important; 
   
-  /* FIXED: Blurs out the main hub elements completely so they cannot bleed through */
-  background: rgba(7, 7, 10, 0.6) !important; /* Semi-transparent dark tinted sheet */
-  backdrop-filter: blur(25px) !important;      /* Aggressive blur to completely fog out background buttons */
+  background: rgba(7, 7, 10, 0.6) !important;
+  backdrop-filter: blur(25px) !important;
   -webkit-backdrop-filter: blur(25px) !important;
 }
 
@@ -495,7 +454,6 @@ input[type="text"]:focus {
   border-radius: 22px; 
   text-align: center;
   
-  /* Keeps the card block clear since the backdrop mask handles the layout blur */
   background: var(--card-bg) !important; 
   border: 1px solid rgba(255, 255, 255, 0.08) !important; 
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4) !important;
@@ -505,7 +463,6 @@ input[type="text"]:focus {
   align-items: center !important;
 }
 
-/* Polished Typography Styles */
 .maintenance-box h1 {
   margin: 0 0 15px 0 !important;
 }
@@ -518,7 +475,6 @@ input[type="text"]:focus {
   text-align: center;
 }
 
-/* SECURE FILTER-PROOF MASKING INTERFACE FIELD */
 #dev-password {
   margin-bottom: 20px !important;
   text-align: center;
@@ -526,14 +482,12 @@ input[type="text"]:focus {
   text-security: disc !important;
 }
 
-/* Dynamic Interaction Button Override */
 .maintenance-box button {
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
 }
 
-/* System Exception Output Alert text layout style mapping */
 #error-msg {
   color: #ff8e8e !important; 
   font-size: 13px;
