@@ -1,28 +1,19 @@
-# Being worked on! Will be opened by the start of school!
+# Being worked on! Will be opened sometime this school year!
 
 # 🎮 Welcome to 290045's Hub
-
-A clean, fast, and feature-rich front-end web development portal designed to explore browser APIs, storage mechanics, and modern web UI components.
 
 🌐 **Live Website:** [https://290045.github.io/](https://290045.github.io/)
 
 ---
 
-## 🚀 Core Features
+## 🛠️ Changelog:
 
-* **🎮 Interactive Canvas Media:** Integration of lightweight browser-based interactive applications and games.
-* **🛠️ API & Third-Party Integrations:** Implementation of external utility integrations, automated web scraping tools, and media streaming APIs.
-* **⚙️ Dynamic Tab Customization:** Uses the JavaScript DOM API to dynamically alter document titles and favicons on the fly.
-* **🚨 Key Event Handlers (Panic Feature):** Advanced event-listener configuration mapping custom keyboard hotkeys to immediate window-close events.
-* **🎨 Persistent Settings:** All configurations, user theme choices, and preferences automatically serialize and save using HTML5 `localStorage`.
-
----
-
-## 🤖 AI Disclosure & Collaboration
-
-This project was developed for academic purposes. Generative AI tools were utilized throughout development:
-* **Code Assistance:** AI was used to debug canvas physics, optimize asset rendering loops, and troubleshoot syntax errors.
-* **Human Ownership:** All project architecture, UI layout designs, repository hosting setup, and final code integrations were executed independently by me.
+* **Proxies:** There are many unblocked proxies for various uses, and they will be updated a lot
+* **Games:** There are many games, and some that I coded (more will be coded)
+* **Movies/AI tools:** There are movie sites and AI tools if you're bored or need homework help
+* **Settings:** There are many settings that allow you to change themes, tab name, and icon, and more
+* **Particle System:** Particles that are also interactive
+* **Liquid Glass:** The UI is based on Apple's liquid glass because it's smooth and looks nice
 
 ---
 
