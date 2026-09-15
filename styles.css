@@ -61,7 +61,7 @@ body {
 }
 
 /* Force all structural sub-pages to remain clear so particles show through */
-.tab-content, #homepage, #settings, #games, #routing, #tools, #changelog {
+.tab-content, #homepage, #settings, #games, #routing, #tools {
   background: transparent !important;
   background-color: transparent !important;
   color: var(--text-main) !important;
@@ -303,57 +303,6 @@ select {
 select option {
   background: #07070a;
   color: #ffffff;
-}
-
-/* =========================================================================
-   7. STRUCTURAL INTERFACE CONTENT PANELS
-   ========================================================================= */
-.changelog-card, .credits-card, .panic-section { 
-  background: transparent !important; 
-  padding: 25px; 
-  border-radius: 22px; 
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  line-height: 1.6;
-  width: 100%;
-  color: var(--text-main) !important;
-}
-
-.changelog-card .date {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 15px;
-}
-
-.changelog-card ul {
-  padding-left: 20px;
-  margin: 0;
-  color: var(--text-main) !important;
-}
-
-.changelog-card li {
-  margin-bottom: 10px;
-  color: var(--text-main) !important;
-}
-
-.changelog-card strong {
-  color: var(--text-main) !important;
-}
-
-.changelog-card code {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: #00ffcc;
-  font-family: 'Courier New', monospace;
-}
-
-.footer-note {
-  font-size: 11px;
-  color: var(--text-muted);
-  text-align: center;
-  margin-top: 25px;
-  opacity: 0.5;
-  letter-spacing: 0.5px;
 }
 
 /* ================= PANIC CONTROLS SECTION ================= */
