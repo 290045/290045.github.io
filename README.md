@@ -14,6 +14,7 @@
 * **Settings:** There are many settings that allow you to change themes, tab name, and icon, and more
 * **Particle System:** Particles that are also interactive
 * **Liquid Glass:** The UI is based on Apple's liquid glass because it's smooth and looks nice
+* **Recode/Cleanup:** Cleaned up the code that was broken, useless, or random text
 
 ---
 
