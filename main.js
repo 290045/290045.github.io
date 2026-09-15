@@ -565,13 +565,14 @@ const networkRegistry = {
   "node_boredom3": "aHR0cHM6Ly9ib3JlZG9uYXNuZGtmLmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC8=",
   "node_helios": "aHR0cHM6Ly9oZWxpb3MtYmx1ZS52ZXJjZWwuYXBwLw==",
   "node_seraph": "aHR0cHM6Ly9qb2VtYW1hOTgwLmdpdGh1Yi5pby9nYW1lcy9pbmRleC5odG1s",
-  "node_unblokkked": "aHR0cHM6Ly91bmJsb2tra2VkLndlYi5hcHAv",
-  };
+  "node_unblokkked": "aHR0cHM6Ly91bmJsb2tra2VkLndlYi5hcHAv"
+};
 
 // ==========================================
 // 3. UTILITIES DATA REGISTRY
 // ==========================================
 const utilityRegistry = {
+  "tool_1flex": "aHR0cHM6Ly93d3cuMWZsZXgub3JnLw==",
   "tool_docsmovie": "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vcHJlc2VudGF0aW9uL2QvMUJCb3VZTjdxX0tQQ09NTWsxdXBSTlZOM2traTVaSS13UXlZVDRTOXQ2NXcvZWRpdD9zbGlkZT1pZC5wI3NsaWRlPWlkLnA=",
   "tool_blooket": "aHR0cHM6Ly9ibG9va2V0Ym90Lm5lb2NpdGllcy5vcmcv",
   "tool_kahoot": "aHR0cHM6Ly9rYWhvb3Rib3QubmV0",
@@ -581,30 +582,6 @@ const utilityRegistry = {
   "tool_britannica": "aHR0cHM6Ly93d3cuYnJpdGFubmljYS5jb20vY2hhdGJvdA==",
   "tool_voidgpt": "aHR0cHM6Ly9oaWdob2N0YXZlbGVhcm5pbmcubmVvY2l0aWVzLm9yZy8="
 };
-
-// ==========================================
-// 4. CORE ENGINE NAVIGATION (Tab Control)
-// ==========================================
-function switchTab(tabId) {
-  // Array containing all panel layout wrapper IDs - FIXED: Added 'settings' and 'changelog'
-  const tabs = ['homepage', 'games', 'routing', 'tools', 'settings', 'changelog'];
-  
-  tabs.forEach(id => {
-    const element = document.getElementById(id);
-    if (element) {
-      if (id === tabId) {
-        element.style.display = 'block'; // Makes active tab show up
-      } else {
-        element.style.display = 'none';  // Hides inactive tabs
-      }
-    }
-  });
-}
-
-// Global default function to cleanly route URLs
-function handleLinkClick(url) {
-  window.open(url, '_blank');
-}
 
 // ==========================================
 // 5. EVENT CLICK BINDERS
@@ -618,7 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!targetButton) return;
       const appId = targetButton.getAttribute("data-id");
       const scrambledUrl = secureRegistry[appId];
-      if (scrambledUrl) handleLinkClick(atob(scrambledUrl));
+      if (scrambledUrl) window.handleLinkClick(atob(scrambledUrl));
     });
   }
 
@@ -630,7 +607,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!targetButton) return;
       const nodeId = targetButton.getAttribute("data-id");
       const scrambledUrl = networkRegistry[nodeId];
-      if (scrambledUrl) handleLinkClick(atob(scrambledUrl));
+      if (scrambledUrl) window.handleLinkClick(atob(scrambledUrl));
     });
   }
 
@@ -642,7 +619,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!targetButton) return;
       const toolId = targetButton.getAttribute("data-id");
       const scrambledUrl = utilityRegistry[toolId];
-      if (scrambledUrl) handleLinkClick(atob(scrambledUrl));
+      if (scrambledUrl) window.handleLinkClick(atob(scrambledUrl));
     });
   }
 });
