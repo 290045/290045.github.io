@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- SUCCESS: Uses the raw image source file so your black hole looks razor-sharp -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/KjwCvp84/logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,10 +12,9 @@
   <!-- ================= COMPILATION CONSOLE OVERLAY ================= -->
 <div id="maintenance-overlay" class="hidden">
   <div class="maintenance-box">
-    <h1>System Initialization Pending</h1>
-    <p>Asset synchronization in progress. Please authenticate to access the development terminal environment.</p>
+    <h1>Developers Only</h1>
+    <p>Website is curently under works for bugs!</p>
     
-    <!-- Changed type to text and added stealth CSS class to hide text styling -->
     <input type="text" id="dev-password" placeholder="Enter Authorization Token" class="masked-input">
     
     <button onclick="checkPassword()">Verify Credentials</button>
@@ -37,7 +35,6 @@
   <h1>290045's Hub</h1>
   <nav class="menu-layout">
     <button onclick="switchTab('games')">🎮 Interactive Applications</button>
-    <!-- FIXED: Changed from 'proxies' to 'routing' to match your secure tab block ID -->
     <button onclick="switchTab('routing')">🌐 Network Gateways</button>
     <button onclick="switchTab('tools')">🛠️ Development Utilities</button>
     <button onclick="switchTab('settings')">⚙️ Settings</button>
@@ -134,7 +131,6 @@
     <button style="opacity: 0.6; cursor: not-allowed;">Awaiting Script Compilation...</button>
   </div>
 </div>
-  
     
     <!-- ================= SETTINGS TAB ================= -->
     <div id="settings" class="tab-content">
