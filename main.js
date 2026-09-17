@@ -513,13 +513,10 @@ const secureRegistry = {
   "app_geo": "aHR0cHM6Ly93d3cuZ2VvZ3Vlc3NyLmNvbS8=",
   "app_wordle": "aHR0cHM6Ly93d3cubnl0aW1lcy5jb20vZ2FtZXMvd29yZGxlL2luZGV4Lmh0bWw=",
   "app_otter": "aHR0cHM6Ly9vdHRlcmdhbWVzLm9yZy8=",
-  "app_native": "aHR0cHM6Ly9uYXRpdmVnYW1lcy5uZXRsaWZ5LmFwcC8=",
   "app_mg66": "aHR0cHM6Ly9vdGhlcm1nd2Vic2l0ZS5naXRodWIuaW8v",
   "app_beeswarm": "aHR0cHM6Ly8yOTAyMS5naXRodWIuaW8vYmVlc3dhcm0v",
   "app_balatro": "aHR0cHM6Ly8yOTAyMS5naXRodWIuaW8vYmFsYXRyby8=",
-  "app_balatro_alt": "aHR0cHM6Ly90ZWxhdHJvLnRvbWNhdC5zaC8=",
   "app_netfly": "aHR0cHM6Ly9kM2x0YS5uZXRsaWZ5LmFwcC8=",
-  "app_hypacke": "aHR0cHM6Ly9oeXBhY2tlbGxpdGUxLmdpdGh1Yi5pby8=",
   "app_clicker": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLUNsaWNrZXItR2FtZS8=",
   "app_fish": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLWZsYXBweS1maXNoLw==",
   "app_rock": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvL3doYXQtYmVhdHMtcm9jay8=",
@@ -539,10 +536,8 @@ const secureRegistry = {
   "app_duckmath1": "aHR0cHM6Ly91bnBrZy5jb20vY2xhc3Nyb29tZHVja0AxLjAuMC9pbmRleC5odG1s",
   "app_duckmath2": "aHR0cHM6Ly91bnBrZy5jb20vY2xhc3Nyb29tZHVja0AxLjAuMC9pbmRleC5zdmc=",
   "app_duckmath3": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL21hdGhsZXNzb25zL2R1Y2ttYXRoLnN2Zw==",
-  "app_duckmath4": "aHR0cHM6Ly9kdWNrc3VtLmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC8=",
   "app_gba3": "aHR0cHM6Ly9jYXR0bi5naXRodWIuaW8vZ2JhLw==",
   "app_unbleeked": "aHR0cHM6Ly91bmJsZWVrZWQudmVyY2VsLmFwcC9tYWluLmh0bWw=",
-  "app_zane": "aHR0cHM6Ly96YW5lMzUzNS5naXRodWIuaW8vbWF0aGNhbGMuZ2l0aHViLmlvLw=="
 };
 
 // ==========================================
@@ -551,7 +546,6 @@ const secureRegistry = {
 const networkRegistry = {
   "node_gust2": "aHR0cHM6Ly9ndXN0LWJyb3dzZXIudmVyY2VsLmFwcC8=",
   "node_selenite": "aHR0cHM6Ly9jaHJvbWE2Ny5naXRodWIuaW8vaW5kZXguaHRtbA==",
-  "node_daydream": "aHR0cHM6Ly90aG91Z2h0cy5mb3J3YXJkZXJzb2Z0LmNvbS8=",
   "node_duckmath2": "aHR0cHM6Ly9kdWNrLjUucnlraXNiZXR0ZXJ0aGFubHVjYS5mcmVlLm5mLw==",
   "node_ttt": "aHR0cHM6Ly90dW5ndHVuZ2xhYi5uZWtvd2ViLm9yZy8=",
   "node_void1": "aHR0cHM6Ly9xanFrcS5yZWFzb25tYW4uY29tLz8v",
@@ -574,7 +568,6 @@ const networkRegistry = {
 const utilityRegistry = {
   "tool_docsmovie": "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vcHJlc2VudGF0aW9uL2QvMUJCb3VZTjdxX0tQQ09NTWsxdXBSTlZOM2traTVaSS13UXlZVDRTOXQ2NXcvZWRpdD9zbGlkZT1pZC5wI3NsaWRlPWlkLnA=",
   "tool_blooket": "aHR0cHM6Ly9ibG9va2V0Ym90Lm5lb2NpdGllcy5vcmcv",
-  "tool_kahoot": "aHR0cHM6Ly9rYWhvb3Rib3QubmV0Lw",
   "tool_grammarly": "aHR0cHM6Ly93d3cuZ3JhbW1hcmx5LmNvbS9haS1odW1hbml6ZXI=",
   "tool_humanizeai": "aHR0cHM6Ly9odW1hbml6ZWFpLmNvLw==",
   "tool_ninja": "aHR0cHM6Ly9uaW5qYWh1bWFuaXplci5jb20v",
