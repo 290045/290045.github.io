@@ -1,626 +1,201 @@
-// ==========================================================
-// CONFIGURATION ENGINE
-// ==========================================================
-const SYSTEM_BUILD_STABLE = false; // Set to FALSE to activate terminal lock, TRUE to unlock site
+// Configuration and maintenance lock
+const SYSTEM_BUILD_STABLE = false;
 const MODULE_CHECKSUM = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
 
-document.addEventListener("DOMContentLoaded", () => {
+function checkPassword() {
+  const input = document.getElementById("dev-password");
   const overlay = document.getElementById("maintenance-overlay");
-  const isDev = sessionStorage.getItem("dev_authenticated");
-  const passwordInput = document.getElementById("dev-password");
-  const errorMsg = document.getElementById("error-msg");
+  const error = document.getElementById("error-msg");
+  if (!input || !overlay || !error) return;
 
-  if (errorMsg) {
-    errorMsg.classList.add("hidden");
-  }
-
-  if (overlay) {
-    // Lock screen triggers if SYSTEM_BUILD_STABLE is set to false
-    if (!SYSTEM_BUILD_STABLE && isDev !== "true") {
-      overlay.style.removeProperty("display");
-      overlay.classList.remove("hidden");
-    } else {
-      overlay.classList.add("hidden");
-      overlay.style.setProperty("display", "none", "important");
-    }
-  }
-
-  if (passwordInput) {
-    passwordInput.addEventListener("keypress", (event) => {
-      if (event.key === "Enter") {
-        checkPassword();
-      }
-    });
-  }
-});
-
-// ==========================================================
-// CRYPTOGRAPHIC RUNTIME VERIFICATION
-// ==========================================================
-async function checkPassword() {
-  const inputField = document.getElementById("dev-password");
-  const errorMsg = document.getElementById("error-msg");
-  const overlay = document.getElementById("maintenance-overlay");
-  const box = document.querySelector(".maintenance-box");
-
-  if (!inputField || !errorMsg || !overlay) return;
-
-  const inputValue = inputField.value;
-
-  try {
-    const msgBuffer = new TextEncoder().encode(inputValue);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const inputHash = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
-
-    // Evaluates input hash against masked system checksum
-    if (inputHash === MODULE_CHECKSUM) {
+  crypto.subtle.digest("SHA-256", new TextEncoder().encode(input.value)).then(buffer => {
+    const hash = [...new Uint8Array(buffer)].map(byte => byte.toString(16).padStart(2, "0")).join("");
+    if (hash === MODULE_CHECKSUM) {
       sessionStorage.setItem("dev_authenticated", "true");
-      errorMsg.classList.add("hidden");
       overlay.classList.add("hidden");
       overlay.style.setProperty("display", "none", "important");
+      error.classList.add("hidden");
     } else {
-      errorMsg.classList.remove("hidden");
-      if (box) {
-        box.style.animation = "none";
-        setTimeout(() => {
-          box.style.animation = "fadeIn 0.4s";
-        }, 10);
-      }
+      error.classList.remove("hidden");
     }
-  } catch (error) {
-    console.error("Cryptographic evaluation failed:", error);
-  }
+  }).catch(console.error);
 }
 
-  // =========================================================================
-  // WORKSPACE ENVIRONMENTAL SYSTEM CONTROLS (THEMES Engine)
-  // =========================================================================
-  const presetSelect = document.getElementById("preset-selector");
-  const backgroundSelect = document.getElementById("background-selector"); 
-  const customControls = document.getElementById("custom-theme-controls");
-  const customBgInput = document.getElementById("custom-bg");
-  const customTextInput = document.getElementById("custom-text");
-  const particleColorInput = document.getElementById("particle-color-input"); 
-  const fontSelect = document.getElementById("font-selector");
-  const cursorSelect = document.getElementById("cursor-selector");
+function switchTab(id) {
+  document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
+  document.getElementById(id)?.classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-  // Read saved client specifications out of storage (Using uniform dash naming)
-  const savedPreset = localStorage.getItem("theme-preset") || "dark";
-  const savedBgAnim = localStorage.getItem("theme-bg-anim") || "constellation"; 
-  const savedParticleColor = localStorage.getItem("theme-particle-color") || "#ffffff"; 
-  const savedFont = localStorage.getItem("theme-font") || "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-  const savedCursor = localStorage.getItem("theme-cursor") || "default";
+function handleLinkClick(url) {
+  if (!url || url === "test") return alert("Coming soon...");
+  window.open(url, "_blank", "noopener,noreferrer");
+}
 
-  // Assign interface positions 
-  if (presetSelect) presetSelect.value = savedPreset;
-  if (backgroundSelect) backgroundSelect.value = savedBgAnim; 
-  if (particleColorInput) particleColorInput.value = savedParticleColor; 
-  if (fontSelect) fontSelect.value = savedFont;
-  if (cursorSelect) cursorSelect.value = savedCursor;
+const links = {
+  app_rl2d: "https://skempisthy.github.io/rocket_league_2d/",
+  app_pizza: "https://pizagame.pages.dev/",
+  app_kriptic: "https://kripticedition2.neocities.org/",
+  app_kriptic_alt: "https://kriptic-edition-3-0.vercel.app/",
+  app_vertex: "https://gold-static.pages.dev/",
+  app_biolyze: "https://biolyze90.lol/",
+  app_mario: "https://mathadventure1.github.io/sm64/sm64/index.html",
+  app_gba: "https://cattn.github.io/gba/",
+  app_grate: "https://gamerateofficial.weebly.com/",
+  app_human: "https://humanornot.so/",
+  app_geo: "https://www.geoguessr.com/",
+  app_wordle: "https://www.nytimes.com/games/wordle/index.html",
+  app_otter: "https://ottergames.org/",
+  app_mg66: "https://othermgwebsite.github.io/",
+  app_beeswarm: "https://29021.github.io/beeswarm/",
+  app_balatro: "https://29021.github.io/balatro/",
+  app_netfly: "https://d3lta.netlify.app/",
+  app_clicker: "https://290045.github.io/290045-s-Clicker-Game/",
+  app_fish: "https://290045.github.io/290045-s-flappy-fish/",
+  app_rock: "https://290045.github.io/what-beats-rock/",
+  app_mathplay: "https://www.mathplayground.com/",
+  app_slope: "https://slope-online.github.io/",
+  app_bloxcraft: "https://bloxcraft.win/",
+  app_uno: "https://unogameonline.github.io/",
+  app_minecraft: "https://elite4r.github.io/Resent-Client/game.html",
+  app_sitesdotcom: "https://games-b3749.web.app/",
+  app_classroom6x: "https://sites.google.com/view/classroom6x/",
+  app_pgis: "https://pgis.x10.mx/",
+  app_ccported: "https://arandomdev12.github.io/",
+  app_pgis2: "https://0800webdev.github.io/PGIS/",
+  app_slopeunb: "https://slope-unblocked-10x.github.io/",
+  app_duckmath1: "https://unpkg.com/classroomduck@1.0.0/index.html",
+  app_duckmath2: "https://unpkg.com/classroomduck@1.0.0/index.svg",
+  app_duckmath3: "https://storage.googleapis.com/mathlessons/duckmath.svg",
+  app_gba3: "https://cattn.github.io/gba/",
+  app_unbleeked: "https://unbleeked.vercel.app/main.html",
+  app_whitehouse: "https://www.whitehouse.gov/arcade/",
+  node_gust2: "https://gust-browser.vercel.app/",
+  node_selenite: "https://chroma67.github.io/index.html",
+  node_duckmath2: "https://duck.5.rykisbetterthanluca.free.nf/",
+  node_ttt: "https://tungtunglab.nekoweb.org/",
+  node_void1: "https://qjkq.reasonman.com//",
+  node_lunar2: "https://uoasman.lol/",
+  node_dodge1: "https://storage.googleapis.com/dogueub/index.html",
+  node_dodge2: "https://storage.googleapis.com/instructure/index.html",
+  node_dodge3: "https://storage.googleapis.com/educationate/index.html",
+  node_dodge4: "https://storage.googleapis.com/canvas-lms/index.html",
+  node_boredom1: "https://manually-relaxed-alien.global.ssl.fastly.net/",
+  node_boredom2: "https://alii-in-a-new-dress.global.ssl.fastly.net/",
+  node_boredom3: "https://boredonasndkfm.global.ssl.fastly.net/",
+  node_helios: "https://helios-blue.vercel.app/",
+  node_seraph: "https://joemama980.github.io/games/index.html",
+  node_unblokkked: "https://unblokkked.web.app/",
+  node_ghostlink: "https://vortexinnovations-cyber.github.io/nexus.github.io/",
+  node_aetheris: "https://aetheris.win/#home",
+  node_hyperion: "https://edmaths-edu.netlify.app/",
+  node_daydream: "https://cdn.jsdelivr.net/gh/NightProxy/DD-Static/dist/index.svg",
+  node_fern1: "https://s3.amazonaws.com/angelfern/index.html",
+  node_fern2: "https://s3.amazonaws.com/bullisgoated/index.html",
+  node_invisi: "https://ethostulsa.org/index?cache=170328603",
+  node_gnmath: "https://s3.amazonaws.com/pragers-server/mathematics.html",
+  node_frogie1: "https://schoologywork.wikidelia.net/",
+  node_frogie2: "https://finishomo.wikidelia.net/",
+  node_arsenic: "https://read.new-updates.info/",
+  tool_docsmovie: "https://docs.google.com/presentation/d/1BBouYN7q_KPCOMMk1upRNVN3kki5ZI-wQyY4T5Ot65w/edit?slide=id.p#slide=id.p",
+  tool_blooket: "https://blooketbot.neocities.org/",
+  tool_grammarly: "https://www.grammarly.com/ai-humanizer",
+  tool_humanizeai: "https://humanizeai.co/",
+  tool_ninja: "https://ninjahumanizer.com/",
+  tool_britannica: "https://www.britannica.com/chatbot",
+  tool_voidgpt: "https://highoctavelearning.neocities.org/"
+};
 
-  // Process system visibility mappings instantly on boot
-  applyThemePreset(savedPreset);
-  document.documentElement.style.setProperty("--font-family", savedFont);
-  document.documentElement.style.setProperty("--cursor-type", savedCursor);
-  
-  // Initialize background switcher engine if available on boot
-  if (typeof initBackgroundEngine === "function") initBackgroundEngine(); 
+function setFavicon(url) {
+  let icon = document.querySelector("link[rel~='icon']");
+  if (!icon) { icon = document.createElement("link"); icon.rel = "icon"; document.head.appendChild(icon); }
+  icon.href = url;
+}
 
-  // Monitor Theme Preset Changes
-  if (presetSelect) {
-    presetSelect.addEventListener("change", (e) => {
-      const selection = e.target.value;
-      localStorage.setItem("theme-preset", selection);
-      applyThemePreset(selection);
-    });
-  }
-
-  // Monitor Background Animation Switcher changes
-  if (backgroundSelect) {
-    backgroundSelect.addEventListener("change", (e) => {
-      localStorage.setItem("theme-bg-anim", e.target.value);
-      if (typeof initBackgroundEngine === "function") initBackgroundEngine(); 
-    });
-  }
-
-  // Monitor Particle Hex Color input changes
-  if (particleColorInput) {
-    particleColorInput.addEventListener("input", (e) => {
-      localStorage.setItem("theme-particle-color", e.target.value);
-      // Tells the particle engine to update immediately if it has a redraw check
-      if (typeof updateParticleColors === "function") updateParticleColors();
-    });
-  }
-
-  function applyThemePreset(preset) {
-    if (!customControls) return;
-    
-    // FIXED: Enforced lowercase matching to hide controls on boot if not "custom"
-    if (preset === "custom") {
-      customControls.style.setProperty("display", "flex", "important");
-      customControls.classList.remove("hidden");
-      
-      const customBg = localStorage.getItem("custom-bg-color") || "#07070a";
-      const customText = localStorage.getItem("custom-text-color") || "#ffffff";
-      
-      if (customBgInput) customBgInput.value = customBg;
-      if (customTextInput) customTextInput.value = customText;
-      
-      document.documentElement.removeAttribute("data-theme");
-      document.documentElement.style.setProperty("--bg-color", customBg);
-      document.documentElement.style.setProperty("--text-main", customText);
-    } else {
-      // Safely hides custom textboxes if a standard theme is picked
-      customControls.style.setProperty("display", "none", "important");
-      customControls.classList.add("hidden");
-      document.documentElement.style.removeProperty("--bg-color");
-      document.documentElement.style.removeProperty("--text-main");
-      document.documentElement.setAttribute("data-theme", preset);
-    }
-  }
-
-  // Monitor Custom Hex Inputs live tracking
-  [customBgInput, customTextInput].forEach(input => {
-    if (input) {
-      input.addEventListener("input", () => {
-        if (presetSelect && presetSelect.value === "custom") {
-          document.documentElement.style.setProperty("--bg-color", customBgInput.value);
-          document.documentElement.style.setProperty("--text-main", customTextInput.value);
-          localStorage.setItem("custom-bg-color", customBgInput.value);
-          localStorage.setItem("custom-text-color", customTextInput.value);
-        }
-      });
-    }
-  });
-
-  // Typography Engine Mapping
-  if (fontSelect) {
-    fontSelect.addEventListener("change", (e) => {
-      const selectedFont = e.target.value;
-      document.documentElement.style.setProperty("--font-family", selectedFont);
-      localStorage.setItem("theme-font", selectedFont);
-    });
-  }
-
-  // Custom System Cursor Engine Mapping
-  if (cursorSelect) {
-    cursorSelect.addEventListener("change", (e) => {
-      const selectedCursor = e.target.value;
-      document.documentElement.style.setProperty("--cursor-type", selectedCursor);
-      localStorage.setItem("theme-cursor", selectedCursor);
-    });
-  }
-// ================= CLOAKING =================
-(function() {
-  const STORAGE_KEYS = {
-    title: 'cloakTitle',
-    favicon: 'cloakFavicon',
-    panic: 'panicKey'
+function setUserCloak(preset) {
+  const settings = {
+    googleDrive: ["My Drive - Google Drive", "https://gstatic.com"],
+    googleClassroom: ["Home", "https://gstatic.com"],
+    canvas: ["Dashboard", "https://cloudfront.net"]
   };
+  if (preset === "reset") { localStorage.removeItem("cloakTitle"); localStorage.removeItem("cloakFavicon"); location.reload(); return; }
+  const value = settings[preset];
+  if (!value) return;
+  localStorage.setItem("cloakTitle", value[0]);
+  localStorage.setItem("cloakFavicon", value[1]);
+  document.title = value[0];
+  setFavicon(value[1]);
+}
 
-  const PANIC_REDIRECT = 'https://google.com';
+function applyCustomCloak() {
+  const title = document.getElementById("customTitleInput")?.value.trim();
+  const icon = document.getElementById("customIconInput")?.value.trim();
+  if (!title && !icon) return alert("Please enter a title or URL first.");
+  if (title) { localStorage.setItem("cloakTitle", title); document.title = title; }
+  if (icon) { localStorage.setItem("cloakFavicon", icon); setFavicon(icon); }
+}
 
-  // ================= TAB & UI FUNCTIONS =================
-  function switchTab(id) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    const target = document.getElementById(id);
-    if (target) target.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function handleLinkClick(url) {
-    if (!url || url === 'test') return alert('Coming soon...');
-    try {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    } catch (e) {
-      location.href = url;
-    }
-  }
-
-  // Cloak helpers
-  function setFavicon(href) {
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      document.head.appendChild(link);
-    }
-    link.href = href;
-  }
-
-  function applyCloak(title, favicon) {
-    if (title) document.title = title;
-    if (favicon) setFavicon(favicon);
-  }
-
-  function setUserCloak(preset) {
-    if (preset === 'reset') {
-      localStorage.removeItem(STORAGE_KEYS.title);
-      localStorage.removeItem(STORAGE_KEYS.favicon);
-      alert('Tab settings restored! Reloading page...');
-      location.reload();
-      return;
-    }
-
-    let title = null, favicon = null;
-    if (preset === 'googleDrive') {
-      title = 'My Drive - Google Drive';
-      favicon = 'https://gstatic.com';
-    } else if (preset === 'googleClassroom') {
-      title = 'Home';
-      favicon = 'https://gstatic.com';
-    } else if (preset === 'canvas') {
-      title = 'Dashboard';
-      favicon = 'https://cloudfront.net';
-    }
-
-    if (title) localStorage.setItem(STORAGE_KEYS.title, title);
-    if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
-    applyCloak(title, favicon);
-    alert(`${preset} cloak applied successfully!`);
-  }
-
-  function applyCustomCloak() {
-    const titleInput = document.getElementById('customTitleInput');
-    const iconInput = document.getElementById('customIconInput');
-    if (!titleInput || !iconInput) return alert('Inputs not found');
-
-    const title = titleInput.value.trim();
-    const favicon = iconInput.value.trim();
-
-    if (!title && !favicon) return alert('Please enter a title or URL first.');
-
-    if (title) localStorage.setItem(STORAGE_KEYS.title, title);
-    if (favicon) localStorage.setItem(STORAGE_KEYS.favicon, favicon);
-    applyCloak(title, favicon);
-    alert('Custom configuration applied!');
-  }
-
-  // Panic hotkey
-  let listeningForPanic = false;
-
-  function startListeningForPanicKey() {
-    const display = document.getElementById('panicKeyDisplay');
-    if (!display || listeningForPanic) return;
-
-    listeningForPanic = true;
-    display.classList.add('listening');
-    display.textContent = 'Press any key...';
-
-    function keyHandler(e) {
-      e.preventDefault();
-      if (e.key === 'Escape') {
-        listeningForPanic = false;
-        display.classList.remove('listening');
-        updatePanicDisplay();
-        window.removeEventListener('keydown', keyHandler);
-        return;
-      }
-      localStorage.setItem(STORAGE_KEYS.panic, e.key);
-      listeningForPanic = false;
-      display.classList.remove('listening');
-      updatePanicDisplay();
-      window.removeEventListener('keydown', keyHandler);
-    }
-    window.addEventListener('keydown', keyHandler);
-  }
-
-  function clearPanicKey() {
-    localStorage.removeItem(STORAGE_KEYS.panic);
+let panicListening = false;
+function setPanicKey() {
+  const display = document.getElementById("panicKeyDisplay");
+  if (!display || panicListening) return;
+  panicListening = true;
+  display.textContent = "Press any key...";
+  const handler = event => {
+    event.preventDefault();
+    if (event.key !== "Escape") localStorage.setItem("panicKey", event.key);
+    panicListening = false;
+    window.removeEventListener("keydown", handler);
     updatePanicDisplay();
-  }
-
-  function updatePanicDisplay() {
-    const display = document.getElementById('panicKeyDisplay');
-    const key = localStorage.getItem(STORAGE_KEYS.panic);
-    if (!display) return;
-    display.textContent = key ? `Key: ${key.toUpperCase()}` : 'No Key Set';
-  }
-
-  function handlePanicKey(e) {
-    if (listeningForPanic) return;
-    const key = localStorage.getItem(STORAGE_KEYS.panic);
-    if (!key) return;
-    if (e.key.toLowerCase() === key.toLowerCase()) {
-      e.preventDefault();
-      location.replace(PANIC_REDIRECT);
-    }
-  }
-
-  // ================= CONSTELLATION MOUSE-INTERACTIVE ENGINE =================
-  let canvas, ctx;
-  let particles = [];
-  const PARTICLE_COUNT = 65; 
-  const LINK_DISTANCE = 115; 
-
-  // Track mouse coordinates for dynamic interaction
-  const mouse = {
-    x: null,
-    y: null,
-    radius: 160 // Connection area around the cursor
   };
+  window.addEventListener("keydown", handler);
+}
+function clearPanicKey() { localStorage.removeItem("panicKey"); updatePanicDisplay(); }
+function updatePanicDisplay() {
+  const display = document.getElementById("panicKeyDisplay");
+  const key = localStorage.getItem("panicKey");
+  if (display) display.textContent = key ? `Key: ${key.toUpperCase()}` : "No Key Set";
+}
 
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-
-  window.addEventListener('mouseout', () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
-
-  class NodeParticle {
-    constructor() {
-      this.radius = Math.random() * 2 + 1.5; 
-      this.x = Math.random() * window.innerWidth;
-      this.y = Math.random() * window.innerHeight;
-      this.vx = (Math.random() - 0.5) * 0.8; 
-      this.vy = (Math.random() - 0.5) * 0.8;
-    }
-
-    update() {
-      // Pull particles slightly toward the cursor when nearby
-      if (mouse.x !== null && mouse.y !== null) {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          this.x += (dx / dist) * force * 0.6;
-          this.y += (dy / dist) * force * 0.6;
-        }
-      }
-
-      this.x += this.vx;
-      this.y += this.vy;
-
-      // Screen wrapping rules
-      if (this.x < 0) this.x = canvas.width;
-      if (this.x > canvas.width) this.x = 0;
-      if (this.y < 0) this.y = canvas.height;
-      if (this.y > canvas.height) this.y = 0;
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-      ctx.fill();
-    }
-  }
-
-  function drawConnections() {
-    for (let i = 0; i < particles.length; i++) {
-      // Create lines directly between particles and the cursor
-      if (mouse.x !== null && mouse.y !== null) {
-        const mdx = particles[i].x - mouse.x;
-        const mdy = particles[i].y - mouse.y;
-        const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mDist < mouse.radius) {
-          const mOpacity = (1 - mDist / mouse.radius) * 0.35;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(100, 200, 255, ${mOpacity})`;
-          ctx.lineWidth = 1.0;
-          ctx.stroke();
-        }
-      }
-
-      // Create lines between neighboring nodes
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < LINK_DISTANCE) {
-          const opacity = (1 - distance / LINK_DISTANCE) * 0.22;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(100, 180, 255, ${opacity})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function resizeCanvas() {
-    if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  function renderLoop() {
-    if (!ctx || !canvas) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    drawConnections();
-
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-
-    requestAnimationFrame(renderLoop);
-  }
-
-  function initParticles() {
-    canvas = document.getElementById('particleCanvas');
-    if (!canvas) return;
-    
-    ctx = canvas.getContext('2d');
-    
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push(new NodeParticle());
-    }
-
-    renderLoop();
-  }
-
-  // ================= INIT EXECUTION LOOP =================
-  function init() {
-    initParticles();
-
-    // Map features cleanly to global scope windows
-    window.switchTab = switchTab;
-    window.handleLinkClick = handleLinkClick;
-    window.setUserCloak = setUserCloak;
-    window.applyCustomCloak = applyCustomCloak;
-    window.setPanicKey = startListeningForPanicKey;
-    window.clearPanicKey = clearPanicKey;
-
-    const savedTitle = localStorage.getItem(STORAGE_KEYS.title);
-    const savedFavicon = localStorage.getItem(STORAGE_KEYS.favicon);
-    if (savedTitle || savedFavicon) applyCloak(savedTitle, savedFavicon);
-
-    updatePanicDisplay();
-    window.addEventListener('keydown', handlePanicKey);
-
-    const active = document.querySelector('.tab-content.active');
-    if (!active) switchTab('homepage');
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-
-// ==========================================
-// 1. APPLICATION MODULE REGISTRY
-// ==========================================
-const secureRegistry = {
-  "app_rl2d": "aHR0cHM6Ly9za2VtcGlzdHkuZ2l0aHViLmlvL3JvY2tldF9sZWFndWVfMmQv",
-  "app_pizza": "aHR0cHM6Ly9waXphZ2FtZS5wYWdlcy5kZXYv",
-  "app_kriptic": "aHR0cHM6Ly9rcmlwdGljZWRpdGlvbjIubmVvY2l0aWVzLm9yZy8=",
-  "app_kriptic_alt": "aHR0cHM6Ly9rcmlwdGljLWVkaXRpb24tMy0wLnZlcmNlbC5hcHAv",
-  "app_vertex": "aHR0cHM6Ly9nb2xkLXN0YXRpYy5wYWdlcy5kZXYv",
-  "app_biolyze": "aHR0cHM6Ly9iaW9seXplOTAubG9sLw==",
-  "app_mario": "aHR0cHM6Ly9tYXRoYWR2ZW50dXJlMS5naXRodWIuaW8vc202NC9zbTY0L2luZGV4Lmh0bWw=",
-  "app_gba": "aHR0cHM6Ly9jYXR0bi5naXRodWIuaW8vZ2JhLw==",
-  "app_grate": "aHR0cHM6Ly9nYW1lcmF0ZW9mZmljaWFsLndlZWJseS5jb20v",
-  "app_human": "aHR0cHM6Ly9odW1hbm9ybm90LnNvLw==",
-  "app_geo": "aHR0cHM6Ly93d3cuZ2VvZ3Vlc3NyLmNvbS8=",
-  "app_wordle": "aHR0cHM6Ly93d3cubnl0aW1lcy5jb20vZ2FtZXMvd29yZGxlL2luZGV4Lmh0bWw=",
-  "app_otter": "aHR0cHM6Ly9vdHRlcmdhbWVzLm9yZy8=",
-  "app_mg66": "aHR0cHM6Ly9vdGhlcm1nd2Vic2l0ZS5naXRodWIuaW8v",
-  "app_beeswarm": "aHR0cHM6Ly8yOTAyMS5naXRodWIuaW8vYmVlc3dhcm0v",
-  "app_balatro": "aHR0cHM6Ly8yOTAyMS5naXRodWIuaW8vYmFsYXRyby8=",
-  "app_netfly": "aHR0cHM6Ly9kM2x0YS5uZXRsaWZ5LmFwcC8=",
-  "app_clicker": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLUNsaWNrZXItR2FtZS8=",
-  "app_fish": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLWZsYXBweS1maXNoLw==",
-  "app_rock": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvL3doYXQtYmVhdHMtcm9jay8=",
-  "app_mathplay": "aHR0cHM6Ly93d3cubWF0aHBsYXlncm91bmQuY29tLw==",
-  "app_slope": "aHR0cHM6Ly9zbG9wZS1vbmxpbmUuZ2l0aHViLmlvLw==",
-  "app_bloxcraft": "aHR0cHM6Ly9ibG94Y3JhZnQud2luLw==",
-  "app_uno": "aHR0cHM6Ly91bm9nYW1lb25saW5lLmdpdGh1Yi5pby8=",
-  "app_minecraft": "aHR0cHM6Ly9lbGl0ZTRyLmdpdGh1Yi5pby9SZXNlbnQtQ2xpZW50L2dhbWUuaHRtbA==",
-  "app_sitesdotcom": "aHR0cHM6Ly9nYW1lcy1iMzc0OS53ZWIuYXBwLw==",
-  "app_classroom6x": "aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvY2xhc3Nyb29tNngv",
-  "app_pgis": "aHR0cHM6Ly9wZ2lzLngxMC5teC8=",
-  "app_ccported": "aHR0cHM6Ly9hcmFuZG9tZGV2MTIuZ2l0aHViLmlvLw==",
-  "app_pgis2": "aHR0cHM6Ly8wODAwd2ViZGV2LmdpdGh1Yi5pby9QR0lTLw==",
-  "app_slopeunb": "aHR0cHM6Ly9zbG9wZS11bmJsb2NrZWQtMTB4LmdpdGh1Yi5pby8=",
-  "app_duckmath1": "aHR0cHM6Ly91bnBrZy5jb20vY2xhc3Nyb29tZHVja0AxLjAuMC9pbmRleC5odG1s",
-  "app_duckmath2": "aHR0cHM6Ly91bnBrZy5jb20vY2xhc3Nyb29tZHVja0AxLjAuMC9pbmRleC5zdmc=",
-  "app_duckmath3": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL21hdGhsZXNzb25zL2R1Y2ttYXRoLnN2Zw==",
-  "app_gba3": "aHR0cHM6Ly9jYXR0bi5naXRodWIuaW8vZ2JhLw==",
-  "app_unbleeked": "aHR0cHM6Ly91bmJsZWVrZWQudmVyY2VsLmFwcC9tYWluLmh0bWw=",
-  "app_whitehouse": "aHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYXJjYWRlLyA"
-};
-
-// ==========================================
-// 2. NETWORK GATEWAYS DATA REGISTRY
-// ==========================================
-const networkRegistry = {
-  "node_gust2": "aHR0cHM6Ly9ndXN0LWJyb3dzZXIudmVyY2VsLmFwcC8=",
-  "node_selenite": "aHR0cHM6Ly9jaHJvbWE2Ny5naXRodWIuaW8vaW5kZXguaHRtbA==",
-  "node_duckmath2": "aHR0cHM6Ly9kdWNrLjUucnlraXNiZXR0ZXJ0aGFubHVjYS5mcmVlLm5mLw==",
-  "node_ttt": "aHR0cHM6Ly90dW5ndHVuZ2xhYi5uZWtvd2ViLm9yZy8=",
-  "node_void1": "aHR0cHM6Ly9xanFrcS5yZWFzb25tYW4uY29tLz8v",
-  "node_lunar2": "aHR0cHM6Ly91b2FzbWFuLmxvbC8=",
-  "node_dodge1": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2RvZ2V1Yi9pbmRleC5odG1s",
-  "node_dodge2": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2luc3RydWN0dXJlL2luZGV4Lmh0bWw=",
-  "node_dodge3": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2VkdWNhdGlvbmF0ZS9pbmRleC5odG1s",
-  "node_dodge4": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2NhbnZhcy1sbXMvaW5kZXguaHRtbA==",
-  "node_boredom1": "aHR0cHM6Ly9tYW51YWxseS1yZWxheGVkLWFsaWVuLmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC8=",
-  "node_boredom2": "aHR0cHM6Ly9hbGktaW4tYS1uZXctZHJlc3MuZ2xvYmFsLnNzbC5mYXN0bHkubmV0Lw==",
-  "node_boredom3": "aHR0cHM6Ly9ib3JlZG9uYXNuZGtmLmdsb2JhbC5zc2wuZmFzdGx5Lm5ldC8=",
-  "node_helios": "aHR0cHM6Ly9oZWxpb3MtYmx1ZS52ZXJjZWwuYXBwLw==",
-  "node_seraph": "aHR0cHM6Ly9qb2VtYW1hOTgwLmdpdGh1Yi5pby9nYW1lcy9pbmRleC5odG1s",
-  "node_unblokkked": "aHR0cHM6Ly91bmJsb2tra2VkLndlYi5hcHAv"
-  "node_ghostlink": "aHR0cHM6Ly92b3J0ZXhpbm5vdmF0aW9ucy1jeWJlci5naXRodWIuaW8vbmV4dXMuZ2l0aHViLmlvLw",
-  "node_aetheris": "aHR0cHM6Ly9hZXRoZXJpcy53aW4vI2hvbWU",
-  "node_hyperion": "aHR0cHM6Ly9lZG1hdGhzLWVkdS5uZXRsaWZ5LmFwcC8",
-  "node_daydream": "aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL05pZ2h0UHJveHkvREQtU3RhdGljL2Rpc3QvaW5kZXguc3Zn",
-  "node_fern1": "aHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL2FuZ2VsZmVybi9pbmRleC5odG1s",
-  "node_fern2": "teaHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL2J1bGxpc2dvYXRlZC9pbmRleC5odG1sxt",
-  "node_invisi": "aHR0cHM6Ly9ldGhvc3R1bHNhLm9yZy9pbmRleD9jYWNoZT0xNzAzMjg2MDM",
-  "node_gnmath": "aHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL3ByYWdlcnUtc2VydmVyL21hdGhlbWF0aWNzLmh0bWw",
-  "node_frogie1": "aHR0cHM6Ly9zY2hvb2xvZ3l3b3JrLndpa2lkZWxpYS5uZXQv",
-  "node_frogie2": "aHR0cHM6Ly9maW5uaXNob21vLndpa2lkZWxpYS5uZXQv",
-  "node_arsenic": "aHR0cHM6Ly9yZWFkLm5ldy11cGRhdGVzLmluZm8v"
-};
-
-// ==========================================
-// 3. UTILITIES DATA REGISTRY
-// ==========================================
-const utilityRegistry = {
-  "tool_docsmovie": "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vcHJlc2VudGF0aW9uL2QvMUJCb3VZTjdxX0tQQ09NTWsxdXBSTlZOM2traTVaSS13UXlZVDRTOXQ2NXcvZWRpdD9zbGlkZT1pZC5wI3NsaWRlPWlkLnA=",
-  "tool_blooket": "aHR0cHM6Ly9ibG9va2V0Ym90Lm5lb2NpdGllcy5vcmcv",
-  "tool_grammarly": "aHR0cHM6Ly93d3cuZ3JhbW1hcmx5LmNvbS9haS1odW1hbml6ZXI=",
-  "tool_humanizeai": "aHR0cHM6Ly9odW1hbml6ZWFpLmNvLw==",
-  "tool_ninja": "aHR0cHM6Ly9uaW5qYWh1bWFuaXplci5jb20v",
-  "tool_britannica": "aHR0cHM6Ly93d3cuYnJpdGFubmljYS5jb20vY2hhdGJvdA==",
-  "tool_voidgpt": "aHR0cHM6Ly9oaWdob2N0YXZlbGVhcm5pbmcubmVvY2l0aWVzLm9yZy8="
-};
-
-// ==========================================
-// 5. EVENT CLICK BINDERS
-// ==========================================
 document.addEventListener("DOMContentLoaded", () => {
-  // Bind Games Tab Click Catchers
-  const gamesContainer = document.getElementById("games");
-  if (gamesContainer) {
-    gamesContainer.addEventListener("click", (event) => {
-      const targetButton = event.target.closest("button[data-id]");
-      if (!targetButton) return;
-      const appId = targetButton.getAttribute("data-id");
-      const scrambledUrl = secureRegistry[appId];
-      if (scrambledUrl) window.handleLinkClick(atob(scrambledUrl));
-    });
+  const overlay = document.getElementById("maintenance-overlay");
+  const authenticated = sessionStorage.getItem("dev_authenticated") === "true";
+  if (overlay && !SYSTEM_BUILD_STABLE && !authenticated) {
+    overlay.classList.remove("hidden");
+    overlay.style.removeProperty("display");
+  } else if (overlay) {
+    overlay.classList.add("hidden");
+    overlay.style.setProperty("display", "none", "important");
   }
 
-  // Bind Network Gateways Tab Click Catchers
-  const routingContainer = document.getElementById("routing");
-  if (routingContainer) {
-    routingContainer.addEventListener("click", (event) => {
-      const targetButton = event.target.closest("button[data-id]");
-      if (!targetButton) return;
-      const nodeId = targetButton.getAttribute("data-id");
-      const scrambledUrl = networkRegistry[nodeId];
-      if (scrambledUrl) window.handleLinkClick(atob(scrambledUrl));
-    });
-  }
+  document.getElementById("dev-password")?.addEventListener("keydown", event => {
+    if (event.key === "Enter") checkPassword();
+  });
 
-  // Bind Utilities Tab Click Catchers
-  const toolsContainer = document.getElementById("tools");
-  if (toolsContainer) {
-    toolsContainer.addEventListener("click", (event) => {
-      const targetButton = event.target.closest("button[data-id]");
-      if (!targetButton) return;
-      const toolId = targetButton.getAttribute("data-id");
-      const scrambledUrl = utilityRegistry[toolId];
-      if (scrambledUrl) window.handleLinkClick(atob(scrambledUrl));
+  ["games", "routing", "tools"].forEach(section => {
+    document.getElementById(section)?.addEventListener("click", event => {
+      const button = event.target.closest("button[data-id]");
+      if (button && links[button.dataset.id]) handleLinkClick(links[button.dataset.id]);
     });
-  }
+  });
+
+  window.addEventListener("keydown", event => {
+    if (panicListening) return;
+    const key = localStorage.getItem("panicKey");
+    if (key && event.key.toLowerCase() === key.toLowerCase()) location.replace("https://google.com");
+  });
+
+  const savedTitle = localStorage.getItem("cloakTitle");
+  const savedIcon = localStorage.getItem("cloakFavicon");
+  if (savedTitle) document.title = savedTitle;
+  if (savedIcon) setFavicon(savedIcon);
+  updatePanicDisplay();
+
+  window.switchTab = switchTab;
+  window.handleLinkClick = handleLinkClick;
+  window.checkPassword = checkPassword;
+  window.setUserCloak = setUserCloak;
+  window.applyCustomCloak = applyCustomCloak;
+  window.setPanicKey = setPanicKey;
+  window.clearPanicKey = clearPanicKey;
 });
