@@ -535,7 +535,7 @@ const secureRegistry = {
   "app_duckmath3": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL21hdGhsZXNzb25zL2R1Y2ttYXRoLnN2Zw==",
   "app_gba3": "aHR0cHM6Ly9jYXR0bi5naXRodWIuaW8vZ2JhLw==",
   "app_unbleeked": "aHR0cHM6Ly91bmJsZWVrZWQudmVyY2VsLmFwcC9tYWluLmh0bWw=",
-  "app_whitehouse": "aHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYXJjYWRlLyA",
+  "app_whitehouse": "aHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYXJjYWRlLyA"
 };
 
 // ==========================================
@@ -568,7 +568,7 @@ const networkRegistry = {
   "node_gnmath": "aHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL3ByYWdlcnUtc2VydmVyL21hdGhlbWF0aWNzLmh0bWw",
   "node_frogie1": "aHR0cHM6Ly9zY2hvb2xvZ3l3b3JrLndpa2lkZWxpYS5uZXQv",
   "node_frogie2": "aHR0cHM6Ly9maW5uaXNob21vLndpa2lkZWxpYS5uZXQv",
-  "node_arsenic": "aHR0cHM6Ly9yZWFkLm5ldy11cGRhdGVzLmluZm8v",
+  "node_arsenic": "aHR0cHM6Ly9yZWFkLm5ldy11cGRhdGVzLmluZm8v"
 };
 
 // ==========================================
