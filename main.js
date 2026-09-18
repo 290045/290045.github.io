@@ -499,7 +499,6 @@ async function checkPassword() {
 // 1. APPLICATION MODULE REGISTRY
 // ==========================================
 const secureRegistry = {
-  // Your Original 23 Stable Applications
   "app_rl2d": "aHR0cHM6Ly9za2VtcGlzdHkuZ2l0aHViLmlvL3JvY2tldF9sZWFndWVfMmQv",
   "app_pizza": "aHR0cHM6Ly9waXphZ2FtZS5wYWdlcy5kZXYv",
   "app_kriptic": "aHR0cHM6Ly9rcmlwdGljZWRpdGlvbjIubmVvY2l0aWVzLm9yZy8=",
@@ -520,8 +519,6 @@ const secureRegistry = {
   "app_clicker": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLUNsaWNrZXItR2FtZS8=",
   "app_fish": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvLzI5MDA0NS1zLWZsYXBweS1maXNoLw==",
   "app_rock": "aHR0cHM6Ly8yOTAwNDUuZ2l0aHViLmlvL3doYXQtYmVhdHMtcm9jay8=",
-
-  // Your 18 Brand New Applications (With Fixed Uniform Keys)
   "app_mathplay": "aHR0cHM6Ly93d3cubWF0aHBsYXlncm91bmQuY29tLw==",
   "app_slope": "aHR0cHM6Ly9zbG9wZS1vbmxpbmUuZ2l0aHViLmlvLw==",
   "app_bloxcraft": "aHR0cHM6Ly9ibG94Y3JhZnQud2luLw==",
