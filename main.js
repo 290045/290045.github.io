@@ -535,6 +535,7 @@ const secureRegistry = {
   "app_duckmath3": "aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL21hdGhsZXNzb25zL2R1Y2ttYXRoLnN2Zw==",
   "app_gba3": "aHR0cHM6Ly9jYXR0bi5naXRodWIuaW8vZ2JhLw==",
   "app_unbleeked": "aHR0cHM6Ly91bmJsZWVrZWQudmVyY2VsLmFwcC9tYWluLmh0bWw=",
+  "app_whitehouse": "aHR0cHM6Ly93d3cud2hpdGVob3VzZS5nb3YvYXJjYWRlLyA",
 };
 
 // ==========================================
@@ -557,6 +558,17 @@ const networkRegistry = {
   "node_helios": "aHR0cHM6Ly9oZWxpb3MtYmx1ZS52ZXJjZWwuYXBwLw==",
   "node_seraph": "aHR0cHM6Ly9qb2VtYW1hOTgwLmdpdGh1Yi5pby9nYW1lcy9pbmRleC5odG1s",
   "node_unblokkked": "aHR0cHM6Ly91bmJsb2tra2VkLndlYi5hcHAv"
+  "node_ghostlink": "aHR0cHM6Ly92b3J0ZXhpbm5vdmF0aW9ucy1jeWJlci5naXRodWIuaW8vbmV4dXMuZ2l0aHViLmlvLw",
+  "node_aetheris": "aHR0cHM6Ly9hZXRoZXJpcy53aW4vI2hvbWU",
+  "node_hyperion": "aHR0cHM6Ly9lZG1hdGhzLWVkdS5uZXRsaWZ5LmFwcC8",
+  "node_daydream": "aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL05pZ2h0UHJveHkvREQtU3RhdGljL2Rpc3QvaW5kZXguc3Zn",
+  "node_fern1": "aHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL2FuZ2VsZmVybi9pbmRleC5odG1s",
+  "node_fern2": "teaHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL2J1bGxpc2dvYXRlZC9pbmRleC5odG1sxt",
+  "node_invisi": "aHR0cHM6Ly9ldGhvc3R1bHNhLm9yZy9pbmRleD9jYWNoZT0xNzAzMjg2MDM",
+  "node_gnmath": "aHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL3ByYWdlcnUtc2VydmVyL21hdGhlbWF0aWNzLmh0bWw",
+  "node_frogie1": "aHR0cHM6Ly9zY2hvb2xvZ3l3b3JrLndpa2lkZWxpYS5uZXQv",
+  "node_frogie2": "aHR0cHM6Ly9maW5uaXNob21vLndpa2lkZWxpYS5uZXQv",
+  "node_arsenic": "aHR0cHM6Ly9yZWFkLm5ldy11cGRhdGVzLmluZm8v",
 };
 
 // ==========================================
