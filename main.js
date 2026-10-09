@@ -1,5 +1,5 @@
 // Configuration and maintenance lock
-const SYSTEM_BUILD_STABLE = false;
+const SYSTEM_BUILD_STABLE = true;
 const MODULE_CHECKSUM = "aaa065eb6460b9d4d1e824de3422738595646507678efad38d20f52f20bb5272";
 
 function checkPassword() {
