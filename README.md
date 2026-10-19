@@ -1,4 +1,4 @@
-# Being worked on! Will be opened sometime this school year!
+# Discontinued due to high homework and me using my own laptop!
 
 # 🎮 Welcome to 290045's Hub
 
